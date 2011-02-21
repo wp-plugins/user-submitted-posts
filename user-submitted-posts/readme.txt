@@ -12,7 +12,7 @@ License:           GPLv2 or later
 
 The User Submitted Posts plugin enables your visitors to submit posts from anywhere on your site.
 
-Demo @ http://perishablepress.com/wordpress/user-submitted-posts-demo/
+[Demo](http://perishablepress.com/wordpress/user-submitted-posts-demo/ "User Submitted Posts Demo")
 
 == Description ==  
 
@@ -26,24 +26,24 @@ Features include:
 
  * Let visitors submit posts from anywhere in your site
  * Display submission form anywhere on the page via shortcode or template tag
- * Post submissions optionally include title, tags, category, author, url, content, and image(s)
+ * Post submissions may include title, tags, category, author, url, post and image(s)
  * Redirect user to anywhere or return to current page after successful post submission
 
- Image Uploads
+ **Image Uploads**
 
  * Optionally allow/require visitors to upload any number of images
  * Specify minimum and maximum width and height for uploaded images
  * Specicy minimum and maximum number of allowed image uploads for each post
  * Includes jQuery snippet for easy choosing of multiple images
  
- Customization
+ **Customization**
 
  * Control which fields are displayed in the submission form
  * Choose which categories users are allowed to select
  * Assign submitted posts to any registered user
  * Customizable error and upload messages
 
- Post Management
+ **Post Management**
 
  * Saves as custom-fields with each post: user name, IP, URL, and path info for each uploaded image
  * Set submitted posts to any status: Draft, Publish, or publish after some number of approved posts
