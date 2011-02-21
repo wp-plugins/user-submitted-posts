@@ -20,33 +20,33 @@ submitted posts as draft, publish immediately, or after some number of approved 
 Also enables users to upload multiple images when submitting a post. 
 Everything super-easy to customize via Admin Settings page.
 
-Features include:
+**Features**
 
- * Let visitors submit posts from anywhere in your site
- * Display submission form anywhere on the page via shortcode or template tag
- * Post submissions may include title, tags, category, author, url, post and image(s)
- * Redirect user to anywhere or return to current page after successful post submission
+* Let visitors submit posts from anywhere in your site
+* Display submission form anywhere on the page via shortcode or template tag
+* Post submissions may include title, tags, category, author, url, post and image(s)
+* Redirect user to anywhere or return to current page after successful post submission
 
- **Image Uploads**
+**Image Uploads**
 
- * Optionally allow/require visitors to upload any number of images
- * Specify minimum and maximum width and height for uploaded images
- * Specicy minimum and maximum number of allowed image uploads for each post
- * Includes jQuery snippet for easy choosing of multiple images
+* Optionally allow/require visitors to upload any number of images
+* Specify minimum and maximum width and height for uploaded images
+* Specicy minimum and maximum number of allowed image uploads for each post
+* Includes jQuery snippet for easy choosing of multiple images
  
- **Customization**
+**Customization**
 
- * Control which fields are displayed in the submission form
- * Choose which categories users are allowed to select
- * Assign submitted posts to any registered user
- * Customizable error and upload messages
+* Control which fields are displayed in the submission form
+* Choose which categories users are allowed to select
+* Assign submitted posts to any registered user
+* Customizable error and upload messages
 
- **Post Management**
+**Post Management**
 
- * Saves as custom-fields with each post: user name, IP, URL, and path info for each uploaded image
- * Set submitted posts to any status: Draft, Publish, or publish after some number of approved posts
- * One-click post-filtering of user-submitted posts on the Admin Posts page
- * Includes template tags for easy display of post attachments and images
+* Saves as custom-fields with each post: user name, IP, URL, and path info for each uploaded image
+* Set submitted posts to any status: Draft, Publish, or publish after some number of approved posts
+* One-click post-filtering of user-submitted posts on the Admin Posts page
+* Includes template tags for easy display of post attachments and images
 
 == Installation ==
 
@@ -57,35 +57,35 @@ Features include:
  - To display the form on a post or page, use the shortcode: [user-submitted-posts]
  - To display the form anywhere in your theme, use the template tag: public_submission_form(true)
 
-4. By default, the form width is 300px. To change the width, do the following:
+**Note:** By default, the form width is 300px. To change the width, do the following:
 
- - Open the CSS file: /user-submitted-posts/resources/user-submitted-posts.css
- - Edit the first declaration block to the desired width: div#usp { width: 300px; }
- - All other styles are relative to that width, so no other changes are required
+1. Open the CSS file: /user-submitted-posts/resources/user-submitted-posts.css
+2. Edit the first declaration block to the desired width: div#usp { width: 300px; }
+3. All other styles are relative to that width, so no other changes are required
 
 == Template Tags ==
 
 To display the images attached to user-submitted posts, use this template tag:
 
-	<?php post_attachments(); ?>
+<?php post_attachments(); ?>
 
 This template tag prints the URLs for all post attachments and accepts the following paramters:
 
-	<?php post_attachments($size, $beforeUrl, $afterUrl, $numberImages, $postId); ?>
+<?php post_attachments($size, $beforeUrl, $afterUrl, $numberImages, $postId); ?>
 
-	$size         = image size as thumbnail, medium, large or full -> default = full
-	$beforeUrl    = text/markup displayed before the image URL     -> default = <img src="
-	$afterUrl     = text/markup displayed after the image URL      -> default = " />
-	$numberImages = the number of images to display for each post  -> default = false (display all)
-	$postId       = an optional post ID to use                     -> default = uses global post
+$size         = image size as thumbnail, medium, large or full -> default = full
+$beforeUrl    = text/markup displayed before the image URL     -> default = <img src="
+$afterUrl     = text/markup displayed after the image URL      -> default = " />
+$numberImages = the number of images to display for each post  -> default = false (display all)
+$postId       = an optional post ID to use                     -> default = uses global post
 
 Additionally, the following template tag returns an array of URLs for the specified post image:
 
-	<?php get_post_images(); ?>
+<?php get_post_images(); ?>
 	
 This tag returns a boolean value indicating whether the specified post is a public submission: 
 
-	<?php is_public_submission(); ?>
+<?php is_public_submission(); ?>
 
 == Styling the Submission Form ==
 
