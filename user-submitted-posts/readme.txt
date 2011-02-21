@@ -10,7 +10,7 @@ Tested up to:      3.0.5
 Version:           1.00
 License:           GPLv2 or later
 
-The User Submitted Posts plugin enables your visitors to submit posts from anywhere on your site.
+User Submitted Posts enables your visitors to submit posts and images from anywhere on your site.
 
 == Description ==  
 
