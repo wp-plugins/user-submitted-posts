@@ -12,8 +12,6 @@ License:           GPLv2 or later
 
 The User Submitted Posts plugin enables your visitors to submit posts from anywhere on your site.
 
-[Demo](http://perishablepress.com/wordpress/user-submitted-posts-demo/ "User Submitted Posts Demo")
-
 == Description ==  
 
 Adds a simple form via template tag or shortcode that enables your visitors to submit posts. 
