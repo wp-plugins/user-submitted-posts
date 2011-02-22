@@ -128,7 +128,7 @@ global $pagenow;
 							<option <?php selected($settings['author'], $author->ID); ?> value="<?php echo $author->ID; ?>">
 							<?php echo $author->display_name; ?>
 							</option>
-							<? } ?>
+							<?php } ?>
 						</select>
 					</td>
 				</tr>
