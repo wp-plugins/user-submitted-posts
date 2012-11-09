@@ -55,25 +55,25 @@ Adds a simple form via template tag or shortcode that enables your visitors to s
 
 == Installation ==
 
-** Overview **
+**Overview**
 
 1. Upload the `/user-submitted-posts/` directory to your plugins folder and activate
 2. Go to the "User Submitted Posts" Settings Page and customize your options
 3. Display the submission form on your page(s) using template tag or shortcode
 
-** Displaying the submission form **
+**Displaying the submission form**
 
 * To display the form on a post or page, use the shortcode: `[user-submitted-posts]`
 * To display the form anywhere in your theme, use the template tag:
 
 	&lt;?php if (function_exists('user_submitted_posts')) user_submitted_posts(); ?&gt;
 
-** Customizing the submission form **
+**Customizing the submission form**
 
 * To style the submission form, use the included CSS file located at: `/resources/usp.css`
 * To add custom JavaScript, use the included JS file located at: `/resources/usp.js`
 
-** Customizing user-submitted posts **
+**Customizing user-submitted posts**
 
 User-submitted posts are just like any other post, with the exception that they each contain a set of custom fields. The custom fields include extra information about the post:
 
@@ -88,7 +88,7 @@ So when user-submitted posts are displayed on your website, say on the home page
 * [WordPress Custom Fields, Part I: The Basics](http://perishablepress.com/wordpress-custom-fields-tutorial/)
 * [WordPress Custom Fields, Part II: Tips and Tricks](http://perishablepress.com/wordpress-custom-fields-tips-tricks/)
 
-** Template Tags **
+**Template Tags**
 
 Additionally, the USP plugin also includes a set of template tags for customizing your user-submitted posts:
 
@@ -170,7 +170,7 @@ Screenshots available at the [USP Homepage](http://perishablepress.com/user-subm
 
 == Frequently Asked Questions ==
 
-= Images are not uploaded or displaying =
+**Images are not uploaded or displaying**
 
 There are several things that can interfere with uploading files:
 
@@ -179,15 +179,15 @@ There are several things that can interfere with uploading files:
 
 Note: when changing permissions on files and folders, it is important to use the least-restrictive settings possible. If you have to use more permissive settings, it is important to secure the directory against malicious activity. For more information check out: [Secure Media Uploads](http://digwp.com/2012/09/secure-media-uploads/)
 
-= Will this work with my theme =
+**Will this work with my theme**
 
 USP is designed to work with any compatible theme running on WordPress version 3.3 or better.
 
-= What about security and spam? =
+**What about security and spam?**
 
 USP uses the WordPress API to keep everything secure, and includes a captcha and hidden field to stop spam and bots.
 
-= Other questions =
+**Other questions**
 
 To ask a question, visit the [USP Homepage](http://perishablepress.com/user-submitted-posts/) or [contact me](http://perishablepress.com/contact/).
 
