@@ -94,16 +94,16 @@ Additionally, the USP plugin also includes a set of template tags for customizin
 
 	usp_is_public_submission()
 	Returns a boolean value indicating whether the specified post is a public submission
-	Usage: &lt;?php if (function_exists('usp_is_public_submission')) usp_is_public_submission(); ?&gt;
+	Usage: <?php if (function_exists('usp_is_public_submission')) usp_is_public_submission(); ?>
 
 	usp_get_post_images()
 	Returns an array of URLs for the specified post image
-	Usage: &lt;?php $images = usp_get_post_images(); foreach ($images as $image) { echo $image; } ?&gt;
+	Usage: <?php $images = usp_get_post_images(); foreach ($images as $image) { echo $image; } ?>
 
 	usp_post_attachments()
 	Prints the URLs for all post attachments.
-	Usage:  &lt;?php if (function_exists('usp_post_attachments')) usp_post_attachments(); ?&gt;
-	Syntax: &lt;?php if (function_exists('usp_post_attachments')) usp_post_attachments($size, $beforeUrl, $afterUrl, $numberImages, $postId); ?&gt;
+	Usage:  <?php if (function_exists('usp_post_attachments')) usp_post_attachments(); ?>
+	Syntax: <?php if (function_exists('usp_post_attachments')) usp_post_attachments($size, $beforeUrl, $afterUrl, $numberImages, $postId); ?>
 	Paramters:
 		$size         = image size as thumbnail, medium, large or full -> default = full
 		$beforeUrl    = text/markup displayed before the image URL     -> default = &lt;img src="
@@ -114,7 +114,7 @@ Additionally, the USP plugin also includes a set of template tags for customizin
 	usp_author_link()
 	For public-submitted posts, this tag displays the author's name as a link (if URL provided) or plain text (if URL not provided)
 	For normal posts, this tag displays the author's name as a link to their author's post page
-	Usage: &lt;?php if (function_exists('usp_author_link')) usp_author_link(); ?&gt;
+	Usage: <?php if (function_exists('usp_author_link')) usp_author_link(); ?>
 
 For more information, check out the template-tag file at: `/library/template-tags.php`
 
