@@ -22,8 +22,9 @@ Adds a simple form via template tag or shortcode that enables your visitors to s
 
 **Features**
 
-* Let visitors submit posts from any post or page with shortcode, or anywhere in your theme with template tag
-* Latest version includes customizable captcha and hidden anti-spam field to stop bots and spam
+* Let visitors submit posts from anywhere on your site
+* Use template tag or shortcode to display the submission form anywhere
+* Latest version includes customizable captcha and hidden field to stop spam
 * Post submissions may include title, tags, category, author, url, post and image(s)
 * Redirect user to anywhere or return to current page after successful post submission
 * Includes a set of template tags for displaying and customizing user-submitted posts
@@ -47,8 +48,8 @@ Adds a simple form via template tag or shortcode that enables your visitors to s
 
 **Post Management**
 
-* Saves as custom-fields with each post: user name, IP, URL, and path info for each uploaded image
-* Set submitted posts to any status: Draft, Publish, or publish after some number of approved posts
+* Custom-fields saved with each post: name, IP, URL, and any image URLs
+* Set submitted posts to any status: Draft, Publish, or Moderate
 * One-click post-filtering of user-submitted posts on the Admin Posts page
 * Includes template tags for easy display of post attachments and images
 
