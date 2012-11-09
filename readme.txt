@@ -14,7 +14,7 @@ Version: 20121107
 Stable tag: 20121107
 License: GPL v2 or later
 
-[User Submitted Posts](http://perishablepress.com/user-submitted-posts/) enables your visitors to submit posts and images from anywhere on your site.
+User Submitted Posts enables your visitors to submit posts and images from anywhere on your site.
 
 == Description ==  
 
