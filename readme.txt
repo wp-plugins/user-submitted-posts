@@ -7,7 +7,7 @@ Tags: submit, public, news, share, upload, images, posts, users, user-submit, co
 Author URI: http://monzilla.biz/
 Author: Jeff Starr
 Donate link: http://digwp.com/book/
-Contributors: Jeff Starr
+Contributors: specialk
 Requires at least: 3.3
 Tested up to: 3.4.2
 Version: 20121107
