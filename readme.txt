@@ -170,7 +170,7 @@ Screenshots available at the [USP Homepage](http://perishablepress.com/user-subm
 
 == Frequently Asked Questions ==
 
-** Images are not uploaded or displaying **
+= Images are not uploaded or displaying =
 
 There are several things that can interfere with uploading files:
 
@@ -179,15 +179,15 @@ There are several things that can interfere with uploading files:
 
 Note: when changing permissions on files and folders, it is important to use the least-restrictive settings possible. If you have to use more permissive settings, it is important to secure the directory against malicious activity. For more information check out: [Secure Media Uploads](http://digwp.com/2012/09/secure-media-uploads/)
 
-** Will this work with my theme **
+= Will this work with my theme =
 
 USP is designed to work with any compatible theme running on WordPress version 3.3 or better.
 
-** What about security and spam? **
+= What about security and spam? =
 
 USP uses the WordPress API to keep everything secure, and includes a captcha and hidden field to stop spam and bots.
 
-** Other questions **
+= Other questions =
 
 To ask a question, visit the [USP Homepage](http://perishablepress.com/user-submitted-posts/) or [contact me](http://perishablepress.com/contact/).
 
