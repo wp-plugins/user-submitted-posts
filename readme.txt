@@ -1,31 +1,33 @@
 === User Submitted Posts ===
 
-Plugin Name:       User Submitted Posts
-Plugin URI:        http://perishablepress.com/user-submitted-posts/
-Tags:              posts, user-submit, community, public, submit
-Author URI:        http://perishablepress.com/
-Author:            Jeff Starr
-Requires at least: 2.8
-Tested up to:      3.0.5
-Version:           1.00
-License:           GPLv2 or later
+Plugin Name: User Submitted Posts
+Plugin URI: http://perishablepress.com/user-submitted-posts/
+Description: Enables your visitors to submit posts and images from anywhere on your site.
+Tags: submit, public, news, share, upload, images, posts, users, user-submit, community
+Author URI: http://monzilla.biz/
+Author: Jeff Starr
+Donate link: http://digwp.com/book/
+Contributors: Jeff Starr
+Requires at least: 3.3
+Tested up to: 3.4.2
+Version: 20121107
+Stable tag: 20121107
+License: GPL v2 or later
 
-User Submitted Posts enables your visitors to submit posts and images from anywhere on your site.
+[User Submitted Posts](http://perishablepress.com/user-submitted-posts/) enables your visitors to submit posts and images from anywhere on your site.
 
 == Description ==  
 
-Adds a simple form via template tag or shortcode that enables your visitors to submit posts. 
-User-submitted posts optionally include tags, categories, post titles, and more. You can set 
-submitted posts as draft, publish immediately, or after some number of approved posts. 
-Also enables users to upload multiple images when submitting a post. 
-Everything super-easy to customize via Admin Settings page.
+Adds a simple form via template tag or shortcode that enables your visitors to submit posts. User-submitted posts optionally include tags, categories, post titles, and more. You can set submitted posts as draft, publish immediately, or after some number of approved posts. Also enables users to upload multiple images when submitting a post. Everything super-easy to customize via Admin Settings page.
 
 **Features**
 
-* Let visitors submit posts from anywhere in your site
-* Display submission form anywhere on the page via shortcode or template tag
+* Let visitors submit posts from any post or page with shortcode, or anywhere in your theme with template tag
+* Latest version includes customizable captcha and hidden anti-spam field to stop bots and spam
 * Post submissions may include title, tags, category, author, url, post and image(s)
 * Redirect user to anywhere or return to current page after successful post submission
+* Includes a set of template tags for displaying and customizing user-submitted posts
+* New HTML5 submission form with streamlined CSS styles
 
 **Image Uploads**
 
@@ -39,7 +41,9 @@ Everything super-easy to customize via Admin Settings page.
 * Control which fields are displayed in the submission form
 * Choose which categories users are allowed to select
 * Assign submitted posts to any registered user
-* Customizable error and upload messages
+* Customizable success, error, and upload messages
+* Plus options for the captcha, auto-publish, and redirect-URL
+* Option to use classic form, HTML5 form, or disable only the stylesheet
 
 **Post Management**
 
@@ -50,82 +54,144 @@ Everything super-easy to customize via Admin Settings page.
 
 == Installation ==
 
-1. Upload the user-submitted-posts directory to your plugins folder and activate via Admin
-2. Go to the "User Submitted Posts" Settings Page and customize the options for your site
-3. Display the submission form on your page(s) using template tag or shortcode:
+** Overview **
 
- - To display the form on a post or page, use the shortcode: [user-submitted-posts]
- - To display the form anywhere in your theme, use the template tag: public_submission_form(true)
+1. Upload the `/user-submitted-posts/` directory to your plugins folder and activate
+2. Go to the "User Submitted Posts" Settings Page and customize your options
+3. Display the submission form on your page(s) using template tag or shortcode
 
-**Note:** By default, the form width is 300px. To change the width, do the following:
+** Displaying the submission form **
 
-1. Open the CSS file: /user-submitted-posts/resources/user-submitted-posts.css
-2. Edit the first declaration block to the desired width: div#usp { width: 300px; }
-3. All other styles are relative to that width, so no other changes are required
+* To display the form on a post or page, use the shortcode: `[user-submitted-posts]`
+* To display the form anywhere in your theme, use the template tag:
 
-== Template Tags ==
+	&lt;?php if (function_exists('user_submitted_posts')) user_submitted_posts(); ?&gt;
 
-To display the images attached to user-submitted posts, use this template tag:
+** Customizing the submission form **
 
-<?php post_attachments(); ?>
+* To style the submission form, use the included CSS file located at: `/resources/usp.css`
+* To add custom JavaScript, use the included JS file located at: `/resources/usp.js`
 
-This template tag prints the URLs for all post attachments and accepts the following paramters:
+** Customizing user-submitted posts **
 
-<?php post_attachments($size, $beforeUrl, $afterUrl, $numberImages, $postId); ?>
+User-submitted posts are just like any other post, with the exception that they each contain a set of custom fields. The custom fields include extra information about the post:
 
-$size         = image size as thumbnail, medium, large or full -> default = full
-$beforeUrl    = text/markup displayed before the image URL     -> default = <img src="
-$afterUrl     = text/markup displayed after the image URL      -> default = " />
-$numberImages = the number of images to display for each post  -> default = false (display all)
-$postId       = an optional post ID to use                     -> default = uses global post
+* `is_submission` - indicates that the post is in fact user-submitted
+* `user_submit_image` - the URL of the submitted image (one custom field per image)
+* `user_submit_ip` - the IP address of the submitted-post author
+* `user_submit_name` - the name of the submitted-post author
+* `user_submit_url` - the submitted URL
 
-Additionally, the following template tag returns an array of URLs for the specified post image:
+So when user-submitted posts are displayed on your website, say on the home page or single-view, these custom fields are available to you in your theme files. This enables you to customize the user-submitted posts by displaying the submitted name, URL, images, and so forth. Here are two articles for those new to using WordPress custom-fields:
 
-<?php get_post_images(); ?>
-	
-This tag returns a boolean value indicating whether the specified post is a public submission: 
+* [WordPress Custom Fields, Part I: The Basics](http://perishablepress.com/wordpress-custom-fields-tutorial/)
+* [WordPress Custom Fields, Part II: Tips and Tricks](http://perishablepress.com/wordpress-custom-fields-tips-tricks/)
 
-<?php is_public_submission(); ?>
+** Template Tags **
 
-== Styling the Submission Form ==
+Additionally, the USP plugin also includes a set of template tags for customizing your user-submitted posts:
 
-By default a CSS file is included with the submission form. It includes some basic styles for 
-uniform structural and font display, but you will probably want to customize the look and feel 
-of the form by adding a few styles of your own. The stylesheet includes all available selectors 
-and is located in the following directory:
+	usp_is_public_submission()
+	Returns a boolean value indicating whether the specified post is a public submission
+	Usage: &lt;?php if (function_exists('usp_is_public_submission')) usp_is_public_submission(); ?&gt;
 
-/wp-content/plugins/user-submitted-posts/resources/user-submitted-posts.css
+	usp_get_post_images()
+	Returns an array of URLs for the specified post image
+	Usage: &lt;?php $images = usp_get_post_images(); foreach ($images as $image) { echo $image; } ?&gt;
 
-== jQuery/JavaScript ==
+	usp_post_attachments()
+	Prints the URLs for all post attachments.
+	Usage:  &lt;?php if (function_exists('usp_post_attachments')) usp_post_attachments(); ?&gt;
+	Syntax: &lt;?php if (function_exists('usp_post_attachments')) usp_post_attachments($size, $beforeUrl, $afterUrl, $numberImages, $postId); ?&gt;
+	Paramters:
+		$size         = image size as thumbnail, medium, large or full -> default = full
+		$beforeUrl    = text/markup displayed before the image URL     -> default = &lt;img src="
+		$afterUrl     = text/markup displayed after the image URL      -> default = " /&gt;
+		$numberImages = the number of images to display for each post  -> default = false (display all)
+		$postId       = an optional post ID to use                     -> default = uses global post
 
-Along with the stylesheet, an external JavaScript file is included on any page that displays 
-the submission form. This file is located in the following directory:
+	usp_author_link()
+	For public-submitted posts, this tag displays the author's name as a link (if URL provided) or plain text (if URL not provided)
+	For normal posts, this tag displays the author's name as a link to their author's post page
+	Usage: &lt;?php if (function_exists('usp_author_link')) usp_author_link(); ?&gt;
 
-/wp-content/plugins/user-submitted-posts/resources/user-submitted-posts.js
-
-By default, this file contains only a jQuery snippet for multiple image uploads. If you are 
-customizing the form with additional jQuery/JavaScript, this is a convenient place to do so.
+For more information, check out the template-tag file at: `/library/template-tags.php`
 
 == Upgrade Notice ==
 
-None yet (initial release)
+__Important!__ Many things have changed in the new version of the plugin. Please copy/paste your current USP settings to a safe place. Then update the plugin as usual, using your saved settings while configuring the new version.
 
 == Screenshots ==
 
-See http://perishablepress.com/user-submitted-posts/
+Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
 
 == Changelog ==
 
+= 20121105 =
+
+* Rebuilt plugin and optimized code using current WP API
+* Redesigned settings page, toggling panels, better structure, more info, etc.
+* Errors now redirect to specified page (if set) or current page
+* Fixed bug to allow for unlimited number of uploaded images
+* Cleaned up template tags, added inline comments
+* Optimized/enhanced the user-submission form
+* Added option to restore default settings
+* Added settings link from Plugins page
+* Renamed CSS and JavaScript files
+* Added challenge question captcha
+* Added hidden field for security
+* Added option for custom success message
+* Submission form now retains entered value if error
+* Added placeholder attributes to the form fields
+* Submissions including invalid upload files now redirect to form with error message
+* Fixed default author of submitted posts
+* the_author_link is not filterable, so created new function usp_author_link
+* moved admin styles from form stylesheet to admin-only stylesheet
+* Added new HTML5 form and stylesheet, kept originals as "classic" version
+
 = 1.0 =
 
- * Initial release
+* Initial release
+
+= To Do =
+
+* Load styles only on form page(s)
+* Custom error message when images are too big or if too many images are uploaded
+* Filter `the_author_link` if/when possible
+* Inlcude sub-category option
+* Auto inserting/attaching uploaded images to posts
+* Automatically use the first uploaded image as the featured image
+* Include support for uploaded videos
+* Additional form fields / custom fields
+* Refine error message to show which field
+* Email notifications for approved submissions
+* Customizable field labels
 
 == Frequently Asked Questions ==
 
-See http://perishablepress.com/user-submitted-posts/
+** Images are not uploaded or displaying **
+
+There are several things that can interfere with uploading files:
+
+* Check the permission settings on the upload folder(s) by ensuring that you can successfully upload image files thru the Media Uploader. 
+* Double-check that all the image-upload settings make sense, and that the images being uploaded meet the specified requirements.
+
+Note: when changing permissions on files and folders, it is important to use the least-restrictive settings possible. If you have to use more permissive settings, it is important to secure the directory against malicious activity. For more information check out: [Secure Media Uploads](http://digwp.com/2012/09/secure-media-uploads/)
+
+** Will this work with my theme **
+
+USP is designed to work with any compatible theme running on WordPress version 3.3 or better.
+
+** What about security and spam? **
+
+USP uses the WordPress API to keep everything secure, and includes a captcha and hidden field to stop spam and bots.
+
+** Other questions **
+
+To ask a question, visit the [USP Homepage](http://perishablepress.com/user-submitted-posts/) or [contact me](http://perishablepress.com/contact/).
 
 == Donations ==
 
-To show support for the plugin, consider buying a copy of our book, 
-Digging into WordPress, now available at <http://digwp.com/book/>
-Links and tweets are also appreciated! Thanks for your support :)
+I created this plugin with love for the WP community. To show support, consider purchasing my new book, [.htaccess made easy](http://htaccessbook.com/), or my WordPress book, [Digging into WordPress](http://digwp.com/).
+
+Links, tweets and likes also appreciated. Thanks! :)

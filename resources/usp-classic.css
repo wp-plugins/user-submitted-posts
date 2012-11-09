@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* 
-	User Submitted Posts - CSS Stylesheet Version 1
+	User Submitted Posts - CSS Stylesheet (Classic)
 	http://perishablepress.com/user-submitted-posts/
 */
 
@@ -11,7 +11,7 @@ input#user-submit-post, div#usp_upload-message, a#usp_add-another, input#user-su
 	width: 96%; float: left; clear: both; margin: 0; padding: 0; overflow: hidden; font: 13px/1 Helvetica, Arial, sans-serif; 
 	}
 #usp label.usp_label { margin: 8px 0 2px 0; }
-#usp input.usp_input { width: 70%; padding: 3px; font-size: 13px; line-height: 1; }
+#usp input.usp_input { width: 75%; padding: 3px; font-size: 13px; line-height: 1; }
 #usp input.usp_input[type="hidden"] { display: none; }
 #usp input.usp_clone {}
 
@@ -22,7 +22,7 @@ input#user-submit-post, div#usp_upload-message, a#usp_add-another, input#user-su
 #usp a#usp_add-another { outline: 0 none; width: auto; text-decoration: none; font-size: 11px; margin-bottom: 10px; }
 
 #usp div#usp_upload-message {}
-#usp div#usp_success_message { font-weight: bold; font-size: 16px; }
+#usp div#usp_success_message { font-weight: bold; }
 
 #usp ul#usp_list,
 #usp ul#usp_list li { list-style: none outside none; }
@@ -32,6 +32,7 @@ input#user-submit-post, div#usp_upload-message, a#usp_add-another, input#user-su
 #usp li.usp_title {}
 #usp li.usp_tags {}
 #usp li.usp_category {}
+#usp li.usp_captcha {}
 #usp li.usp_content {}
 #usp li.usp_images {}
 #usp li.usp_submit {}
@@ -44,5 +45,3 @@ input#user-submit-post, div#usp_upload-message, a#usp_add-another, input#user-su
 #usp textarea#user-submitted-content { margin: 0 0 5px 0; padding: 3px; font-size: 13px; line-height: 1.2; }
 #usp input#user-submitted-image { margin-bottom: 7px; font-size: 11px; line-height: 1; }
 #usp input#user-submitted-post { width: 100px; margin: 5px 0 17px 0; padding: 3px; }
-
-form#posts-filter a#usp_admin_filter_posts { float: right; clear: none; margin: 1px 0 8px 0; padding: 3px 8px 4px 8px; }
