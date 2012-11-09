@@ -9,8 +9,8 @@
 	Donate link: http://digwp.com/book/
 	Requires at least: 3.3
 	Tested up to: 3.4.2
-	Stable tag: 20121107
-	Version: 20121107
+	Stable tag: 20121108
+	Version: 20121108
 	License: GPL v2
 */
 
@@ -21,7 +21,7 @@ $usp_options = get_option('usp_options');
 $usp_path    = plugin_basename(__FILE__); // '/user-submitted-posts/user-submitted-posts.php';
 $usp_logo    = plugins_url() . '/user-submitted-posts/images/usp-logo.png';
 $usp_homeurl = 'http://perishablepress.com/user-submitted-posts/';
-$usp_version = '20121107';
+$usp_version = '20121108';
 
 $usp_post_meta_IsSubmission = 'is_submission';
 $usp_post_meta_SubmitterIp  = 'user_submit_ip';
@@ -72,9 +72,16 @@ function usp_checkForPublicSubmission() {
 	global $usp_options;
 	if (isset($_POST['user-submitted-post']) && !empty($_POST['user-submitted-post'])) {
 
-		$title   = stripslashes($_POST['user-submitted-title']);
-		$content = stripslashes($_POST['user-submitted-content']);
-		
+		if ($usp_options['usp_title'] == 'show') {
+			$title = stripslashes($_POST['user-submitted-title']);
+		} else {
+			$title = 'User Submitted Post';
+		}
+		if ($usp_options['usp_content'] == 'show') {
+			$content = stripslashes($_POST['user-submitted-content']);
+		} else {
+			$content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+		}
 		if (stripslashes($_POST['user-submitted-name']) && !empty($_POST['user-submitted-name'])) {
 			$author_submit = stripslashes($_POST['user-submitted-name']);
 			$author_info = get_user_by('login', $author_submit);
@@ -91,11 +98,11 @@ function usp_checkForPublicSubmission() {
 			$authorID = $usp_options['author'];
 			$authorName = get_the_author_meta('display_name', $authorID);
 		}
-		$authorUrl        = stripslashes($_POST['user-submitted-url']);
-		$tags             = stripslashes($_POST['user-submitted-tags']);
-		$captcha          = stripslashes($_POST['user-submitted-captcha']);
-		$category         = intval($_POST['user-submitted-category']);
-		$fileData         = $_FILES['user-submitted-image'];
+		$authorUrl = stripslashes($_POST['user-submitted-url']);
+		$tags      = stripslashes($_POST['user-submitted-tags']);
+		$captcha   = stripslashes($_POST['user-submitted-captcha']);
+		$category  = intval($_POST['user-submitted-category']);
+		$fileData  = $_FILES['user-submitted-image'];
 
 		$publicSubmission = usp_createPublicSubmission($title, $content, $authorName, $authorID, $authorUrl, $tags, $category, $fileData);
 
