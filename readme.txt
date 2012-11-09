@@ -128,7 +128,7 @@ Screenshots available at the [USP Homepage](http://perishablepress.com/user-subm
 
 == Changelog ==
 
-== 20121108 ==
+= 20121108 =
 
 * Fixed non-submission when title and other fields are hidden
 
