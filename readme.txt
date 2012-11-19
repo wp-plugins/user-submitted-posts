@@ -10,8 +10,8 @@ Donate link: http://digwp.com/book/
 Contributors: specialk
 Requires at least: 3.3
 Tested up to: 3.4.2
-Version: 20121108
-Stable tag: 20121108
+Version: 20121119
+Stable tag: 20121119
 License: GPL v2 or later
 
 User Submitted Posts enables your visitors to submit posts and images from anywhere on your site.
@@ -29,6 +29,13 @@ Adds a simple form via template tag or shortcode that enables your visitors to s
 * Redirect user to anywhere or return to current page after successful post submission
 * Includes a set of template tags for displaying and customizing user-submitted posts
 * New HTML5 submission form with streamlined CSS styles
+
+**New Features**
+
+* Option to receive email alert for new submitted posts
+* Option to set logged-in username as submitted-post author
+* Option to set logged-in user&rsquo;s URL as the submitted URL
+* Option to set a default submission category via hidden field
 
 **Image Uploads**
 
@@ -127,6 +134,22 @@ __Important!__ Many things have changed in the new version of the plugin. Please
 Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
 
 == Changelog ==
+
+= 20121119 =
+
+* increased default image width and height
+* comment out output start in three files
+* remove echo output for input value attributes
+* cleaned up placeholders with clearer infos
+* remove usp_validateContent() function
+* remove conditional if for content in usp_checkForPublicSubmission() [1]
+* [1] default text no longer added to posts when empty
+* remove content validation in usp_createPublicSubmission()
+* added option to receive email alert for new submissions
+* added option to set author as current user
+* added option to set author url as usp url
+* added option to set category as hidden
+* submission-form.php &amp; submission-form-classic.php: changed markup output for success &amp; error messages
 
 = 20121108 =
 

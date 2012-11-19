@@ -1,19 +1,9 @@
 <?php // User Submitted Posts - HTML5 Submission Form
 
-global $usp_options; 
-
-session_start();
-$title      = $_SESSION['title'];
-$content    = $_SESSION['content'];
-$authorName = $_SESSION['authorName'];
-$authorUrl  = $_SESSION['authorUrl'];
-$tags       = $_SESSION['tags'];
-$captcha    = $_SESSION['captcha'];
-$category   = $_SESSION['category'];
+global $usp_options, $current_user;
 
 $author_ID  = $usp_options['author'];
 $default_author = get_the_author_meta('display_name', $author_ID);
-
 if ($authorName == $default_author) {
 	$authorName = '';
 } ?>
@@ -30,27 +20,27 @@ if ($authorName == $default_author) {
 		<div id="usp-success-message"><?php echo $usp_options['success-message']; ?></div>
 		<?php } else { ?>
 
-		<?php if ($usp_options['usp_name'] == 'show') { ?>
+		<?php if (($usp_options['usp_name'] == 'show') && ($usp_options['usp_use_author'] == false)) { ?>
 		<fieldset class="usp-name">
 			<label for="user-submitted-name"><?php _e('Your Name'); ?></label>
-			<input name="user-submitted-name" type="text" value="<?php echo $authorName; ?>" placeholder="<?php _e('Your Name'); ?>">
+			<input name="user-submitted-name" type="text" value="" placeholder="<?php _e('Your Name'); ?>">
 		</fieldset>
-		<?php } if ($usp_options['usp_url'] == 'show') { ?>
+		<?php } if (($usp_options['usp_url'] == 'show') && ($usp_options['usp_use_url'] == false)) { ?>
 		<fieldset class="usp-url">
 			<label for="user-submitted-url"><?php _e('Your URL'); ?></label>
-			<input name="user-submitted-url" type="text" value="<?php echo $authorUrl; ?>" placeholder="<?php _e('Your URL'); ?>">
+			<input name="user-submitted-url" type="text" value="" placeholder="<?php _e('Your URL'); ?>">
 		</fieldset>
 		<?php } if ($usp_options['usp_title'] == 'show') { ?>
 		<fieldset class="usp-title">
 			<label for="user-submitted-title"><?php _e('Post Title'); ?></label>
-			<input name="user-submitted-title" type="text" value="<?php echo $title; ?>" placeholder="<?php _e('Post Title'); ?>">
+			<input name="user-submitted-title" type="text" value="" placeholder="<?php _e('Post Title'); ?>">
 		</fieldset>
 		<?php } if ($usp_options['usp_tags'] == 'show') { ?>
 		<fieldset class="usp-tags">
 			<label for="user-submitted-tags"><?php _e('Post Tags'); ?></label>
-			<input name="user-submitted-tags" type="text" value="<?php echo $tags; ?>" placeholder="<?php _e('Post Tags'); ?>">
+			<input name="user-submitted-tags" type="text" value="" placeholder="<?php _e('Post Tags'); ?>">
 		</fieldset>
-		<?php } if ($usp_options['usp_category'] == 'show') { ?>
+		<?php } if (($usp_options['usp_category'] == 'show') && ($usp_options['usp_use_cat'] == false)) { ?>
 		<fieldset class="usp-category">
 			<label for="user-submitted-category"><?php _e('Post Category'); ?></label>
 			<select name="user-submitted-category">
@@ -62,12 +52,12 @@ if ($authorName == $default_author) {
 		<?php } if ($usp_options['usp_captcha'] == 'show') { ?>
 		<fieldset class="usp-captcha">
 			<label for="user-submitted-captcha"><?php echo $usp_options['usp_question']; ?></label>
-			<input name="user-submitted-captcha" type="text" value="<?php echo $captcha; ?>" placeholder="<?php echo $usp_options['usp_response']; ?>">
+			<input name="user-submitted-captcha" type="text" value="" placeholder="<?php _e('Anti-spam: '); echo $usp_options['usp_question']; ?>">
 		</fieldset>
 		<?php } if ($usp_options['usp_content'] == 'show') { ?>
 		<fieldset class="usp-content">
 			<label for="user-submitted-content"><?php _e('Post Content'); ?></label>
-			<textarea name="user-submitted-content" rows="5" placeholder="<?php _e('Post Content'); ?>"><?php echo $content; ?></textarea>
+			<textarea name="user-submitted-content" rows="5" placeholder="<?php _e('Post Content'); ?>"></textarea>
 		</fieldset>
 		<?php } if ($usp_options['usp_images'] == 'show') { ?>
 		<?php if ($usp_options['max-images'] !== 0) { ?>
@@ -92,14 +82,24 @@ if ($authorName == $default_author) {
 			<input name="user-submitted-verify" type="text" value="">
 		</fieldset>
 		<div id="usp-submit">
-			<?php if(!empty($usp_options['redirect-url'])) { ?>
+			<?php if (!empty($usp_options['redirect-url'])) { ?>
 			<input type="hidden" name="redirect-override" value="<?php echo $usp_options['redirect-url']; ?>">
+			<?php } ?>
+			<?php if ($usp_options['usp_use_author'] == true) { ?>
+			<input class="hidden" type="hidden" name="user-submitted-name" value="<?php echo $current_user->user_login; ?>">
+			<?php } ?>
+			<?php if ($usp_options['usp_use_url'] == true) { ?>
+			<input class="hidden" type="hidden" name="user-submitted-url" value="<?php echo $current_user->user_url; ?>">
+			<?php } ?>
+			<?php if ($usp_options['usp_use_cat'] == true) { ?>
+			<input class="hidden" type="hidden" name="user-submitted-category" value="<?php echo $usp_options['usp_use_cat_id']; ?>">
 			<?php } ?>
 			<input name="user-submitted-post" type="submit" value="<?php _e('Submit Post'); ?>">
 		</div>
+
+		<?php } ?>
+
 	</form>
 </div>
 <script>(function(){var e = document.getElementById("coldform_verify");e.parentNode.removeChild(e);})();</script>
 <!-- User Submitted Posts @ http://perishablepress.com/user-submitted-posts/ -->
-
-<?php } ?>

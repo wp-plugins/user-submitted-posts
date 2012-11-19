@@ -9,8 +9,8 @@
 	Donate link: http://digwp.com/book/
 	Requires at least: 3.3
 	Tested up to: 3.4.2
-	Stable tag: 20121108
-	Version: 20121108
+	Stable tag: 20121119
+	Version: 20121119
 	License: GPL v2
 */
 
@@ -77,11 +77,6 @@ function usp_checkForPublicSubmission() {
 		} else {
 			$title = 'User Submitted Post';
 		}
-		if ($usp_options['usp_content'] == 'show') {
-			$content = stripslashes($_POST['user-submitted-content']);
-		} else {
-			$content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
-		}
 		if (stripslashes($_POST['user-submitted-name']) && !empty($_POST['user-submitted-name'])) {
 			$author_submit = stripslashes($_POST['user-submitted-name']);
 			$author_info = get_user_by('login', $author_submit);
@@ -105,15 +100,6 @@ function usp_checkForPublicSubmission() {
 		$fileData  = $_FILES['user-submitted-image'];
 
 		$publicSubmission = usp_createPublicSubmission($title, $content, $authorName, $authorID, $authorUrl, $tags, $category, $fileData);
-
-		session_start();
-		$_SESSION['title']      = $title;
-		$_SESSION['content']    = $content;
-		$_SESSION['authorName'] = $authorName;
-		$_SESSION['authorUrl']  = $authorUrl;
-		$_SESSION['tags']       = $tags;
-		$_SESSION['captcha']    = $captcha;
-		$_SESSION['category']   = $category;
 
 		if (false == ($publicSubmission)) {
 			$errorMessage = empty($usp_options['error-message']) ? __('An error occurred. Please go back and try again.') : $usp_options['error-message'];
@@ -226,9 +212,6 @@ function usp_createPublicSubmission($title, $content, $authorName, $authorID, $a
 	if (!usp_validateTitle($title)) {
 		return false;
 	}
-	if (!usp_validateContent($content)) {
-		return false;
-	}
 	if (!usp_validateTags($tags)) {
 		return false;
 	}
@@ -269,6 +252,14 @@ function usp_createPublicSubmission($title, $content, $authorName, $authorID, $a
 		wp_set_post_tags($newPost, $tags);
 		wp_set_post_categories($newPost, array($category));
 
+		if ($usp_options['usp_email_alerts'] == true) {
+			$to = $usp_options['usp_email_address'];
+			if ($to !== '') {
+				$subject = 'New user-submitted post!';
+				$message = 'Hey, there is a new user-submitted post waiting for you.';
+				wp_mail($to, $subject, $message);
+			}
+		}
 		if (!function_exists('media_handle_upload')) {
 			require_once (ABSPATH . '/wp-admin/includes/media.php');
 			require_once (ABSPATH . '/wp-admin/includes/file.php');
@@ -324,9 +315,6 @@ function usp_imageIsRightSize($width, $height) {
 	$widthFits = ($width <= intval($usp_options['max-image-width'])) && ($width >= $usp_options['min-image-width']);
 	$heightFits = ($height <= $usp_options['max-image-height']) && ($height >= $usp_options['min-image-height']);
 	return $widthFits && $heightFits;
-}
-function usp_validateContent($content) {
-	return !empty($content);
 }
 function usp_validateTags($tags) {
 	return true;
@@ -385,6 +373,7 @@ if ($usp_options['default_options'] == 1) {
 register_activation_hook (__FILE__, 'usp_add_defaults');
 function usp_add_defaults() {
 	$currentUser = wp_get_current_user();
+	$admin_mail = get_bloginfo('admin_email');
 	$tmp = get_option('usp_options');
 	if(($tmp['default_options'] == '1') || (!is_array($tmp))) {
 		$arr = array(
@@ -398,8 +387,8 @@ function usp_add_defaults() {
 			'max-images' => 1,
 			'min-image-height' => 0,
 			'min-image-width' => 0,
-			'max-image-height' => 500,
-			'max-image-width' => 500,
+			'max-image-height' => 1500,
+			'max-image-width' => 1500,
 			'usp_name' => 'show',
 			'usp_url' => 'show',
 			'usp_title' => 'show',
@@ -415,6 +404,12 @@ function usp_add_defaults() {
 			'usp_content' => 'show',
 			'success-message' => 'Success! Thank you for your submission.',
 			'usp_form_version' => 'current',
+			'usp_email_alerts' => 1,
+			'usp_email_address' => $admin_mail,
+			'usp_use_author' => 0,
+			'usp_use_url' => 0,
+			'usp_use_cat' => 0,
+			'usp_use_cat_id' => '',
 		);
 		update_option('usp_options', $arr);
 	}	
@@ -465,25 +460,39 @@ function usp_validate_options($input) {
 	$input['max-image-height'] = (is_numeric($input['max-image-height']) && ($usp_options['min-image-height'] <= $input['max-image-height'])) ? intval($input['max-image-height']) : $usp_options['max-image-height'];
 	$input['max-image-width']  = (is_numeric($input['max-image-width'])  && ($usp_options['min-image-width']  <= $input['max-image-width']))  ? intval($input['max-image-width'])  : $usp_options['max-image-width'];
 
-	$input['usp_name']         = wp_filter_nohtml_kses($input['usp_name']);
-	$input['usp_url']          = wp_filter_nohtml_kses($input['usp_url']);
-	$input['usp_title']        = wp_filter_nohtml_kses($input['usp_title']);
-	$input['usp_tags']         = wp_filter_nohtml_kses($input['usp_tags']);
-	$input['usp_category']     = wp_filter_nohtml_kses($input['usp_category']);
-	$input['usp_images']       = wp_filter_nohtml_kses($input['usp_images']);
-	$input['upload-message']   = wp_filter_nohtml_kses($input['upload-message']);
-	$input['usp_form_width']   = wp_filter_nohtml_kses($input['usp_form_width']);
-	$input['usp_question']     = wp_filter_nohtml_kses($input['usp_question']);
-	$input['usp_answer']       = wp_filter_nohtml_kses($input['usp_answer']);
-	$input['usp_captcha']      = wp_filter_nohtml_kses($input['usp_captcha']);
-	$input['usp_content']      = wp_filter_nohtml_kses($input['usp_content']);
-	$input['success-message']  = wp_filter_nohtml_kses($input['success-message']);
+	$input['usp_name']          = wp_filter_nohtml_kses($input['usp_name']);
+	$input['usp_url']           = wp_filter_nohtml_kses($input['usp_url']);
+	$input['usp_title']         = wp_filter_nohtml_kses($input['usp_title']);
+	$input['usp_tags']          = wp_filter_nohtml_kses($input['usp_tags']);
+	$input['usp_category']      = wp_filter_nohtml_kses($input['usp_category']);
+	$input['usp_images']        = wp_filter_nohtml_kses($input['usp_images']);
+	$input['upload-message']    = wp_filter_nohtml_kses($input['upload-message']);
+	$input['usp_form_width']    = wp_filter_nohtml_kses($input['usp_form_width']);
+	$input['usp_question']      = wp_filter_nohtml_kses($input['usp_question']);
+	$input['usp_answer']        = wp_filter_nohtml_kses($input['usp_answer']);
+	$input['usp_captcha']       = wp_filter_nohtml_kses($input['usp_captcha']);
+	$input['usp_content']       = wp_filter_nohtml_kses($input['usp_content']);
+	$input['success-message']   = wp_filter_nohtml_kses($input['success-message']);
+	$input['usp_email_address'] = wp_filter_nohtml_kses($input['usp_email_address']);
+	$input['usp_use_cat_id']    = wp_filter_nohtml_kses($input['usp_use_cat_id']);
 
 	if (!isset($input['usp_casing'])) $input['usp_casing'] = null;
 	$input['usp_casing'] = ($input['usp_casing'] == 1 ? 1 : 0);
 
 	if (!isset($input['usp_form_version'])) $input['usp_form_version'] = null;
 	if (!array_key_exists($input['usp_form_version'], $usp_form_version)) $input['usp_form_version'] = null;
+	
+	if (!isset($input['usp_email_alerts'])) $input['usp_email_alerts'] = null;
+	$input['usp_email_alerts'] = ($input['usp_email_alerts'] == 1 ? 1 : 0);
+
+	if (!isset($input['usp_use_author'])) $input['usp_use_author'] = null;
+	$input['usp_use_author'] = ($input['usp_use_author'] == 1 ? 1 : 0);
+
+	if (!isset($input['usp_use_url'])) $input['usp_use_url'] = null;
+	$input['usp_use_url'] = ($input['usp_use_url'] == 1 ? 1 : 0);
+	
+	if (!isset($input['usp_use_cat'])) $input['usp_use_cat'] = null;
+	$input['usp_use_cat'] = ($input['usp_use_cat'] == 1 ? 1 : 0);
 
 	return $input;
 }
@@ -688,6 +697,16 @@ function usp_render_form() {
 										</td>
 									</tr>
 									<tr>
+										<th scope="row"><label class="description" for="usp_options[usp_email_alerts]"><?php _e('Receive Email Alert'); ?></label></th>
+										<td><input type="checkbox" value="1" name="usp_options[usp_email_alerts]" <?php if (isset($usp_options['usp_email_alerts'])) { checked('1', $usp_options['usp_email_alerts']); } ?> />
+										<span class="mm-item-caption"><?php _e('Check this box if you want to be notified via email for new post submissions.'); ?></span></td>
+									</tr>
+									<tr>
+										<th scope="row"><label class="description" for="usp_options[usp_email_address]"><?php _e('Email Address for Alerts'); ?></label></th>
+										<td><input type="text" size="45" maxlength="200" name="usp_options[usp_email_address]" value="<?php echo attribute_escape($usp_options['usp_email_address']); ?>" />
+										<div class="mm-item-caption"><?php _e('If you checked the box to receive email alerts, indicate here the address to which the emails should be sent.'); ?></div></td>
+									</tr>
+									<tr>
 										<th scope="row"><label class="description" for="usp_options[redirect-url]"><?php _e('Redirect URL'); ?></label></th>
 										<td><input type="text" size="45" maxlength="200" name="usp_options[redirect-url]" value="<?php echo attribute_escape($usp_options['redirect-url']); ?>" />
 										<div class="mm-item-caption"><?php _e('Specify a URL to redirect the user after post-submission. Note: leave blank to redirect back to current page.'); ?></div></td>
@@ -701,6 +720,31 @@ function usp_render_form() {
 										<th scope="row"><label class="description" for="usp_options[error-message]"><?php _e('Error Message'); ?></label></th>
 										<td><textarea class="textarea" rows="3" cols="50" name="usp_options[error-message]"><?php echo attribute_escape($usp_options['error-message']); ?></textarea> 
 										<div class="mm-item-caption"><?php _e('This is the error message that is displayed if post-submission fails.'); ?></div></td>
+									</tr>
+								</table>
+							</div>
+							<h4><?php _e('Use registered user info'); ?></h4>
+							<div class="mm-table-wrap">
+								<table class="widefat mm-table">
+									<tr>
+										<th scope="row"><label class="description" for="usp_options[usp_use_author]"><?php _e('Use registered username for author?'); ?></label></th>
+										<td><input type="checkbox" value="1" name="usp_options[usp_use_author]" <?php if (isset($usp_options['usp_use_author'])) { checked('1', $usp_options['usp_use_author']); } ?> />
+										<span class="mm-item-caption"><?php _e('Check this box if you want to automatically use the registered username as the submitted-post author. Note: this really should only be used when requiring log-in for submissions.'); ?></span></td>
+									</tr>
+									<tr>
+										<th scope="row"><label class="description" for="usp_options[usp_use_url]"><?php _e('Use registered URL for submitted URL?'); ?></label></th>
+										<td><input type="checkbox" value="1" name="usp_options[usp_use_url]" <?php if (isset($usp_options['usp_use_url'])) { checked('1', $usp_options['usp_use_url']); } ?> />
+										<span class="mm-item-caption"><?php _e('Check this box if you want to automatically use the registered user&rsquo;s specified URL as the submitted-post URL. Note: this really should only be used when requiring log-in for submissions.'); ?></span></td>
+									</tr>
+									<tr>
+										<th scope="row"><label class="description" for="usp_options[usp_use_cat]"><?php _e('Use a hidden field for submitted category?'); ?></label></th>
+										<td><input type="checkbox" value="1" name="usp_options[usp_use_cat]" <?php if (isset($usp_options['usp_use_cat'])) { checked('1', $usp_options['usp_use_cat']); } ?> />
+										<span class="mm-item-caption"><?php _e('Check this box if you want to use a hidden category field for the submitted category. Note: this may be used to specify a default category for submitted posts when the category field is hidden.'); ?></span></td>
+									</tr>
+									<tr>
+										<th scope="row"><label class="description" for="usp_options[usp_use_cat_id]"><?php _e('Category ID for hidden field'); ?></label></th>
+										<td><input type="text" size="45" maxlength="200" name="usp_options[usp_use_cat_id]" value="<?php echo attribute_escape($usp_options['usp_use_cat_id']); ?>" />
+										<div class="mm-item-caption"><?php _e('Specify a cateogry (ID) to use as the default category when using the &ldquo;hidden field&rdquo; option.'); ?></div></td>
 									</tr>
 								</table>
 							</div>
