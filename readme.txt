@@ -192,9 +192,12 @@ Screenshots available at the [USP Homepage](http://perishablepress.com/user-subm
 * Include support for uploaded videos
 * Additional form fields / custom fields
 * Refine error message to show which field
-* Email notifications for approved submissions
 * Customizable field labels
 * Enable HMTL in custom message fields
+* Make work with custom taxonomies
+* Option for custom post types @ http://bit.ly/TUkntM
+* Add custom field for anything @ http://bit.ly/Tcq3AM
+* Choose a tag from the dropdown list, instead of categories
 
 == Frequently Asked Questions ==
 
