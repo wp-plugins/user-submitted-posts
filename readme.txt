@@ -36,6 +36,8 @@ Adds a simple form via template tag or shortcode that enables your visitors to s
 * Option to set logged-in username as submitted-post author
 * Option to set logged-in user&rsquo;s URL as the submitted URL
 * Option to set a default submission category via hidden field
+* Option to disable loading of external JavaScript file
+* Option to specify URL for targeted resource loading
 
 **Image Uploads**
 
