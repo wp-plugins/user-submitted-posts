@@ -10,6 +10,11 @@ if ($authorName == $default_author) {
 
 <!-- User Submitted Posts @ http://perishablepress.com/user-submitted-posts/ -->
 <div id="user-submitted-posts">
+
+	<?php if ($usp_options['usp_form_content'] !== '') {
+		echo $usp_options['usp_form_content'];
+	} ?>
+
 	<form method="post" enctype="multipart/form-data" action="">
 
 		<?php if($_GET['submission-error'] == '1') { ?>
@@ -38,7 +43,12 @@ if ($authorName == $default_author) {
 		<?php } if ($usp_options['usp_tags'] == 'show') { ?>
 		<fieldset class="usp-tags">
 			<label for="user-submitted-tags"><?php _e('Post Tags'); ?></label>
-			<input name="user-submitted-tags" type="text" value="" placeholder="<?php _e('Post Tags'); ?>">
+			<input name="user-submitted-tags" id="user-submitted-tags" type="text" value="" placeholder="<?php _e('Post Tags'); ?>">
+		</fieldset>
+		<?php } if ($usp_options['usp_captcha'] == 'show') { ?>
+		<fieldset class="usp-captcha">
+			<label for="user-submitted-captcha"><?php echo $usp_options['usp_question']; ?></label>
+			<input name="user-submitted-captcha" type="text" value="" placeholder="<?php _e('Anti-spam: '); echo $usp_options['usp_question']; ?>">
 		</fieldset>
 		<?php } if (($usp_options['usp_category'] == 'show') && ($usp_options['usp_use_cat'] == false)) { ?>
 		<fieldset class="usp-category">
@@ -48,11 +58,6 @@ if ($authorName == $default_author) {
 				<option value="<?php echo $categoryId; ?>"><?php $category = get_category($categoryId); echo htmlentities($category->name); ?></option>
 				<?php } ?>
 			</select>
-		</fieldset>
-		<?php } if ($usp_options['usp_captcha'] == 'show') { ?>
-		<fieldset class="usp-captcha">
-			<label for="user-submitted-captcha"><?php echo $usp_options['usp_question']; ?></label>
-			<input name="user-submitted-captcha" type="text" value="" placeholder="<?php _e('Anti-spam: '); echo $usp_options['usp_question']; ?>">
 		</fieldset>
 		<?php } if ($usp_options['usp_content'] == 'show') { ?>
 		<fieldset class="usp-content">

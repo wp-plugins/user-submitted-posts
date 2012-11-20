@@ -9,8 +9,8 @@
 	Donate link: http://digwp.com/book/
 	Requires at least: 3.3
 	Tested up to: 3.4.2
-	Stable tag: 20121119
-	Version: 20121119
+	Stable tag: 20121120
+	Version: 20121120
 	License: GPL v2
 */
 
@@ -21,7 +21,7 @@ $usp_options = get_option('usp_options');
 $usp_path    = plugin_basename(__FILE__); // '/user-submitted-posts/user-submitted-posts.php';
 $usp_logo    = plugins_url() . '/user-submitted-posts/images/usp-logo.png';
 $usp_homeurl = 'http://perishablepress.com/user-submitted-posts/';
-$usp_version = '20121108';
+$usp_version = '20121120';
 
 $usp_post_meta_IsSubmission = 'is_submission';
 $usp_post_meta_SubmitterIp  = 'user_submit_ip';
@@ -97,6 +97,7 @@ function usp_checkForPublicSubmission() {
 		$tags      = stripslashes($_POST['user-submitted-tags']);
 		$captcha   = stripslashes($_POST['user-submitted-captcha']);
 		$category  = intval($_POST['user-submitted-category']);
+		$content   = stripslashes($_POST['user-submitted-content']);
 		$fileData  = $_FILES['user-submitted-image'];
 
 		$publicSubmission = usp_createPublicSubmission($title, $content, $authorName, $authorID, $authorUrl, $tags, $category, $fileData);
@@ -134,14 +135,38 @@ function usp_checkForPublicSubmission() {
 add_action ('init', 'usp_enqueueResources');
 function usp_enqueueResources() {
 	global $usp_options, $usp_version;
+	$display_url = $usp_options['usp_display_url'];
+	$current_url = trailingslashit('http://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+	$current_url = remove_query_arg('submission-error', $current_url);
+	$current_url = remove_query_arg('success', $current_url);
 	if (!is_admin()) {
-		if ($usp_options['usp_form_version'] == 'classic') {
-			wp_enqueue_style ('usp_style', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp-classic.css', false, $usp_version, 'all');
-		} elseif ($usp_options['usp_form_version'] == 'current') { 
-			wp_enqueue_style ('usp_style', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp.css', false, $usp_version, 'all');
-		} elseif ($usp_options['usp_form_version'] == 'disable') {}
+		// style
+		if ($display_url !== '') {
+			if ($display_url == $current_url) {
+				if ($usp_options['usp_form_version'] == 'classic') {
+					wp_enqueue_style ('usp_style', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp-classic.css', false, $usp_version, 'all');
+				} elseif ($usp_options['usp_form_version'] == 'current') { 
+					wp_enqueue_style ('usp_style', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp.css', false, $usp_version, 'all');
+				} elseif ($usp_options['usp_form_version'] == 'disable') {}
+			}
+		} else {
+			if ($usp_options['usp_form_version'] == 'classic') {
+				wp_enqueue_style ('usp_style', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp-classic.css', false, $usp_version, 'all');
+			} elseif ($usp_options['usp_form_version'] == 'current') { 
+				wp_enqueue_style ('usp_style', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp.css', false, $usp_version, 'all');
+			} elseif ($usp_options['usp_form_version'] == 'disable') {}
+		}
+		// script
+		if ($display_url !== '') {
+			if (($display_url == $current_url) && ($usp_options['usp_include_js'] == true)) {
+				wp_enqueue_script ('usp_script', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp.js', array('jquery'), $usp_version);
+			}
+		} else {
+			if ($usp_options['usp_include_js'] == true) {
+				wp_enqueue_script ('usp_script', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp.js', array('jquery'), $usp_version);
+			}
+		}
 	}
-	wp_enqueue_script ('usp_script', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp.js', array('jquery'), $usp_version);
 }
 
 // add styles to admin Edit page
@@ -410,6 +435,9 @@ function usp_add_defaults() {
 			'usp_use_url' => 0,
 			'usp_use_cat' => 0,
 			'usp_use_cat_id' => '',
+			'usp_include_js' => 1,
+			'usp_display_url' => '',
+			'usp_form_content' => '',
 		);
 		update_option('usp_options', $arr);
 	}	
@@ -444,13 +472,9 @@ function usp_validate_options($input) {
 	if (!isset($input['default_options'])) $input['default_options'] = null;
 	$input['default_options'] = ($input['default_options'] == 1 ? 1 : 0);
 
-	$input['author']           = wp_filter_nohtml_kses($input['author']);
 	$input['categories']       = is_array($input['categories']) && !empty($input['categories']) ? array_unique($input['categories']) : array(get_option('default_category'));
 	$input['number-approved']  = is_numeric($input['number-approved']) ? intval($input['number-approved']) : - 1;
-	
-	$input['redirect-url']     = wp_filter_nohtml_kses($input['redirect-url']);
-	$input['error-message']    = wp_filter_nohtml_kses($input['error-message']);
-	
+
 	$input['min-images']       = is_numeric($input['min-images']) ? intval($input['min-images']) : $input['max-images'];
 	$input['max-images']       = (is_numeric($input['max-images']) && ($usp_options['min-images'] <= abs($input['max-images']))) ? intval($input['max-images']) : $usp_options['max-images'];
 	
@@ -460,21 +484,51 @@ function usp_validate_options($input) {
 	$input['max-image-height'] = (is_numeric($input['max-image-height']) && ($usp_options['min-image-height'] <= $input['max-image-height'])) ? intval($input['max-image-height']) : $usp_options['max-image-height'];
 	$input['max-image-width']  = (is_numeric($input['max-image-width'])  && ($usp_options['min-image-width']  <= $input['max-image-width']))  ? intval($input['max-image-width'])  : $usp_options['max-image-width'];
 
+	$input['author']            = wp_filter_nohtml_kses($input['author']);
 	$input['usp_name']          = wp_filter_nohtml_kses($input['usp_name']);
 	$input['usp_url']           = wp_filter_nohtml_kses($input['usp_url']);
 	$input['usp_title']         = wp_filter_nohtml_kses($input['usp_title']);
 	$input['usp_tags']          = wp_filter_nohtml_kses($input['usp_tags']);
 	$input['usp_category']      = wp_filter_nohtml_kses($input['usp_category']);
 	$input['usp_images']        = wp_filter_nohtml_kses($input['usp_images']);
-	$input['upload-message']    = wp_filter_nohtml_kses($input['upload-message']);
 	$input['usp_form_width']    = wp_filter_nohtml_kses($input['usp_form_width']);
 	$input['usp_question']      = wp_filter_nohtml_kses($input['usp_question']);
 	$input['usp_answer']        = wp_filter_nohtml_kses($input['usp_answer']);
 	$input['usp_captcha']       = wp_filter_nohtml_kses($input['usp_captcha']);
 	$input['usp_content']       = wp_filter_nohtml_kses($input['usp_content']);
-	$input['success-message']   = wp_filter_nohtml_kses($input['success-message']);
 	$input['usp_email_address'] = wp_filter_nohtml_kses($input['usp_email_address']);
 	$input['usp_use_cat_id']    = wp_filter_nohtml_kses($input['usp_use_cat_id']);
+	$input['usp_display_url']   = wp_filter_nohtml_kses($input['usp_display_url']);
+	$input['redirect-url']      = wp_filter_nohtml_kses($input['redirect-url']);
+
+	// dealing with kses
+	global $allowedposttags;
+	$allowed_atts = array('align'=>array(), 'class'=>array(), 'type'=>array(), 'id'=>array(), 'dir'=>array(), 'lang'=>array(), 'style'=>array(), 'xml:lang'=>array(), 'src'=>array(), 'alt'=>array());
+
+	$allowedposttags['script'] = $allowed_atts;
+	$allowedposttags['strong'] = $allowed_atts;
+	$allowedposttags['small'] = $allowed_atts;
+	$allowedposttags['span'] = $allowed_atts;
+	$allowedposttags['abbr'] = $allowed_atts;
+	$allowedposttags['code'] = $allowed_atts;
+	$allowedposttags['div'] = $allowed_atts;
+	$allowedposttags['img'] = $allowed_atts;
+	$allowedposttags['h1'] = $allowed_atts;
+	$allowedposttags['h2'] = $allowed_atts;
+	$allowedposttags['h3'] = $allowed_atts;
+	$allowedposttags['h4'] = $allowed_atts;
+	$allowedposttags['h5'] = $allowed_atts;
+	$allowedposttags['ol'] = $allowed_atts;
+	$allowedposttags['ul'] = $allowed_atts;
+	$allowedposttags['li'] = $allowed_atts;
+	$allowedposttags['em'] = $allowed_atts;
+	$allowedposttags['p'] = $allowed_atts;
+	$allowedposttags['a'] = $allowed_atts;
+
+	$input['usp_form_content'] = wp_kses_post($input['usp_form_content'], $allowedposttags);
+	$input['error-message']    = wp_kses_post($input['error-message'], $allowedposttags);
+	$input['upload-message']   = wp_kses_post($input['upload-message'], $allowedposttags);
+	$input['success-message']  = wp_kses_post($input['success-message'], $allowedposttags);
 
 	if (!isset($input['usp_casing'])) $input['usp_casing'] = null;
 	$input['usp_casing'] = ($input['usp_casing'] == 1 ? 1 : 0);
@@ -493,6 +547,9 @@ function usp_validate_options($input) {
 	
 	if (!isset($input['usp_use_cat'])) $input['usp_use_cat'] = null;
 	$input['usp_use_cat'] = ($input['usp_use_cat'] == 1 ? 1 : 0);
+
+	if (!isset($input['usp_include_js'])) $input['usp_include_js'] = null;
+	$input['usp_include_js'] = ($input['usp_include_js'] == 1 ? 1 : 0);
 
 	return $input;
 }
@@ -653,6 +710,16 @@ function usp_render_form() {
 										</td>
 									</tr>
 									<tr>
+										<th scope="row"><label class="description" for="usp_options[usp_include_js]"><?php _e('Include JavaScript?'); ?></label></th>
+										<td><input type="checkbox" value="1" name="usp_options[usp_include_js]" <?php if (isset($usp_options['usp_include_js'])) { checked('1', $usp_options['usp_include_js']); } ?> />
+										<span class="mm-item-caption"><?php _e('Check this box if you want to include the external JavaScript file. Note: if you&rsquo;re not allowing image uploads, leave this option unchecked.'); ?></span></td>
+									</tr>
+									<tr>
+										<th scope="row"><label class="description" for="usp_options[usp_display_url]"><?php _e('Targeted Loading'); ?></label></th>
+										<td><input type="text" size="45" maxlength="200" name="usp_options[usp_display_url]" value="<?php echo attribute_escape($usp_options['usp_display_url']); ?>" />
+										<div class="mm-item-caption"><?php _e('When enabled, external CSS &amp; JavaScript files are loaded on every page. Here you may specify the URL of the USP form to load resources only on that page. Note: leave blank to load on all pages.'); ?></div></td>
+									</tr>
+									<tr>
 										<th scope="row"><label class="description"><?php _e('Categories'); ?></label></th>
 										<td>
 											<?php $categories = get_categories(array('hide_empty'=> 0)); ?>
@@ -720,6 +787,11 @@ function usp_render_form() {
 										<th scope="row"><label class="description" for="usp_options[error-message]"><?php _e('Error Message'); ?></label></th>
 										<td><textarea class="textarea" rows="3" cols="50" name="usp_options[error-message]"><?php echo attribute_escape($usp_options['error-message']); ?></textarea> 
 										<div class="mm-item-caption"><?php _e('This is the error message that is displayed if post-submission fails.'); ?></div></td>
+									</tr>
+									<tr>
+										<th scope="row"><label class="description" for="usp_options[usp_form_content]"><?php _e('Custom Content'); ?></label></th>
+										<td><textarea class="textarea" rows="3" cols="50" name="usp_options[usp_form_content]"><?php echo attribute_escape($usp_options['usp_form_content']); ?></textarea> 
+										<div class="mm-item-caption"><?php _e('Here you may specify custom text/markup to be included before the submission form. Note: leave blank to disable.'); ?></div></td>
 									</tr>
 								</table>
 							</div>

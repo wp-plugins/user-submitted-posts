@@ -5,11 +5,10 @@
 	Complete list of CSS hooks for the submission form @ http://m0n.co/e
 */
 div#user-submitted-posts { width: 100%; }
-div#user-submitted-posts fieldset { margin: 10px 0; }
+div#user-submitted-posts fieldset { margin: 10px 0; border: 0; }
 div#user-submitted-posts fieldset label { float: left; width: 20%; }
 div#user-submitted-posts fieldset input { float: left; width: 60%; }
 div#user-submitted-posts textarea { width: 90%; }
-div#user-submitted-posts fieldset.usp-captcha input { width: 20%; }
 fieldset.usp-images label { clear: both; }
 div#user-submitted-posts input.usp-clone { width: 100%; margin: 3px 0; padding: 0; line-height: 18px; font-size: 12px; border: 1px solid #ccc; background-color: #fafafa; }
 div#usp-upload-message { float: left; clear: both; font-size: 12px; }

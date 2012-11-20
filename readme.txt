@@ -10,8 +10,8 @@ Donate link: http://digwp.com/book/
 Contributors: specialk
 Requires at least: 3.3
 Tested up to: 3.4.2
-Version: 20121119
-Stable tag: 20121119
+Version: 20121120
+Stable tag: 20121120
 License: GPL v2 or later
 
 User Submitted Posts enables your visitors to submit posts and images from anywhere on your site.
@@ -135,6 +135,19 @@ Screenshots available at the [USP Homepage](http://perishablepress.com/user-subm
 
 == Changelog ==
 
+= 20121120 =
+
+* added id to tag input field in submission-form.php
+* enabled option to disable loading of external JavaScript file
+* enabled option to specify URL for targeted resource loading
+* added `fieldset { border: 0; }` to usp.css stylesheet
+* increased width of anti-spam input field (via usp.css)
+* changed the order of input fields in submission-form.php
+* fixed loading of resources on success and error pages
+* added field for custom content to display before the USP form
+* enable HMTL for success, error, and upload messages
+* fixed issue with content not getting included in posts
+
 = 20121119 =
 
 * increased default image width and height
@@ -183,21 +196,20 @@ Screenshots available at the [USP Homepage](http://perishablepress.com/user-subm
 
 = To Do =
 
-* Load styles only on form page(s)
 * Custom error message when images are too big or if too many images are uploaded
 * Filter `the_author_link` if/when possible
-* Inlcude sub-category option
+* Include sub-category option
 * Auto inserting/attaching uploaded images to posts
 * Automatically use the first uploaded image as the featured image
 * Include support for uploaded videos
 * Additional form fields / custom fields
 * Refine error message to show which field
-* Customizable field labels
-* Enable HMTL in custom message fields
 * Make work with custom taxonomies
 * Option for custom post types @ http://bit.ly/TUkntM
 * Add custom field for anything @ http://bit.ly/Tcq3AM
 * Choose a tag from the dropdown list, instead of categories
+* Customizable field labels
+* Add option to require registration
 
 == Frequently Asked Questions ==
 
