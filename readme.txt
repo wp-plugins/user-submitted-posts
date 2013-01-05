@@ -9,9 +9,9 @@ Author: Jeff Starr
 Donate link: http://digwp.com/book/
 Contributors: specialk
 Requires at least: 3.3
-Tested up to: 3.4.2
-Version: 20121120
-Stable tag: 20121120
+Tested up to: 3.5
+Version: 20130104
+Stable tag: 20130104
 License: GPL v2 or later
 
 User Submitted Posts enables your visitors to submit posts and images from anywhere on your site.
@@ -70,6 +70,10 @@ Adds a simple form via template tag or shortcode that enables your visitors to s
 2. Go to the "User Submitted Posts" Settings Page and customize your options
 3. Display the submission form on your page(s) using template tag or shortcode
 
+**Important**
+
+NOTE that this plugin attaches uploaded images as custom fields to submitted posts. Attached images are not displayed automatically in posts, but rather may be displayed using template tags, either WP's built-in tags or the USP template tags (explained below). This provides maximum flexibility in terms of customizing the display of uploaded images. 
+
 **Displaying the submission form**
 
 * To display the form on a post or page, use the shortcode: `[user-submitted-posts]`
@@ -113,7 +117,7 @@ Additionally, the USP plugin also includes a set of template tags for customizin
 	Prints the URLs for all post attachments.
 	Usage:  <?php if (function_exists('usp_post_attachments')) usp_post_attachments(); ?>
 	Syntax: <?php if (function_exists('usp_post_attachments')) usp_post_attachments($size, $beforeUrl, $afterUrl, $numberImages, $postId); ?>
-	Paramters:
+	Parameters:
 		$size         = image size as thumbnail, medium, large or full -> default = full
 		$beforeUrl    = text/markup displayed before the image URL     -> default = &lt;img src="
 		$afterUrl     = text/markup displayed after the image URL      -> default = " /&gt;
@@ -136,6 +140,16 @@ __Important!__ Many things have changed in the new version of the plugin. Please
 Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
 
 == Changelog ==
+
+= 20130104 =
+
+* Added explanation of plugin functionality in readme.txt
+* Fixed character encoding issue for author name
+* Added margins to submit buttons (to fix WP's new CSS)
+* Removed "anti-spam" text from captcha placeholder attribute
+* usp_post_attachments() tag now accepts custom sizes
+* Added temp fix for warning: "getimagesize(): Filename cannot be empty"
+* Restyled USP filter button on admin Posts pages
 
 = 20121120 =
 

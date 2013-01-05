@@ -38,7 +38,7 @@ function usp_get_post_images($postId = false) {
 	Prints the URLs for all post attachments.
 	Usage:  <?php if (function_exists('usp_post_attachments')) usp_post_attachments(); ?>
 	Syntax: <?php if (function_exists('usp_post_attachments')) usp_post_attachments($size, $beforeUrl, $afterUrl, $numberImages, $postId); ?>
-	Paramters:
+	Parameters:
 		$size         = image size as thumbnail, medium, large or full -> default = full
 		$beforeUrl    = text/markup displayed before the image URL     -> default = <img src="
 		$afterUrl     = text/markup displayed after the image URL      -> default = " />
@@ -50,9 +50,9 @@ function usp_post_attachments($size = 'full', $beforeUrl = '<img src="', $afterU
 		global $post;
 		$postId = $post->ID;
 	}
-	if (!in_array($size, array('thumbnail', 'medium', 'large', 'full'))) {
+	/*if (!in_array($size, array('thumbnail', 'medium', 'large', 'full'))) {
 		$size = 'full';
-	}
+	}*/
 	if (false === $numberImages || !is_numeric($numberImages)) {
 		$numberImages = 99;
 	}

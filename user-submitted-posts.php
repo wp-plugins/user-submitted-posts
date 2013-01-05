@@ -8,9 +8,9 @@
 	Author URI: http://monzilla.biz/
 	Donate link: http://digwp.com/book/
 	Requires at least: 3.3
-	Tested up to: 3.4.2
-	Stable tag: 20121120
-	Version: 20121120
+	Tested up to: 3.5
+	Stable tag: 20130104
+	Version: 20130104
 	License: GPL v2
 */
 
@@ -21,7 +21,7 @@ $usp_options = get_option('usp_options');
 $usp_path    = plugin_basename(__FILE__); // '/user-submitted-posts/user-submitted-posts.php';
 $usp_logo    = plugins_url() . '/user-submitted-posts/images/usp-logo.png';
 $usp_homeurl = 'http://perishablepress.com/user-submitted-posts/';
-$usp_version = '20121120';
+$usp_version = '20130104';
 
 $usp_post_meta_IsSubmission = 'is_submission';
 $usp_post_meta_SubmitterIp  = 'user_submit_ip';
@@ -38,10 +38,10 @@ include ('library/template-tags.php');
 add_action('admin_init', 'usp_require_wp_version');
 function usp_require_wp_version() {
 	global $wp_version, $usp_path, $usp_plugin;
-	if (version_compare($wp_version, '3.4', '<')) {
+	if (version_compare($wp_version, '3.3', '<')) {
 		if (is_plugin_active($usp_path)) {
 			deactivate_plugins($usp_path);
-			$msg =  '<strong>' . $usp_plugin . '</strong> ' . __('requires WordPress 3.4 or higher, and has been deactivated!') . '<br />';
+			$msg =  '<strong>' . $usp_plugin . '</strong> ' . __('requires WordPress 3.3 or higher, and has been deactivated!') . '<br />';
 			$msg .= __('Please return to the ') . '<a href="' . admin_url() . '">' . __('WordPress Admin area') . '</a> ' . __('to upgrade WordPress and try again.');
 			wp_die($msg);
 		}
@@ -206,7 +206,7 @@ add_action ('restrict_manage_posts', 'usp_outputUserSubmissionLink');
 function usp_outputUserSubmissionLink() {
 	global $pagenow;
 	if ($pagenow == 'edit.php') {
-		echo '<a id="usp_admin_filter_posts" class="button-secondary" href="' . admin_url('edit.php?post_status=pending&amp;user_submitted=1') . '">' . __('User Submitted Posts') . '</a>';
+		echo '<a id="usp_admin_filter_posts" class="button" href="' . admin_url('edit.php?post_status=pending&amp;user_submitted=1') . '">' . __('User Submitted Posts') . '</a>';
 	}
 }
 
@@ -293,7 +293,7 @@ function usp_createPublicSubmission($title, $content, $authorName, $authorID, $a
 		$attachmentIds = array();
 		$imageCounter = 0;
 		for ($i = 0; $i < count($fileData['name']); $i++) {
-			$imageInfo = getimagesize($fileData['tmp_name'][$i]);
+			$imageInfo = @getimagesize($fileData['tmp_name'][$i]);
 			if (false === $imageInfo || !usp_imageIsRightSize($imageInfo[0], $imageInfo[1])) {
 				continue;
 			}
@@ -327,9 +327,9 @@ function usp_createPublicSubmission($title, $content, $authorName, $authorID, $a
 			return false;
 		}
 		update_post_meta($newPost, $usp_post_meta_IsSubmission, true);
-		update_post_meta($newPost, $usp_post_meta_Submitter, htmlentities(($authorName)));
-		update_post_meta($newPost, $usp_post_meta_SubmitterUrl, htmlentities(($authorUrl)));
-		update_post_meta($newPost, $usp_post_meta_SubmitterIp, htmlentities(($authorIp)));
+		update_post_meta($newPost, $usp_post_meta_Submitter, htmlentities($authorName, ENT_QUOTES, 'UTF-8'));
+		update_post_meta($newPost, $usp_post_meta_SubmitterUrl, htmlentities($authorUrl));
+		update_post_meta($newPost, $usp_post_meta_SubmitterIp, htmlentities($authorIp));
 	}
 	return $newPost;
 }
@@ -590,7 +590,7 @@ function usp_render_form() {
 
 		#setting-error-settings_updated { margin: 10px 0; }
 		#setting-error-settings_updated p { margin: 5px; }
-		.button-primary { margin: 0 0 15px 15px; }
+		#mm-plugin-options .button-primary { margin: 0 0 15px 15px; }
 
 		#mm-panel-toggle { margin: 5px 0; }
 		#mm-credit-info { margin-top: -5px; }
