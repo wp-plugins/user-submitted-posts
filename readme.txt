@@ -137,7 +137,9 @@ __Important!__ Many things have changed in the new version of the plugin. Please
 
 == Screenshots ==
 
-Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
+Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/).
+
+Demos available at [WP-Mix](http://wp-mix.com/share/) and [Perishable Press](http://perishablepress.com/demos/user-submitted-posts/).
 
 == Changelog ==
 
