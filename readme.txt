@@ -6,12 +6,12 @@ Description: Enables your visitors to submit posts and images from anywhere on y
 Tags: submit, public, news, share, upload, images, posts, users, user-submit, community
 Author URI: http://monzilla.biz/
 Author: Jeff Starr
-Donate link: http://digwp.com/book/
+Donate link: http://m0n.co/donate
 Contributors: specialk
 Requires at least: 3.3
 Tested up to: 3.5
-Version: 20130104
-Stable tag: 20130104
+Version: 20130720
+Stable tag: trunk
 License: GPL v2 or later
 
 User Submitted Posts enables your visitors to submit posts and images from anywhere on your site.
@@ -23,14 +23,16 @@ Adds a simple form via template tag or shortcode that enables your visitors to s
 **Features**
 
 * Let visitors submit posts from anywhere on your site
+* NEW option to set submitted images as featured images
+* NEW option to use WP's built-in rich text editor for post content
 * Use template tag or shortcode to display the submission form anywhere
-* Latest version includes customizable captcha and hidden field to stop spam
+* Includes input validation and customizable captcha and hidden field to stop spam
 * Post submissions may include title, tags, category, author, url, post and image(s)
 * Redirect user to anywhere or return to current page after successful post submission
 * Includes a set of template tags for displaying and customizing user-submitted posts
 * New HTML5 submission form with streamlined CSS styles
 
-**New Features**
+**More Features**
 
 * Option to receive email alert for new submitted posts
 * Option to set logged-in username as submitted-post author
@@ -129,7 +131,13 @@ Additionally, the USP plugin also includes a set of template tags for customizin
 	For normal posts, this tag displays the author's name as a link to their author's post page
 	Usage: <?php if (function_exists('usp_author_link')) usp_author_link(); ?>
 
+These template tags should work out of the box when included in your theme template file(s). Keep in mind that for some of the tags to work, there must be some existing submitted posts and/or images available. 
+
 For more information, check out the template-tag file at: `/library/template-tags.php`
+
+**Additional Notes**
+
+Here's a quick tutorial for [automatically setting submitted images as featured images](http://wp-mix.com/set-attachment-featured-image/) (aka post thumbnails).
 
 == Upgrade Notice ==
 
@@ -137,11 +145,26 @@ __Important!__ Many things have changed in the new version of the plugin. Please
 
 == Screenshots ==
 
-Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/).
-
-Demos available at [WP-Mix](http://wp-mix.com/share/) and [Perishable Press](http://perishablepress.com/demos/user-submitted-posts/).
+Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
 
 == Changelog ==
+
+= 20130720 =
+
+* Added option to set attachment as featured image
+* Improved localization support (.mo and .po)
+* Added optional use of WP's built-in rich text editor
+* Added custom stylesheet for WP's rich text editor
+* Replace antispam placeholder in submission-form.php
+* Improved jQuery for "add another image" functionality
+* Added jQuery script to remember form input values via cookies
+* Added data validation for input fields via Parsley @ http://parsleyjs.org
+* Overview and Updates panels now toggled open by default
+* Updated CSS styles for HTML5 and Classic forms
+* Improved logic for form verification JavaScript
+* Resolved numerous PHP notices and warnings
+* Updated readme.txt with more infos
+* General code check n clean
 
 = 20130104 =
 
@@ -212,24 +235,11 @@ Demos available at [WP-Mix](http://wp-mix.com/share/) and [Perishable Press](htt
 
 * Initial release
 
-= To Do =
-
-* Custom error message when images are too big or if too many images are uploaded
-* Filter `the_author_link` if/when possible
-* Include sub-category option
-* Auto inserting/attaching uploaded images to posts
-* Automatically use the first uploaded image as the featured image
-* Include support for uploaded videos
-* Additional form fields / custom fields
-* Refine error message to show which field
-* Make work with custom taxonomies
-* Option for custom post types @ http://bit.ly/TUkntM
-* Add custom field for anything @ http://bit.ly/Tcq3AM
-* Choose a tag from the dropdown list, instead of categories
-* Customizable field labels
-* Add option to require registration
-
 == Frequently Asked Questions ==
+
+**Can you add this feature or that feature?**
+
+Please check the premium version of the plugin, which includes many of the most commonly requested features from users. The free version may incorporate some new features as well in future updates.
 
 **Images are not uploaded or displaying**
 
@@ -240,6 +250,35 @@ There are several things that can interfere with uploading files:
 
 Note: when changing permissions on files and folders, it is important to use the least-restrictive settings possible. If you have to use more permissive settings, it is important to secure the directory against malicious activity. For more information check out: [Secure Media Uploads](http://digwp.com/2012/09/secure-media-uploads/)
 
+**How to set submitted image as the featured image?**
+
+Visit the "Options" panel in the plugin settings and select "Set Uploaded Image as Featured Image". Note that this setting merely assigns the submitted image as the Featured Image for the post; it's up to your theme's single.php file to include `the_post_thumbnail()` to display the Featured Images.
+
+**How to require login?**
+
+Here's a quick tutorial for [requiring user login for any plugin](http://wp-mix.com/require-user-login-any-plugin/).
+
+Here is another way of doing it (customize as needed):
+
+`if (is_user_logged_in()) {
+	// the user is logged in, so display the submission form
+	if (function_exists('user_submitted_posts')) user_submitted_posts();
+} else { 
+	// the user is not logged in, so redirect to any URL and exit
+	header('Location: http://example.com/');
+	exit;
+}`
+
+**How do I change the appearance of the submission form?**
+
+Custom CSS may be used to change the appearance of the submission form. By default, there are two pre-styled forms (HTML5 and Classic) that may be selected from the "Options" panel. Once you've selected one of these, you may customize the CSS by editing either "usp.css" (for HTML5 form) or "usp-classic.css" (for Classic form) located in the plugin's `/resources/` directory. 
+
+Alternately, check to disable the stylesheet for the "Form style" setting in the plugin's "Options" panel. That will ensure that any existing CSS styles are not applied, leaving you with a blank (unstyled) slate with which to work. Then you may customize the form's appearance by adding CSS to your theme's stylesheet, `style.css` (or elsewhere).
+
+**How do I manually modify the submission form?**
+
+To make changes to the submission form, edit either `submission-form-classic.php` or `submission-form.php`, depending on your settings (see "Form style" in the "Options" panel).
+
 **Will this work with my theme**
 
 USP is designed to work with any compatible theme running on WordPress version 3.3 or better.
@@ -248,12 +287,16 @@ USP is designed to work with any compatible theme running on WordPress version 3
 
 USP uses the WordPress API to keep everything secure, and includes a captcha and hidden field to stop spam and bots.
 
+**Can I include video?**
+
+The free version of the plugin supports only image uploads, but some hosted videos may be included in the submitted content (textarea) by simply including the video URL on its own line. See [this page](http://codex.wordpress.org/Embeds) for more info.
+
 **Other questions**
 
 To ask a question, visit the [USP Homepage](http://perishablepress.com/user-submitted-posts/) or [contact me](http://perishablepress.com/contact/).
 
 == Donations ==
 
-I created this plugin with love for the WP community. To show support, consider purchasing my new book, [.htaccess made easy](http://htaccessbook.com/), or my WordPress book, [Digging into WordPress](http://digwp.com/).
+I created this plugin with love for the WP community. To show support, consider purchasing one of my books: [The Tao of WordPress](http://wp-tao.com/), [Digging into WordPress](http://digwp.com/), or [.htaccess made easy](http://htaccessbook.com/).
 
 Links, tweets and likes also appreciated. Thanks! :)

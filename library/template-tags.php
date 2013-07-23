@@ -1,5 +1,7 @@
 <?php // User Submitted Posts - Template Tags
 
+if (!function_exists('add_action')) die('&Delta;');
+
 /* 
 	Returns a boolean value indicating whether the specified post is a public submission
 	Usage: <?php if (function_exists('usp_is_public_submission')) usp_is_public_submission(); ?>

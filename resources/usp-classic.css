@@ -4,7 +4,7 @@
 	http://perishablepress.com/user-submitted-posts/
 */
 
-div#usp { width: 300px; } /* <- CHANGE FORM WIDTH */
+div#usp { overflow: hidden; width: 80%; } /* <- CHANGE FORM WIDTH */
 
 form#usp_form, ul#usp_list, ul#usp_list li, label.usp_label, input.usp_input, select.usp_select, textarea.usp_textarea, 
 input#user-submit-post, div#usp_upload-message, a#usp_add-another, input#user-submitted-image, input#user-submitted-post { 
@@ -45,3 +45,9 @@ input#user-submit-post, div#usp_upload-message, a#usp_add-another, input#user-su
 #usp textarea#user-submitted-content { margin: 0 0 5px 0; padding: 3px; font-size: 13px; line-height: 1.2; }
 #usp input#user-submitted-image { margin-bottom: 7px; font-size: 11px; line-height: 1; }
 #usp input#user-submitted-post { width: 100px; margin: 5px 0 17px 0; padding: 3px; }
+
+div.usp-input-error { width: 75%; overflow: hidden; text-align: right; }
+div.usp-input-error span {}
+
+div.usp_text-editor { margin: 10px 0; }
+.usp-rich-textarea {}
