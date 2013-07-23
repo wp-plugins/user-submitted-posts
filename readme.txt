@@ -74,7 +74,9 @@ Adds a simple form via template tag or shortcode that enables your visitors to s
 
 **Important**
 
-NOTE that this plugin attaches uploaded images as custom fields to submitted posts. Attached images are not displayed automatically in posts, but rather may be displayed using template tags, either WP's built-in tags or the USP template tags (explained below). This provides maximum flexibility in terms of customizing the display of uploaded images. UPDATE: as of version 20130720, submitted images may be set as Featured Images for posts (visit the "Options" panel in the plugin settings for more info).
+NOTE that this plugin attaches uploaded images as custom fields to submitted posts. Attached images are not displayed automatically in posts, but rather may be displayed using template tags, either WP's built-in tags or the USP template tags (explained below). This provides maximum flexibility in terms of customizing the display of uploaded images. 
+
+UPDATE: as of version 20130720, submitted images may be set as Featured Images for posts (visit the "Options" panel in the plugin settings for more info).
 
 **Displaying the submission form**
 
