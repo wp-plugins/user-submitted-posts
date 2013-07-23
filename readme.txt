@@ -135,10 +135,6 @@ These template tags should work out of the box when included in your theme templ
 
 For more information, check out the template-tag file at: `/library/template-tags.php`
 
-**Additional Notes**
-
-Here's a quick tutorial for [automatically setting submitted images as featured images](http://wp-mix.com/set-attachment-featured-image/) (aka post thumbnails).
-
 == Upgrade Notice ==
 
 __Important!__ Many things have changed in the new version of the plugin. Please copy/paste your current USP settings to a safe place. Then update the plugin as usual, using your saved settings while configuring the new version.
