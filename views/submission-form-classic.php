@@ -76,7 +76,21 @@ if (isset($authorName)) {
 			<li class="usp_content">
 				<?php if ($usp_options['usp_richtext_editor'] == true) { ?>
 				<div class="usp_text-editor">
-					<?php wp_editor('', 'uspContent', array('textarea_rows'=>'10','textarea_name'=>'user-submitted-content','editor_class'=>'usp-rich-textarea')); ?>
+					<?php $settings = array(
+						    'wpautop'       => true,  // enable rich text editor
+						    'media_buttons' => true,  // enable add media button
+						    'textarea_name' => 'user-submitted-content', // name
+						    'textarea_rows' => '10',  // number of textarea rows
+						    'tabindex'      => '',    // tabindex
+						    'editor_css'    => '',    // extra CSS
+						    'editor_class'  => 'usp-rich-textarea', // class
+						    'teeny'         => false, // output minimal editor config
+						    'dfw'           => false, // replace fullscreen with DFW
+						    'tinymce'       => true,  // enable TinyMCE
+						    'quicktags'     => true,  // enable quicktags
+						);
+						wp_editor('', 'uspContent', $settings); 
+					?>
 				</div>
 				<?php } else { ?>
 				<label for="user-submitted-content" class="usp_label"><?php _e('Post Content', 'usp'); ?></label>

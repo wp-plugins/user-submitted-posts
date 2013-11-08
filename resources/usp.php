@@ -1,12 +1,14 @@
 <?php // User Submitted Posts > JavaScript
 
-	header("Cache-Control: must-revalidate");
-	$offset = 60*60*24*60;
-	$ExpStr = "Expires: ".gmdate("D, d M Y H:i:s",time() + $offset)." GMT";
+	header('Cache-Control: must-revalidate');
+	$offset = 60 * 60 * 24 * 60;
+	$ExpStr = 'Expires: ' . gmdate('D, d M Y H:i:s', time() + $offset) . ' GMT';
 	header($ExpStr);
-	header('Content-Type: application/x-javascript');
+	header('Content-Type: application/javascript');
+
 	define('WP_USE_THEMES', false);
-	require('../../../../wp-blog-header.php');
+	//require('../../../../wp-blog-header.php');
+	require('../../../../wp-load.php');
 	$usp_options = get_option('usp_options');
 ?>
 /* 
@@ -46,20 +48,9 @@ jQuery(document).ready(function($) {
 	remember('[name=user-submitted-category]');
 	remember('[name=user-submitted-content]');
 	
-	// get url params
-	function getUrlVars(){
-	    var vars = [], hash;
-	    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-	    for(var i = 0; i < hashes.length; i++){
-		   hash = hashes[i].split('=');
-		   vars.push(hash[0]);
-		   vars[hash[0]] = hash[1];
-	    }
-	    return vars;
-	}
 	// forget input values
-	var qs = getUrlVars();
-	if (qs == 'success'){
+	var re = /[?&]success=/;
+	if (re.test(location.href)) {
 		$.removeCookie('user-submitted-name', { path: '/' });
 		$.removeCookie('user-submitted-url', { path: '/' });
 		$.removeCookie('user-submitted-title', { path: '/' });

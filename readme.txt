@@ -9,8 +9,8 @@ Author: Jeff Starr
 Donate link: http://m0n.co/donate
 Contributors: specialk
 Requires at least: 3.3
-Tested up to: 3.5
-Version: 20130720
+Tested up to: 3.7
+Version: 20131107
 Stable tag: trunk
 License: GPL v2 or later
 
@@ -40,6 +40,7 @@ Adds a simple form via template tag or shortcode that enables your visitors to s
 * Option to set a default submission category via hidden field
 * Option to disable loading of external JavaScript file
 * Option to specify URL for targeted resource loading
+* Multiple emails supported in email alerts
 
 **Image Uploads**
 
@@ -75,8 +76,6 @@ Adds a simple form via template tag or shortcode that enables your visitors to s
 **Important**
 
 NOTE that this plugin attaches uploaded images as custom fields to submitted posts. Attached images are not displayed automatically in posts, but rather may be displayed using template tags, either WP's built-in tags or the USP template tags (explained below). This provides maximum flexibility in terms of customizing the display of uploaded images. 
-
-UPDATE: as of version 20130720, submitted images may be set as Featured Images for posts (visit the "Options" panel in the plugin settings for more info).
 
 **Displaying the submission form**
 
@@ -137,6 +136,10 @@ These template tags should work out of the box when included in your theme templ
 
 For more information, check out the template-tag file at: `/library/template-tags.php`
 
+**Additional Notes**
+
+Here's a quick tutorial for [automatically setting submitted images as featured images](http://wp-mix.com/set-attachment-featured-image/) (aka post thumbnails).
+
 == Upgrade Notice ==
 
 __Important!__ Many things have changed in the new version of the plugin. Please copy/paste your current USP settings to a safe place. Then update the plugin as usual, using your saved settings while configuring the new version.
@@ -146,6 +149,32 @@ __Important!__ Many things have changed in the new version of the plugin. Please
 Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
 
 == Changelog ==
+
+= 20131107 =
+
+* Added i18n support
+* Added uninstall.php file
+* Removed "&Delta;" from `die()`
+* Added "rate this plugin" links
+* Added Brazilian Portuguese translation; thanks to [Daniel Lemes](http://www.tutoriart.com.br/)
+* Added notes about support for multiple email addresses for email alerts
+* Increased `line-height` on settings page `<td>` elements
+* Added `.inline` class to some plugin settings
+* Changed CSS for `#usp_admin_filter_posts` in usp-admin.css
+* Changed link text on Post filter button from "User Submitted Posts" to "USP"
+* Fixed backwards setting for captcha case-sensitivity
+* Added `is_object($post)` to `usp_display_featured_image`; Thanks to [Larry Holish](holish.net)
+* Changed `application/x-javascript` to `application/javascript` in usp.php
+* Removed `getUrlVars` function and changed "forget input values" to use a simpler regex; Thanks to [Larry Holish](holish.net)
+* Tricked out `wp_editor` with complete array in both submission-form files
+* Added note on settings screen about deprecating the "classic" submit form
+* Replaced `wp-blog-header.php` with `wp-load.php` in usp.php
+* Improved sanitization of POST variables
+* Added check for empty content when content textarea is displayed on form
+* Removed closing `?>` from user-submitted-posts.php
+* Tested with latest version of WordPress (3.7)
+* Fleshed out readme.txt with even more infos
+* General code cleanup and maintenance
 
 = 20130720 =
 
@@ -248,9 +277,11 @@ There are several things that can interfere with uploading files:
 
 Note: when changing permissions on files and folders, it is important to use the least-restrictive settings possible. If you have to use more permissive settings, it is important to secure the directory against malicious activity. For more information check out: [Secure Media Uploads](http://digwp.com/2012/09/secure-media-uploads/)
 
+Update: new post at [WP-Mix](http://wp-mix.com/display-images-attached-post/) that should be useful for this.
+
 **How to set submitted image as the featured image?**
 
-Visit the "Options" panel in the plugin settings and select "Set Uploaded Image as Featured Image". Note that this setting merely assigns the submitted image as the Featured Image for the post; it's up to your theme's single.php file to include `the_post_thumbnail()` to display the Featured Images.
+Visit the "Options" panel in the plugin settings and select "Set Uploaded Image as Featured Image". Note that this setting merely assigns the submitted image as the Featured Image for the post; it's up to your theme's single.php file to include `the_post_thumbnail()` to display the Featured Images. Update: I've posted a quick tutorial at [WP-Mix](http://wp-mix.com/set-attachment-featured-image/).
 
 **How to require login?**
 
@@ -266,6 +297,8 @@ Here is another way of doing it (customize as needed):
 	header('Location: http://example.com/');
 	exit;
 }`
+
+Here is a [useful thread](http://wordpress.org/support/topic/limiting-posts-to-registered-users) on WP.org with further infos.
 
 **How do I change the appearance of the submission form?**
 
@@ -289,7 +322,44 @@ USP uses the WordPress API to keep everything secure, and includes a captcha and
 
 The free version of the plugin supports only image uploads, but some hosted videos may be included in the submitted content (textarea) by simply including the video URL on its own line. See [this page](http://codex.wordpress.org/Embeds) for more info.
 
-**Other questions**
+**More Questions &amp; Answers**
+
+Question: "I'm using the user submitted post plugin, and i'm realy loving it.. But i have some trouble with the page speed, when i analyse my site with google page speed i get the following errors: Remove Javascript-code that block loading of the site [...] Anf optimize CSS appearense."
+
+Answer: Sure, there is an "Include JavaScript?" setting to enable/disable the JavaScript. For the CSS, select the option to "Disable stylesheet" under the "Form style" setting. That gives you full control over when and where scripts and styles are included on the page. 
+
+Question: "i want to know where i find the informations that the user insert (specially his name and email that he insert in the form of user submitted post) , or i want to know the name of the table in data base."
+
+Answer: No database table is created but the option for the user's name is "usp_name". There is no option for the user's email.
+
+Question: "In your FAQs you mention about a paid version that allows a video field? i cant find any further information on it? Is there a way i can add this to the form?"
+
+Answer: It's not available yet (working on it), but in the meantime and as a workaround you can use WP's built-in oEmbed functionality to allow visitors to include video URLs and WP will then embed automatically in the posts. 
+
+Question: "I'm new to wordpress and just installed your plugin User Submitted posts. What template do I add the code to have it work everywhere."
+
+Answer: It really depends on the theme, as each tends to use template files differently.. it also depends on where on the page you would like to display the form, for example the sidebar (sidebar.php), the footer (footer.php), and so forth. Also, chances are that you'll need to add the form to more than one template file, for example index.php and page.php, etc. A good first place to try would be the sidebar, or maybe index.php and then go from there.
+
+Question: "I have the option for multiple image uploads enabled in the plug-in settings however it does not work on the site. When you click on the Add another image text nothing happens."
+
+Answer: The "Add another image" link is dependent on the required JavaScript being included in the page. Check the plugin setting to "Include JavaScript?" and you should be good to go.
+
+Question: "I really like the new Rich Text editor, but the Add Media button only shows up if I'm logged in to the site, and so nobody else can see it. Is there a way to change that so that all readers wanting to submit something can use that button?"
+
+Answer: As far as I know the user must be logged in to have access to file uploads, Media Library and the uploader. This is a security measure aimed at preventing people who don't know what they're doing from making a horrible, horrible mistake. Never allow open access to file uploads.
+
+Question: "Im trying to use your plugin, User Submitted posts but when I upload images via the form, they dont actually upload. I was wondering if you could help me with this?"
+
+Answer: Some things to check:
+
+1. Read the readme.txt file
+2. Are the images uploaded to the WP Media Library?
+3. Are you able to upload images directly via the Media Library?
+4. Do you see the image URL as a custom field (on Edit Post screen)?
+
+That should help troubleshoot or get some clues going.
+
+**Got questions?**
 
 To ask a question, visit the [USP Homepage](http://perishablepress.com/user-submitted-posts/) or [contact me](http://perishablepress.com/contact/).
 
