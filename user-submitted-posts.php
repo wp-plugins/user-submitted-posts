@@ -7,9 +7,9 @@
 	Author: Jeff Starr
 	Author URI: http://monzilla.biz/
 	Donate link: http://m0n.co/donate
-	Requires at least: 3.3
-	Tested up to: 3.7
-	Version: 20131107
+	Requires at least: 3.5
+	Tested up to: 3.8
+	Version: 20140123
 	Stable tag: trunk
 	License: GPL v2
 */
@@ -19,15 +19,16 @@ if (!defined('ABSPATH')) die();
 
 // i18n
 function usp_i18n_init() {
-	load_plugin_textdomain('usp', false, dirname(plugin_basename(__FILE__)) . '/languages');
+	load_plugin_textdomain('usp', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 }
 add_action('plugins_loaded', 'usp_i18n_init');
 
-$usp_version = '20131107';
+$usp_version = '20140123';
 $usp_plugin  = __('User Submitted Posts', 'usp');
 $usp_options = get_option('usp_options');
 $usp_path    = plugin_basename(__FILE__); // '/user-submitted-posts/user-submitted-posts.php';
 $usp_logo    = plugins_url() . '/user-submitted-posts/images/usp-logo.png';
+$usp_pro     = plugins_url() . '/user-submitted-posts/images/usp-pro.png';
 $usp_homeurl = 'http://perishablepress.com/user-submitted-posts/';
 
 $usp_post_meta_IsSubmission = 'is_submission';
@@ -43,10 +44,10 @@ include ('library/template-tags.php');
 add_action('admin_init', 'usp_require_wp_version');
 function usp_require_wp_version() {
 	global $wp_version, $usp_path, $usp_plugin;
-	if (version_compare($wp_version, '3.3', '<')) {
+	if (version_compare($wp_version, '3.5', '<')) {
 		if (is_plugin_active($usp_path)) {
 			deactivate_plugins($usp_path);
-			$msg =  '<strong>' . $usp_plugin . '</strong> ' . __('requires WordPress 3.3 or higher, and has been deactivated!', 'usp') . '<br />';
+			$msg =  '<strong>' . $usp_plugin . '</strong> ' . __('requires WordPress 3.5 or higher, and has been deactivated!', 'usp') . '<br />';
 			$msg .= __('Please return to the ', 'usp') . '<a href="' . admin_url() . '">' . __('WordPress Admin area', 'usp') . '</a> ' . __('to upgrade WordPress and try again.', 'usp');
 			wp_die($msg);
 		}
@@ -439,7 +440,8 @@ function usp_plugin_action_links($links, $file) {
 function add_usp_links($links, $file) {
 	if ($file == plugin_basename(__FILE__)) {
 		$rate_url = 'http://wordpress.org/support/view/plugin-reviews/' . basename(dirname(__FILE__)) . '?rate=5#postform';
-		$links[] = '<a href="' . $rate_url . '" target="_blank" title="Click here to rate and review this plugin on WordPress.org">Rate this plugin</a>';
+		$links[] = '<a target="_blank" href="' . $rate_url . '" title="Click here to rate and review this plugin on WordPress.org">Rate this plugin</a>';
+		$links[] = '<strong><a target="_blank" href="http://plugin-planet.com/usp-pro/" title="Get USP Pro">Go Pro &raquo;</a></strong>';
 	}
 	return $links;
 }
@@ -461,47 +463,48 @@ function usp_add_defaults() {
 	$tmp = get_option('usp_options');
 	if(($tmp['default_options'] == '1') || (!is_array($tmp))) {
 		$arr = array(
-			'default_options' => 0,
-			'author' => $currentUser->ID,
-			'categories' => array(get_option('default_category')),
-			'number-approved' => -1,
-			'redirect-url' => '',
-			'error-message' => __('There was an error. Please ensure that you have added a title, some content, and that you have uploaded only images.', 'usp'),
-			'min-images' => 0,
-			'max-images' => 1,
-			'min-image-height' => 0,
-			'min-image-width' => 0,
-			'max-image-height' => 1500,
-			'max-image-width' => 1500,
-			'usp_name' => 'show',
-			'usp_url' => 'show',
-			'usp_title' => 'show',
-			'usp_tags' => 'show',
-			'usp_category' => 'show',
-			'usp_images' => 'hide',
-			'upload-message' => 'Please select your image(s) to upload.',
-			'usp_form_width' => '300', // in pixels (not used anywhere)
-			'usp_question' => '1 + 1 =',
-			'usp_response' => '2',
-			'usp_casing' => 0,
-			'usp_captcha' => 'show',
-			'usp_content' => 'show',
-			'success-message' => 'Success! Thank you for your submission.',
-			'usp_form_version' => 'current',
-			'usp_email_alerts' => 1,
-			'usp_email_address' => $admin_mail,
-			'usp_use_author' => 0,
-			'usp_use_url' => 0,
-			'usp_use_cat' => 0,
-			'usp_use_cat_id' => '',
-			'usp_include_js' => 1,
-			'usp_display_url' => '',
-			'usp_form_content' => '',
+			'default_options'     => 0,
+			'author'              => $currentUser->ID,
+			'categories'          => array(get_option('default_category')),
+			'number-approved'     => -1,
+			'redirect-url'        => '',
+			'error-message'       => __('There was an error. Please ensure that you have added a title, some content, and that you have uploaded only images.', 'usp'),
+			'min-images'          => 0,
+			'max-images'          => 1,
+			'min-image-height'    => 0,
+			'min-image-width'     => 0,
+			'max-image-height'    => 1500,
+			'max-image-width'     => 1500,
+			'usp_name'            => __('show', 'usp'),
+			'usp_url'             => __('show', 'usp'),
+			'usp_title'           => __('show', 'usp'),
+			'usp_tags'            => __('show', 'usp'),
+			'usp_category'        => __('show', 'usp'),
+			'usp_images'          => __('hide', 'usp'),
+			'upload-message'      => __('Please select your image(s) to upload.', 'usp'),
+			'usp_form_width'      => '300', // in pixels (not used anywhere)
+			'usp_question'        => '1 + 1 =',
+			'usp_response'        => '2',
+			'usp_casing'          => 0,
+			'usp_captcha'         => __('show', 'usp'),
+			'usp_content'         => __('show', 'usp'),
+			'success-message'     => __('Success! Thank you for your submission.', 'usp'),
+			'usp_form_version'    => 'current',
+			'usp_email_alerts'    => 1,
+			'usp_email_address'   => $admin_mail,
+			'usp_use_author'      => 0,
+			'usp_use_url'         => 0,
+			'usp_use_cat'         => 0,
+			'usp_use_cat_id'      => '',
+			'usp_include_js'      => 1,
+			'usp_display_url'     => '',
+			'usp_form_content'    => '',
 			'usp_richtext_editor' => 0,
 			'usp_featured_images' => 0,
+			'usp_add_another'     => '',
 		);
 		update_option('usp_options', $arr);
-	}	
+	}
 }
 
 // define style options
@@ -534,7 +537,7 @@ function usp_validate_options($input) {
 	$input['default_options'] = ($input['default_options'] == 1 ? 1 : 0);
 
 	$input['categories']       = is_array($input['categories']) && !empty($input['categories']) ? array_unique($input['categories']) : array(get_option('default_category'));
-	$input['number-approved']  = is_numeric($input['number-approved']) ? intval($input['number-approved']) : - 1;
+	$input['number-approved']  = is_numeric($input['number-approved']) ? intval($input['number-approved']) : -1;
 
 	$input['min-images']       = is_numeric($input['min-images']) ? intval($input['min-images']) : $input['max-images'];
 	$input['max-images']       = (is_numeric($input['max-images']) && ($usp_options['min-images'] <= abs($input['max-images']))) ? intval($input['max-images']) : $usp_options['max-images'];
@@ -564,7 +567,20 @@ function usp_validate_options($input) {
 
 	// dealing with kses
 	global $allowedposttags;
-	$allowed_atts = array('align'=>array(), 'class'=>array(), 'type'=>array(), 'id'=>array(), 'dir'=>array(), 'lang'=>array(), 'style'=>array(), 'xml:lang'=>array(), 'src'=>array(), 'alt'=>array());
+	$allowed_atts = array(
+		'align'=>array(), 
+		'class'=>array(), 
+		'type'=>array(), 
+		'id'=>array(), 
+		'dir'=>array(), 
+		'lang'=>array(), 
+		'style'=>array(), 
+		'xml:lang'=>array(), 
+		'src'=>array(), 
+		'alt'=>array(), 
+		'href'=>array(), 
+		'rel'=>array(), 
+		'target'=>array());
 
 	$allowedposttags['script'] = $allowed_atts;
 	$allowedposttags['strong'] = $allowed_atts;
@@ -590,6 +606,7 @@ function usp_validate_options($input) {
 	$input['error-message']    = wp_kses_post($input['error-message'], $allowedposttags);
 	$input['upload-message']   = wp_kses_post($input['upload-message'], $allowedposttags);
 	$input['success-message']  = wp_kses_post($input['success-message'], $allowedposttags);
+	$input['usp_add_another']  = wp_kses_post($input['usp_add_another'], $allowedposttags);
 
 	if (!isset($input['usp_casing'])) $input['usp_casing'] = null;
 	$input['usp_casing'] = ($input['usp_casing'] == 1 ? 1 : 0);
@@ -630,17 +647,29 @@ function usp_add_options_page() {
 
 // create the options page
 function usp_render_form() {
-	global $usp_plugin, $usp_options, $usp_path, $usp_homeurl, $usp_version, $usp_logo, $usp_form_version; ?>
+	global $usp_plugin, $usp_options, $usp_path, $usp_homeurl, $usp_version, $usp_logo, $usp_pro, $usp_form_version; ?>
 
 	<style type="text/css">
-		.mm-panel-overview { padding-left: 200px; background: url(<?php echo $usp_logo; ?>) no-repeat 15px 0; }
+		.mm-panel-overview { padding: 0 0 0 200px; background: url(<?php echo $usp_logo; ?>) no-repeat 15px 0; }
+		.mm-left-div { float: left; margin-bottom: 25px; }
+		.mm-right-div { float: left; margin: -5px 15px 25px 15px; }
+		.mm-pro-blurb {
+			text-decoration: none; text-align: center; font-weight: bold; text-indent: -9999em;
+			display: block; width: 100px; height: 100px; line-height: 100px; position: relative; 
+			border: none; -webkit-border-radius: 100px; -moz-border-radius: 100px; border-radius: 100px; 
+			color: #fff; background: url(<?php echo $usp_pro; ?>) no-repeat center center; 
+			}
+			.mm-pro-blurb:hover { color: #fff; text-decoration: none; }
+			.mm-pro-blurb:active { top: 1px; }
 
 		#mm-plugin-options h2 small { font-size: 60%; }
 		#mm-plugin-options h3 { cursor: pointer; }
 		#mm-plugin-options h4, 
 		#mm-plugin-options p { margin: 15px; line-height: 18px; }
-		#mm-plugin-options ul { margin: 15px 15px 25px 40px; }
+		#mm-plugin-options ul { margin: 15px 15px 25px 40px; line-height: 18px; font-size: 13px; }
 		#mm-plugin-options li { margin: 10px 0; list-style-type: disc; }
+		#mm-plugin-options ul.mm-overview-list { margin: 0 15px 0 40px; }
+		#mm-plugin-options ul.mm-overview-list li { margin: 5px 0; }
 		#mm-plugin-options abbr { cursor: help; border-bottom: 1px dotted #dfdfdf; }
 
 		.mm-table-wrap { margin: 15px; }
@@ -665,6 +694,10 @@ function usp_render_form() {
 		#mm-credit-info { margin-top: -5px; }
 		#mm-iframe-wrap { width: 100%; height: 250px; overflow: hidden; }
 		#mm-iframe-wrap iframe { width: 100%; height: 100%; overflow: hidden; margin: 0; padding: 0; }
+		
+		.clear:before,
+		.clear:after { content: ""; display: table; }
+		.clear:after { clear: both; }
 	</style>
 
 	<div id="mm-plugin-options" class="wrap">
@@ -681,23 +714,29 @@ function usp_render_form() {
 					<div id="mm-panel-overview" class="postbox">
 						<h3><?php _e('Overview', 'usp'); ?></h3>
 						<div class="toggle">
-							<div class="mm-panel-overview">
-								<p>
-									<strong><?php echo $usp_plugin; ?></strong> <?php _e('(USP) enables your visitors to submit posts from anywhere on your site.', 'usp'); ?> 
-									<?php _e('To implement, customize your options and then include the USP form via shortcode or template tag.', 'usp'); ?> 
-									<?php _e('Use the shortcode to display the upload form on a post or page, or use the template tag to display the upload form anywhere in your theme template.', 'usp'); ?>
+							<div class="mm-panel-overview clear">
+								<p class="mm-overview-intro">
+									<strong><?php echo $usp_plugin; ?></strong> <?php _e('(USP) enables your visitors to submit posts and upload images from anywhere on your site.', 'usp'); ?> 
+									<?php _e('To implement, configure the plugin settings and include the USP form in any post or page via shortcode or anywhere in your theme via template tag.', 'usp'); ?> 
+									<?php _e('For more functionality check out', 'usp'); ?> <strong><a href="http://plugin-planet.com/usp-pro/" target="_blank">USP Pro</a></strong> 
+									<?php _e('&mdash; the ultimate solution for unlimited front-end forms.', 'usp'); ?>
 								</p>
-								<ul>
-									<li><?php _e('To configure your settings, visit the', 'usp'); ?> <a id="mm-panel-primary-link" href="#mm-panel-primary"><?php _e('Options panel', 'usp'); ?></a>.</li>
-									<li><?php _e('For the shortcode and template tag, visit', 'usp'); ?> <a id="mm-panel-secondary-link" href="#mm-panel-secondary"><?php _e('Shortcode &amp; Template Tag', 'usp'); ?></a>.</li>
-									<li><?php _e('For more information check the', 'usp'); ?> <a href="<?php echo plugins_url(); ?>/user-submitted-posts/readme.txt">readme.txt</a> 
-										<?php _e('and', 'usp'); ?> <a href="<?php echo $usp_homeurl; ?>"><?php _e('USP Homepage', 'usp'); ?></a>.</li>
-									<li><?php _e('If you like this plugin, please', 'usp'); ?> 
-										<a href="http://wordpress.org/support/view/plugin-reviews/<?php echo basename(dirname(__FILE__)); ?>?rate=5#postform" title="<?php _e('Click here to rate and review this plugin on WordPress.org', 'usp'); ?>" target="_blank">
-											<?php _e('rate it at the Plugin Directory', 'usp'); ?>&nbsp;&raquo;
-										</a>
-									</li>
-								</ul>
+								<div class="mm-left-div">
+									<ul class="mm-overview-list">
+										<li><a id="mm-panel-primary-link" href="#mm-panel-primary"><?php _e('Configure settings', 'usp'); ?></a></li>
+										<li><a id="mm-panel-secondary-link" href="#mm-panel-secondary"><?php _e('Get the shortcode &amp; template tag', 'usp'); ?></a></li>
+										<li><?php _e('More info:', 'usp'); ?> <a href="<?php echo plugins_url(); ?>/user-submitted-posts/readme.txt"><?php _e('readme.txt', 'usp'); ?></a> 
+											<?php _e('and', 'usp'); ?> <a href="<?php echo $usp_homeurl; ?>"><?php _e('homepage', 'usp'); ?></a></li>
+										<li><?php _e('If you like USP, please', 'usp'); ?> 
+											<a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/<?php echo basename(dirname(__FILE__)); ?>?rate=5#postform" title="<?php _e('Rate and review this plugin at the WP Plugin Directory', 'usp'); ?>">
+												<?php _e('rate it at WordPress.org', 'usp'); ?>&nbsp;&raquo;
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="mm-right-div">
+									<a class="mm-pro-blurb" target="_blank" href="http://plugin-planet.com/usp-pro/" title="Unlimited front-end forms">Get USP Pro</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -787,7 +826,7 @@ function usp_render_form() {
 									<tr>
 										<th scope="row"><label class="description" for="usp_options[usp_include_js]"><?php _e('Include JavaScript?', 'usp'); ?></label></th>
 										<td><input type="checkbox" value="1" name="usp_options[usp_include_js]" <?php if (isset($usp_options['usp_include_js'])) { checked('1', $usp_options['usp_include_js']); } ?> />
-										<span class="mm-item-caption"><?php _e('Check this box if you want to include the external JavaScript file. Note: if you&rsquo;re not allowing image uploads, leave this option unchecked.', 'usp'); ?></span></td>
+										<span class="mm-item-caption"><?php _e('Check this box if you want to include the external JavaScript file (recommended).', 'usp'); ?></span></td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="usp_options[usp_display_url]"><?php _e('Targeted Loading', 'usp'); ?></label></th>
@@ -936,29 +975,21 @@ function usp_render_form() {
 										<div class="mm-item-caption"><?php _e('This is the message that appears next to upload field. Useful to state your upload guidelines/rules/etc.', 'usp'); ?></div></td>
 									</tr>
 									<tr>
+										<th scope="row"><label class="description" for="usp_options[usp_add_another]"><?php _e('&ldquo;Add another image&rdquo; link', 'usp'); ?></label></th>
+										<td><textarea class="textarea" rows="3" cols="50" name="usp_options[usp_add_another]"><?php echo esc_attr($usp_options['usp_add_another']); ?></textarea>
+										<div class="mm-item-caption"><?php _e('Here you may specify your own custom markup for the &ldquo;Add another image&rdquo; link (leave blank to use the default markup).', 'usp'); ?></div></td>
+									</tr>
+									<tr>
 										<th scope="row"><label class="description" for="usp_options[min-images]"><?php _e('Minimum number of images', 'usp'); ?></label></th>
 										<td>
-											<select name="usp_options[min-images]">
-												<?php foreach(range(0, 20) as $number) { ?>
-												<option <?php selected($number, $usp_options['min-images']); ?> value="<?php echo $number; ?>">
-													<?php echo $number; ?>
-												</option>
-												<?php } ?>
-											</select>
+											<input name="usp_options[min-images]" type="number" step="1" min="0" max="999" maxlength="3" value="<?php echo $usp_options['min-images']; ?>" />
 											<div class="mm-item-caption inline"><?php _e('Specify the <em>minimum</em> number of images.', 'usp'); ?></div>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="usp_options[max-images]"><?php _e('Maximum number of images', 'usp'); ?></label></th>
 										<td>
-											<select name="usp_options[max-images]">
-												<option value="-1"><?php _e('No Limit', 'usp'); ?></option>
-												<?php foreach(range(0, 20) as $number) { ?>
-												<option <?php selected($number, $usp_options['max-images']); ?> value="<?php echo $number; ?>">
-													<?php echo $number; ?>
-												</option>
-												<?php } ?>
-											</select>
+											<input name="usp_options[max-images]" type="number" step="1" min="0" max="999" maxlength="3" value="<?php echo $usp_options['max-images']; ?>" />
 											<div class="mm-item-caption inline"><?php _e('Specify the <em>maximum</em> number of images.', 'usp'); ?></div>
 										</td>
 									</tr>

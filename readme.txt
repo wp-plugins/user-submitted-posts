@@ -8,9 +8,9 @@ Author URI: http://monzilla.biz/
 Author: Jeff Starr
 Donate link: http://m0n.co/donate
 Contributors: specialk
-Requires at least: 3.3
-Tested up to: 3.7
-Version: 20131107
+Requires at least: 3.5
+Tested up to: 3.8
+Version: 20140123
 Stable tag: trunk
 License: GPL v2 or later
 
@@ -18,7 +18,11 @@ User Submitted Posts enables your visitors to submit posts and images from anywh
 
 == Description ==  
 
-Adds a simple form via template tag or shortcode that enables your visitors to submit posts. User-submitted posts optionally include tags, categories, post titles, and more. You can set submitted posts as draft, publish immediately, or after some number of approved posts. Also enables users to upload multiple images when submitting a post. Everything super-easy to customize via Admin Settings page.
+Adds a basic form via template tag or shortcode that enables your visitors to submit posts and upload images. User-submitted posts optionally include tags, categories, post titles, and more. You can set submitted posts as draft, publish immediately, or after some number of approved posts. Also enables users to upload multiple images when submitting a post. Everything super-easy to customize via Admin Settings page.
+
+**Pro Version**
+
+USP Pro now available at [Plugin Planet](http://plugin-planet.com/usp-pro/)!
 
 **Features**
 
@@ -150,6 +154,25 @@ Screenshots available at the [USP Homepage](http://perishablepress.com/user-subm
 
 == Changelog ==
 
+= 20140123 =
+
+* Tested with latest version of WordPress (3.8)
+* Added trailing slash to load_plugin_textdomain()
+* Increased WP minimum version requirement from 3.3 to 3.5
+* Added popout info about Pro version now available
+* Added Spanish translation; thanks to [María Iglesias](http://www.globalcultura.com/)
+* Change CSS for "USP" button to display after the "Filter" button on edit.php
+* Added 8px margin to "Empty Trash" button on the Post Trash screen
+* Changed handle from "uspContent" to "uspcontent" for wp_editor()
+* Added class ".usp-required" to input fields (for use with JavaScript)
+* Fixed issue of submitted posts going to Trash when a specific number of images is required AND the user submits the form without selecting the required number of images. JavaScript now checks for required image(s) and will not allow the form to be submitted until the user has selected the correct number of images.
+* Improved logic responsible for displaying file input fields and the "Add Another Image" button
+* Added option to display custom markup for "Add Another Image" button
+* Replaced select fields with number inputs for settings "minimum/maximum number of images"
+* Added `href`, `rel`, and `target` attributes to $allowed_atts
+* Made default options translatable, generated new mo/po templates
+* Streamlined plugin settings intro panel
+
 = 20131107 =
 
 * Added i18n support
@@ -277,7 +300,7 @@ There are several things that can interfere with uploading files:
 
 Note: when changing permissions on files and folders, it is important to use the least-restrictive settings possible. If you have to use more permissive settings, it is important to secure the directory against malicious activity. For more information check out: [Secure Media Uploads](http://digwp.com/2012/09/secure-media-uploads/)
 
-Update: new post at [WP-Mix](http://wp-mix.com/display-images-attached-post/) that should be useful for this.
+Update: new posts at [WP-Mix](http://wp-mix.com/) that should be useful for this: [Display all images attached to post](http://wp-mix.com/display-images-attached-post/) and [Display images with links](http://wp-mix.com/display-images-with-user-submitted-posts/)
 
 **How to set submitted image as the featured image?**
 
@@ -358,6 +381,9 @@ Answer: Some things to check:
 4. Do you see the image URL as a custom field (on Edit Post screen)?
 
 That should help troubleshoot or get some clues going.
+
+Question: "I have it set so that articles get submitted under the users name. Sometimes when a user submits an article the article gets submitted under the users name, and other times set as the default user as set in the settings. When the article gets set to the default user I cannot change it in wordpress, I need to copy and paste the whole article to a new article and then set it to the proper user."
+Answer: The registered username of the submitter can be used for post author only when they are logged in to WP (otherwise it's difficult to "guess" their identity). So if a registered user does not log in and guest posting is enabled, their post will be submitted with the submitted name as the post author. Thus, to resolve the dilemma posed in the question, one solution is to require users to be logged in to submit posts.
 
 **Got questions?**
 

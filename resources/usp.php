@@ -18,6 +18,25 @@
 
 jQuery(document).ready(function($) {
 
+	<?php if ($usp_options['min-images'] > 0) : ?>
+	$('#usp_form').submit(function() {
+		var isFormValid = true;
+		$('.usp-required-file').each(function() {
+			if ($.trim($(this).val()).length == 0) {
+				$(this).addClass('usp-highlight');
+				isFormValid = false;
+			} else {
+				$(this).removeClass('usp-highlight');
+			}
+		});
+		$('.usp-highlight').css({ 'border' : '1px solid red', 'background-color' : '#ffffcc' });
+		if (!isFormValid) {
+			alert('Please provide any required file(s)!');
+		}
+		return isFormValid;
+	});
+	<?php endif; ?>
+
 	// captcha check
 	$('#user-submitted-post').click(function() {
 		var usp_captcha = $('#user-submitted-captcha').val();
@@ -64,25 +83,25 @@ jQuery(document).ready(function($) {
 	$('#usp_form').parsley({ errors: { errorsWrapper: '<div class="usp-input-error"></div>', errorElem: '<span></span>' } });
 
 	// add another image
-	var x = parseInt($('#usp-image-limit').val());
-	var n = parseInt($('#usp-image-count').val());
-	if (x == 1) {
-		$('#usp_add-another').hide();
-	}
-	$('#usp_add-another').click(function(event) {
-		event.preventDefault();
-		n++;
+	var x = parseInt($('#usp-min-images').val());
+	var y = parseInt($('#usp-max-images').val());
+	if (x === 0) x = 1;
+	if (x >= y) $('#usp_add-another').hide();
+	$('#usp_add-another').click(function(e) {
+		e.preventDefault();
+		x++;
 		var $this = $(this);
 		var $new = $this.parent().find('input:visible:last').clone().val('');
-		$('#usp-image-count').val(n);
-		if (n < x) {
+		$('#usp-min-images').val(x);
+		if (x < y) {
 			$this.before($new.fadeIn(300));
-		} else if (n = x) {
+		} else if (x = y) {
 			$this.before($new.fadeIn(300));
 			$this.hide();
 		} else {
 			$this.hide();
 		}
+		$new.removeClass('usp-required-file');
 	});
 });
 

@@ -21,6 +21,8 @@ if (isset($authorName)) {
 
 	<form id="usp_form" method="post" data-validate="parsley" enctype="multipart/form-data" action="" novalidate>
 
+		<div class="usp-error"></div>
+
 		<?php if (isset($_GET['submission-error']) && $_GET['submission-error'] == '1') { ?>
 		<div id="usp-error-message"><?php echo $usp_options['error-message']; ?></div>
 		<?php } ?>
@@ -32,33 +34,33 @@ if (isset($authorName)) {
 		<?php if (($usp_options['usp_name'] == 'show') && ($usp_options['usp_use_author'] == false)) { ?>
 		<fieldset class="usp-name">
 			<label for="user-submitted-name"><?php _e('Your Name', 'usp'); ?></label>
-			<input name="user-submitted-name" type="text" value="" data-required="true" placeholder="<?php _e('Your Name', 'usp'); ?>" class="usp-input">
+			<input name="user-submitted-name" type="text" value="" data-required="true" placeholder="<?php _e('Your Name', 'usp'); ?>" class="usp-input usp-required">
 		</fieldset>
 		<?php } if (($usp_options['usp_url'] == 'show') && ($usp_options['usp_use_url'] == false)) { ?>
 		<fieldset class="usp-url">
 			<label for="user-submitted-url"><?php _e('Your URL', 'usp'); ?></label>
-			<input name="user-submitted-url" type="text" value="" data-required="true" data-type="url" placeholder="<?php _e('Your URL', 'usp'); ?>" class="usp-input">
+			<input name="user-submitted-url" type="text" value="" data-required="true" data-type="url" placeholder="<?php _e('Your URL', 'usp'); ?>" class="usp-input usp-required">
 		</fieldset>
 		<?php } if ($usp_options['usp_title'] == 'show') { ?>
 		<fieldset class="usp-title">
 			<label for="user-submitted-title"><?php _e('Post Title', 'usp'); ?></label>
-			<input name="user-submitted-title" type="text" value="" data-required="true" placeholder="<?php _e('Post Title', 'usp'); ?>" class="usp-input">
+			<input name="user-submitted-title" type="text" value="" data-required="true" placeholder="<?php _e('Post Title', 'usp'); ?>" class="usp-input usp-required">
 		</fieldset>
 		<?php } if ($usp_options['usp_tags'] == 'show') { ?>
 		<fieldset class="usp-tags">
 			<label for="user-submitted-tags"><?php _e('Post Tags', 'usp'); ?></label>
-			<input name="user-submitted-tags" id="user-submitted-tags" data-required="true" type="text" value="" placeholder="<?php _e('Post Tags', 'usp'); ?>" class="usp-input">
+			<input name="user-submitted-tags" id="user-submitted-tags" data-required="true" type="text" value="" placeholder="<?php _e('Post Tags', 'usp'); ?>" class="usp-input usp-required">
 		</fieldset>
 		<?php } if ($usp_options['usp_captcha'] == 'show') { ?>
 		<fieldset class="usp-captcha">
 			<label for="user-submitted-captcha"><?php echo $usp_options['usp_question']; ?></label>
-			<input name="user-submitted-captcha" type="text" value="" data-required="true" placeholder="<?php _e('Antispam Question', 'usp'); ?>" class="usp-input" id="user-submitted-captcha">
+			<input name="user-submitted-captcha" type="text" value="" data-required="true" placeholder="<?php _e('Antispam Question', 'usp'); ?>" class="usp-input usp-required" id="user-submitted-captcha">
 		</fieldset>
 		<?php } if (($usp_options['usp_category'] == 'show') && ($usp_options['usp_use_cat'] == false)) { ?>
 		<fieldset class="usp-category">
 			<label for="user-submitted-category"><?php _e('Post Category', 'usp'); ?></label>
 			<select name="user-submitted-category">
-				<?php foreach($usp_options['categories'] as $categoryId) { $category = get_category($categoryId); if(!$category) { continue; } ?>
+				<?php foreach($usp_options['categories'] as $categoryId) { $category = get_category($categoryId); if (!$category) { continue; } ?>
 				<option value="<?php echo $categoryId; ?>"><?php $category = get_category($categoryId); echo htmlentities($category->name, ENT_QUOTES, 'UTF-8'); ?></option>
 				<?php } ?>
 			</select>
@@ -80,7 +82,7 @@ if (isset($authorName)) {
 					    'tinymce'       => true,  // enable TinyMCE
 					    'quicktags'     => true,  // enable quicktags
 					);
-					wp_editor('', 'uspContent', $settings); 
+					wp_editor('', 'uspcontent', $settings); 
 				?>
 			</div>
 			<?php } else { ?>
@@ -94,17 +96,25 @@ if (isset($authorName)) {
 			<label for="user-submitted-image"><?php _e('Upload an Image', 'usp'); ?></label>
 			<div id="usp-upload-message"><?php echo $usp_options['upload-message']; ?></div>
 			<div id="user-submitted-image">
-				<?php if($usp_options['min-images'] < 1) {
-					$numberImages = 1;
-				} else {
-					$numberImages = $usp_options['min-images'];
-				} for($i = 0; $i < $numberImages; $i++) { ?>
-				<input name="user-submitted-image[]" type="file" size="25" class="usp-input usp-clone">
-				<?php } ?>
-				<a href="#" id="usp_add-another"><?php _e('Add another image', 'usp'); ?></a>
+
+				<?php // upload files
+				$minImages = intval($usp_options['min-images']); 
+				$maxImages = intval($usp_options['max-images']); 
+				$addAnother = $usp_options['usp_add_another'];
+				if ($addAnother == '') $addAnother = '<a href="#" id="usp_add-another">' . __('Add another image', 'usp') . '</a>';
+				if ($minImages > 0) : ?>
+					<?php for ($i = 0; $i < $minImages; $i++) : ?>
+						<input name="user-submitted-image[]" type="file" size="25" class="usp-input usp-clone usp-required-file">
+					<?php endfor; ?>
+					<?php if ($minImages < $maxImages) : echo $addAnother; endif; ?>
+				<?php else : ?>
+					<input name="user-submitted-image[]" type="file" size="25" class="usp-input usp-clone">
+					<?php echo $addAnother; ?>
+				<?php endif; ?>
+				
 			</div>
-			<input class="hidden" type="hidden" name="usp-image-limit" id="usp-image-limit" value="<?php echo $usp_options['max-images']; ?>">
-			<input class="hidden" type="hidden" name="usp-image-count" id="usp-image-count" value="1">
+			<input class="hidden" type="hidden" name="usp-min-images" id="usp-min-images" value="<?php echo $usp_options['min-images']; ?>">
+			<input class="hidden" type="hidden" name="usp-max-images" id="usp-max-images" value="<?php echo $usp_options['max-images']; ?>">
 		</fieldset>
 		<?php } ?>
 		<?php } ?>
