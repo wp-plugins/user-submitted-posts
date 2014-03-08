@@ -3,14 +3,14 @@
 Plugin Name: User Submitted Posts
 Plugin URI: http://perishablepress.com/user-submitted-posts/
 Description: Enables your visitors to submit posts and images from anywhere on your site.
-Tags: submit, public, news, share, upload, images, posts, users, user-submit, community
+Tags: submit, public, share, upload, images, posts, users, user-submit, community, front-end, submissions
 Author URI: http://monzilla.biz/
 Author: Jeff Starr
 Donate link: http://m0n.co/donate
 Contributors: specialk
 Requires at least: 3.5
 Tested up to: 3.8
-Version: 20140123
+Version: 20140308
 Stable tag: trunk
 License: GPL v2 or later
 
@@ -153,6 +153,10 @@ __Important!__ Many things have changed in the new version of the plugin. Please
 Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
 
 == Changelog ==
+
+= 20140308 =
+
+* usp_require_wp_version() now runs only on plugin activation
 
 = 20140123 =
 
@@ -321,7 +325,7 @@ Here is another way of doing it (customize as needed):
 	exit;
 }`
 
-Here is a [useful thread](http://wordpress.org/support/topic/limiting-posts-to-registered-users) on WP.org with further infos.
+Also check out [Members-only content via shortcode](http://wp-mix.com/members-only-content-shortcode/) at WP-Mix.
 
 **How do I change the appearance of the submission form?**
 
@@ -357,7 +361,7 @@ Answer: No database table is created but the option for the user's name is "usp_
 
 Question: "In your FAQs you mention about a paid version that allows a video field? i cant find any further information on it? Is there a way i can add this to the form?"
 
-Answer: It's not available yet (working on it), but in the meantime and as a workaround you can use WP's built-in oEmbed functionality to allow visitors to include video URLs and WP will then embed automatically in the posts. 
+Answer: It's available at [Plugin Planet](http://plugin-planet.com/usp-pro/). And/or as a workaround in the free version, you can use WP's built-in oEmbed functionality to allow visitors to include video URLs and WP will then embed automatically in the posts. 
 
 Question: "I'm new to wordpress and just installed your plugin User Submitted posts. What template do I add the code to have it work everywhere."
 

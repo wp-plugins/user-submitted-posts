@@ -9,13 +9,11 @@
 	Donate link: http://m0n.co/donate
 	Requires at least: 3.5
 	Tested up to: 3.8
-	Version: 20140123
+	Version: 20140308
 	Stable tag: trunk
 	License: GPL v2
 */
 if (!defined('ABSPATH')) die();
-
-// NO EDITING REQUIRED - PLEASE SET PREFERENCES IN THE WP ADMIN!
 
 // i18n
 function usp_i18n_init() {
@@ -23,7 +21,7 @@ function usp_i18n_init() {
 }
 add_action('plugins_loaded', 'usp_i18n_init');
 
-$usp_version = '20140123';
+$usp_version = '20140308';
 $usp_plugin  = __('User Submitted Posts', 'usp');
 $usp_options = get_option('usp_options');
 $usp_path    = plugin_basename(__FILE__); // '/user-submitted-posts/user-submitted-posts.php';
@@ -41,7 +39,6 @@ $usp_post_meta_Image        = 'user_submit_image';
 include ('library/template-tags.php');
 
 // require minimum version of WordPress
-add_action('admin_init', 'usp_require_wp_version');
 function usp_require_wp_version() {
 	global $wp_version, $usp_path, $usp_plugin;
 	if (version_compare($wp_version, '3.5', '<')) {
@@ -52,6 +49,9 @@ function usp_require_wp_version() {
 			wp_die($msg);
 		}
 	}
+}
+if (isset($_GET['activate']) && $_GET['activate'] == 'true') {
+	add_action('admin_init', 'usp_require_wp_version');
 }
 
 // add new post status
