@@ -7,12 +7,13 @@
 	Author: Jeff Starr
 	Author URI: http://monzilla.biz/
 	Donate link: http://m0n.co/donate
-	Requires at least: 3.5
-	Tested up to: 3.8
-	Version: 20140308
+	Requires at least: 3.7
+	Tested up to: 4.0
+	Version: 20140927
 	Stable tag: trunk
 	License: GPL v2
 */
+
 if (!defined('ABSPATH')) die();
 
 // i18n
@@ -21,7 +22,7 @@ function usp_i18n_init() {
 }
 add_action('plugins_loaded', 'usp_i18n_init');
 
-$usp_version = '20140308';
+$usp_version = '20140927';
 $usp_plugin  = __('User Submitted Posts', 'usp');
 $usp_options = get_option('usp_options');
 $usp_path    = plugin_basename(__FILE__); // '/user-submitted-posts/user-submitted-posts.php';
@@ -41,10 +42,10 @@ include ('library/template-tags.php');
 // require minimum version of WordPress
 function usp_require_wp_version() {
 	global $wp_version, $usp_path, $usp_plugin;
-	if (version_compare($wp_version, '3.5', '<')) {
+	if (version_compare($wp_version, '3.7', '<')) {
 		if (is_plugin_active($usp_path)) {
 			deactivate_plugins($usp_path);
-			$msg =  '<strong>' . $usp_plugin . '</strong> ' . __('requires WordPress 3.5 or higher, and has been deactivated!', 'usp') . '<br />';
+			$msg =  '<strong>' . $usp_plugin . '</strong> ' . __('requires WordPress 3.7 or higher, and has been deactivated!', 'usp') . '<br />';
 			$msg .= __('Please return to the ', 'usp') . '<a href="' . admin_url() . '">' . __('WordPress Admin area', 'usp') . '</a> ' . __('to upgrade WordPress and try again.', 'usp');
 			wp_die($msg);
 		}
@@ -58,7 +59,7 @@ if (isset($_GET['activate']) && $_GET['activate'] == 'true') {
 add_filter ('post_stati', 'usp_addNewPostStatus');
 function usp_addNewPostStatus($postStati) {
 	$postStati['submitted'] = array(__('Submitted', 'usp'), __('User Submitted Posts', 'usp'), _n_noop('Submitted', 'Submitted'));
-	return $postStati;
+	return apply_filters('usp_post_status', $postStati);
 }
 
 // add submitted status clause
@@ -81,12 +82,12 @@ function usp_checkForPublicSubmission() {
 	if (isset($_POST['user-submitted-post']) && !empty($_POST['user-submitted-post'])) {
 
 		if ($usp_options['usp_title'] == 'show') {
-			$title = stripslashes($_POST['user-submitted-title']);
+			$title = sanitize_text_field($_POST['user-submitted-title']);
 		} else {
 			$title = 'User Submitted Post';
 		}
-		if (stripslashes($_POST['user-submitted-name']) && !empty($_POST['user-submitted-name'])) {
-			$author_submit = stripslashes($_POST['user-submitted-name']);
+		if (isset($_POST['user-submitted-name']) && !empty($_POST['user-submitted-name'])) {
+			$author_submit = sanitize_text_field($_POST['user-submitted-name']);
 			$author_info = get_user_by('login', $author_submit);
 
 			if ($author_info) {
@@ -101,9 +102,9 @@ function usp_checkForPublicSubmission() {
 			$authorID = $usp_options['author'];
 			$authorName = get_the_author_meta('display_name', $authorID);
 		}
-		$authorUrl = stripslashes($_POST['user-submitted-url']);
-		$tags      = stripslashes($_POST['user-submitted-tags']);
-		$captcha   = stripslashes($_POST['user-submitted-captcha']);
+		$authorUrl = sanitize_text_field($_POST['user-submitted-url']);
+		$tags      = sanitize_text_field($_POST['user-submitted-tags']);
+		$captcha   = sanitize_text_field($_POST['user-submitted-captcha']);
 		$category  = intval($_POST['user-submitted-category']);
 		$content   = stripslashes($_POST['user-submitted-content']);
 
@@ -115,29 +116,27 @@ function usp_checkForPublicSubmission() {
 
 		$publicSubmission = usp_createPublicSubmission($title, $content, $authorName, $authorID, $authorUrl, $tags, $category, $fileData);
 
-		if (false == ($publicSubmission)) {
-			$errorMessage = empty($usp_options['error-message']) ? __('An error occurred. Please go back and try again.', 'usp') : $usp_options['error-message'];
-			if(!empty($_POST['redirect-override'])) {
-				$redirect = stripslashes($_POST['redirect-override']);
-				$redirect = remove_query_arg('success', $redirect);
-				$redirect = add_query_arg(array('submission-error'=>'1'), $redirect);
-				wp_redirect($redirect);
-				exit();
-			} else {
-				$redirect = stripslashes($_SERVER["REQUEST_URI"]);
-				$redirect = remove_query_arg('success', $redirect);
-				$redirect = add_query_arg(array('submission-error'=>'1'), $redirect);
-				wp_redirect($redirect);
-				exit();
-			}
-			// wp_die($errorMessage);
-		} else {
+		if (is_numeric($publicSubmission)) {
 			$redirect = empty($usp_options['redirect-url']) ? $_SERVER['REQUEST_URI'] : $usp_options['redirect-url'];
+			if (!empty($_POST['redirect-override'])) $redirect = sanitize_text_field($_POST['redirect-override']);
+			$redirect = remove_query_arg(array('submission-error', 'error'), $redirect);
+			$redirect = add_query_arg(array('success' => 1, 'post_id' => $publicSubmission), $redirect);
+			do_action('usp_submit_success', $redirect);
+			wp_redirect($redirect);
+			exit();
+		} else {
+			$errorMessage = empty($usp_options['error-message']) ? __('An error occurred. Please go back and try again.', 'usp') : $usp_options['error-message'];
+			
 			if (!empty($_POST['redirect-override'])) {
-				$redirect = stripslashes($_POST['redirect-override']);
+				$redirect = sanitize_text_field($_POST['redirect-override']);
+				$redirect = remove_query_arg(array('success', 'post_id'), $redirect);
+				$redirect = add_query_arg(array('submission-error' => '1', 'error' => $publicSubmission), $redirect);
+			} else {
+				$redirect = sanitize_text_field($_SERVER['REQUEST_URI']);
+				$redirect = remove_query_arg(array('success', 'post_id'), $redirect);
+				$redirect = add_query_arg(array('submission-error' => '1', 'error' => $publicSubmission), $redirect);
 			}
-			$redirect = remove_query_arg('submission-error', $redirect);
-			$redirect = add_query_arg(array('success'=>1), $redirect);
+			do_action('usp_submit_error', $redirect);
 			wp_redirect($redirect);
 			exit();
 		}
@@ -171,42 +170,83 @@ function usp_display_featured_image() {
 }
 add_action('wp', 'usp_display_featured_image');
 
-// enqueue script and style
-add_action ('init', 'usp_enqueueResources');
-function usp_enqueueResources() {
-	global $usp_options, $usp_version;
-	$display_url = $usp_options['usp_display_url'];
-	$current_url = trailingslashit('http://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-	$current_url = remove_query_arg('submission-error', $current_url);
-	$current_url = remove_query_arg('success', $current_url);
+// js vars
+function usp_js_vars() { 
+	global $usp_options; 
+	
+	$usp_response = $usp_options['usp_response']; 
+	$include_js   = $usp_options['usp_include_js']; 
+	$display_url  = $usp_options['usp_display_url'];
+	$usp_casing   = $usp_options['usp_casing'];
+	
+	$current_url = sanitize_text_field(trailingslashit('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+	$current_url = remove_query_arg(array('submission-error', 'error', 'success', 'post_id'), $current_url);
+	
+	$print_casing = 'false';
+	if ($usp_casing) $print_casing = 'true';
+	
+	$display = false;
+	if ($display_url !== '') {
+		if (($display_url == $current_url) && ($include_js == true)) $display = true;
+	} else {
+		if ($include_js == true) $display = true;
+	}
 	if (!is_admin()) {
-		// style
+		if ($display) : ?>
+		
+		<script type="text/javascript">
+			window.ParsleyConfig = { excluded: ".exclude" };
+			var usp_case_sensitivity = <?php echo json_encode($print_casing); ?>;
+			var usp_challenge_response = <?php echo json_encode($usp_response); ?>;
+		</script>
+<?php endif;
+	}
+}
+add_action('wp_print_scripts','usp_js_vars');
+
+// enqueue script and style
+if (!function_exists('usp_enqueueResources')) {
+	function usp_enqueueResources() {
+		global $usp_options, $usp_version;
+		
+		$min_images  = $usp_options['min-images'];
+		$include_js  = $usp_options['usp_include_js'];
+		$form_type   = $usp_options['usp_form_version'];
+		$display_url = $usp_options['usp_display_url'];
+		
+		$current_url = sanitize_text_field(trailingslashit('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+		$current_url = remove_query_arg(array('submission-error', 'error', 'success', 'post_id'), $current_url);
+		
+		$base_url = WP_PLUGIN_URL .'/'. basename(dirname(__FILE__));
+		$dir_path = plugin_dir_path(__FILE__);
+		
+		$custom_css  = '/custom/usp.css';
+		$default_css = '/resources/usp.css';
+		$usp_css     = $base_url . $default_css;
+		
+		if ($form_type == 'custom' && file_exists($dir_path . $custom_css)) $usp_css = $base_url . $custom_css;
+		
+		$display = false;
 		if ($display_url !== '') {
-			if ($display_url == $current_url) {
-				if ($usp_options['usp_form_version'] == 'classic') {
-					wp_enqueue_style ('usp_style', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp-classic.css', false, $usp_version, 'all');
-				} elseif ($usp_options['usp_form_version'] == 'current') { 
-					wp_enqueue_style ('usp_style', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp.css', false, $usp_version, 'all');
-				} elseif ($usp_options['usp_form_version'] == 'disable') {}
-			}
+			if (($display_url == $current_url) && ($include_js == true)) $display = true;
 		} else {
-			if ($usp_options['usp_form_version'] == 'classic') {
-				wp_enqueue_style ('usp_style', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp-classic.css', false, $usp_version, 'all');
-			} elseif ($usp_options['usp_form_version'] == 'current') { 
-				wp_enqueue_style ('usp_style', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp.css', false, $usp_version, 'all');
-			} elseif ($usp_options['usp_form_version'] == 'disable') {}
+			if ($include_js == true) $display = true;
 		}
-		// script
-		if ($display_url !== '') {
-			if (($display_url == $current_url) && ($usp_options['usp_include_js'] == true)) {
-				wp_enqueue_script ('usp_script', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp.php', array('jquery'), $usp_version);
-			}
-		} else {
-			if ($usp_options['usp_include_js'] == true) {
-				wp_enqueue_script ('usp_script', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp.php', array('jquery'), $usp_version);
+		if (!is_admin()) {
+			// style
+			if ($form_type !== 'disable') wp_enqueue_style('usp_style', $usp_css, false, null, 'all');
+			// script
+			if ($display) {
+				wp_enqueue_script('usp_cookie',  $base_url .'/resources/jquery.cookie.js',      array('jquery'), null);
+				wp_enqueue_script('usp_parsley', $base_url .'/resources/jquery.parsley.min.js', array('jquery'), null);
+				wp_enqueue_script('usp_core',    $base_url .'/resources/jquery.usp.core.js',    array('jquery'), null);
+				if ($min_images > 0) {
+					wp_enqueue_script('usp_files', $base_url .'/resources/jquery.usp.files.js', array('jquery'), null);
+				}
 			}
 		}
 	}
+	add_action('wp_enqueue_scripts', 'usp_enqueueResources');
 }
 
 // add styles to admin Edit page
@@ -226,22 +266,20 @@ function usp_editor_style($mce_css){
 add_filter('mce_css', 'usp_editor_style');
 
 // shortcode
-add_shortcode ('user-submitted-posts', 'usp_display_form');
-function usp_display_form($atts=array(), $content=null) {
+function usp_display_form($atts = array(), $content = null) {
 	global $usp_options;
-	if ($atts === true) {
-		$redirect = usp_currentPageURL();
-	}
-	if ($usp_options['usp_form_version'] == 'classic') {
-		ob_start();
-		include (WP_PLUGIN_DIR . '/' . basename(dirname(__FILE__)) . '/views/submission-form-classic.php');
-		return ob_get_clean();
-	} else {
-		ob_start();
-		include (WP_PLUGIN_DIR . '/' . basename(dirname(__FILE__)) . '/views/submission-form.php');
-		return ob_get_clean();
-	}
+	
+	$default = WP_PLUGIN_DIR .'/'. basename(dirname(__FILE__)) .'/views/submission-form.php';
+	$custom  = WP_PLUGIN_DIR .'/'. basename(dirname(__FILE__)) .'/custom/submission-form.php';
+	
+	if ($atts === true) $redirect = usp_currentPageURL();
+	
+	ob_start();
+	if ($usp_options['usp_form_version'] == 'custom' && file_exists($custom)) include($custom);
+	else include($default);
+	return apply_filters('usp_form_shortcode', ob_get_clean());
 }
+add_shortcode ('user-submitted-posts', 'usp_display_form');
 
 // template tag
 function user_submitted_posts() {
@@ -265,35 +303,30 @@ function usp_replaceAuthor($author) {
 	$isSubmission     = get_post_meta($post->ID, $usp_post_meta_IsSubmission, true);
 	$submissionAuthor = get_post_meta($post->ID, $usp_post_meta_Submitter, true);
 
-	if ($isSubmission && !empty($submissionAuthor)) {
-		return $submissionAuthor;
-	} else {
-		return $author;
-	}
+	if ($isSubmission && !empty($submissionAuthor)) $author = $submissionAuthor;
+	
+	return apply_filters('usp_post_author', $author);
 }
 
 // create the form
 function usp_createPublicSubmission($title, $content, $authorName, $authorID, $authorUrl, $tags, $category, $fileData) {
 	global $usp_options, $usp_post_meta_IsSubmission, $usp_post_meta_SubmitterIp, $usp_post_meta_Submitter, $usp_post_meta_SubmitterUrl, $usp_post_meta_Image;
+	
 	$authorName = strip_tags($authorName);
 	$authorUrl  = strip_tags($authorUrl);
-	if (isset($_SERVER['REMOTE_ADDR']))          $authorIp = stripslashes(trim($_SERVER['REMOTE_ADDR']));
-	if (isset($_POST['user-submitted-captcha'])) $captcha  = stripslashes(trim($_POST['user-submitted-captcha']));
-	if (isset($_POST['user-submitted-verify']))  $verify   = stripslashes(trim($_POST['user-submitted-verify']));
-
-	if (!usp_validateTitle($title)) {
-		return false;
-	}
-	if (!usp_validateTags($tags)) {
-		return false;
-	}
-	if (!empty($verify)) {
-		return false;
-	}
+	
+	if (isset($_SERVER['REMOTE_ADDR']))          $authorIp = sanitize_text_field($_SERVER['REMOTE_ADDR']);
+	if (isset($_POST['user-submitted-captcha'])) $captcha  = sanitize_text_field($_POST['user-submitted-captcha']);
+	if (isset($_POST['user-submitted-verify']))  $verify   = sanitize_text_field($_POST['user-submitted-verify']);
+	
+	$newPost = array(false, null);
+	
+	if (!usp_validateTitle($title)) return 'title';
+	if (!usp_validateTags($tags))   return 'tags';
+	if (!empty($verify))            return 'verify';
+	
 	if ($usp_options['usp_captcha'] == 'show') {
-		if (!usp_spam_question($captcha)) {
-			return false;
-		}
+		if (!usp_spam_question($captcha)) return 'captcha';
 	}
 	$postData = array();
 	$postData['post_title']   = $title;
@@ -314,12 +347,12 @@ function usp_createPublicSubmission($title, $content, $authorName, $authorID, $a
 				$counter++;
 			}
 		}
-		if ($counter >= $numberApproved) {
-			$postData['post_status'] = 'publish';
-		}
+		if ($counter >= $numberApproved) $postData['post_status'] = 'publish';
 	}
+	do_action('usp_insert_before', $postData);
 	$newPost = wp_insert_post($postData);
-
+	do_action('usp_insert_after', $newPost);
+	
 	if ($newPost) {
 		wp_set_post_tags($newPost, $tags);
 		wp_set_post_categories($newPost, array($category));
@@ -329,6 +362,10 @@ function usp_createPublicSubmission($title, $content, $authorName, $authorID, $a
 			if ($to !== '') {
 				$subject = 'New user-submitted post!';
 				$message = 'Hey, there is a new user-submitted post waiting for you.';
+				
+				$subject = apply_filters('usp_mail_subject', $subject);
+				$message = apply_filters('usp_mail_message', $message);
+				
 				wp_mail($to, $subject, $message);
 			}
 		}
@@ -339,24 +376,26 @@ function usp_createPublicSubmission($title, $content, $authorName, $authorID, $a
 		}
 		$attachmentIds = array();
 		$imageCounter = 0;
-
+		
 		if ($fileData !== '') {
+			do_action('usp_files_before', $fileData);
 			for ($i = 0; $i < count($fileData['name']); $i++) {
 				$imageInfo = @getimagesize($fileData['tmp_name'][$i]);
 				if (false === $imageInfo || !usp_imageIsRightSize($imageInfo[0], $imageInfo[1])) {
-					continue;
+					if (0 < $usp_options['min-images']) return 'image-size';
+					else continue;
 				}
 				$key = "public-submission-attachment-{$i}";
-	
+				
 				$_FILES[$key] = array();
 				$_FILES[$key]['name']     = $fileData['name'][$i];
 				$_FILES[$key]['tmp_name'] = $fileData['tmp_name'][$i];
 				$_FILES[$key]['type']     = $fileData['type'][$i];
 				$_FILES[$key]['error']    = $fileData['error'][$i];
 				$_FILES[$key]['size']     = $fileData['size'][$i];
-	
+				
 				$attachmentId = media_handle_upload($key, $newPost);
-		
+				
 				if (!is_wp_error($attachmentId) && wp_attachment_is_image($attachmentId)) {
 					$attachmentIds[] = $attachmentId;
 					add_post_meta($newPost, $usp_post_meta_Image, wp_get_attachment_url($attachmentId));
@@ -368,20 +407,21 @@ function usp_createPublicSubmission($title, $content, $authorName, $authorID, $a
 					break;
 				}
 			}
+			do_action('usp_files_after', $attachmentIds);
 		}
 		if (count($attachmentIds) < $usp_options['min-images']) {
 			foreach ($attachmentIds as $idToDelete) {
 				wp_delete_attachment($idToDelete);
 			}
 			wp_delete_post($newPost);
-			return false;
+			return 'images-min';
 		}
 		update_post_meta($newPost, $usp_post_meta_IsSubmission, true);
-		update_post_meta($newPost, $usp_post_meta_Submitter, htmlentities($authorName, ENT_QUOTES, 'UTF-8'));
-		update_post_meta($newPost, $usp_post_meta_SubmitterUrl, htmlentities($authorUrl, ENT_QUOTES, 'UTF-8'));
-		update_post_meta($newPost, $usp_post_meta_SubmitterIp, htmlentities($authorIp, ENT_QUOTES, 'UTF-8'));
+		update_post_meta($newPost, $usp_post_meta_Submitter,    sanitize_text_field($authorName));
+		update_post_meta($newPost, $usp_post_meta_SubmitterUrl, sanitize_text_field($authorUrl));
+		update_post_meta($newPost, $usp_post_meta_SubmitterIp,  sanitize_text_field($authorIp));
 	}
-	return $newPost;
+	return apply_filters('usp_new_post', $newPost);
 }
 
 // validate stuff
@@ -402,7 +442,7 @@ function usp_validateTitle($title) {
 function usp_spam_question($input) {
 	global $usp_options;
 	$response = $usp_options['usp_response'];
-	$response = stripslashes(trim($response));
+	$response = sanitize_text_field($response);
 	if ($usp_options['usp_casing'] == false) {
 		return (strtoupper($input) == strtoupper($response));
 	} else {
@@ -422,11 +462,12 @@ function usp_currentPageURL() {
 	} else {
 		$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 	}
-	return $pageURL;
+	do_action('usp_current_page', $pageURL);
+	return sanitize_text_field($pageURL);
 }
 
 // display settings link on plugin page
-add_filter ('plugin_action_links', 'usp_plugin_action_links', 10, 2);
+add_filter('plugin_action_links', 'usp_plugin_action_links', 10, 2);
 function usp_plugin_action_links($links, $file) {
 	global $usp_path;
 	if ($file == $usp_path) {
@@ -509,13 +550,13 @@ function usp_add_defaults() {
 
 // define style options
 $usp_form_version = array(
-	'classic' => array(
-		'value' => 'classic',
-		'label' => __('Classic form + styles (<small><em><strong>Note:</strong> the &ldquo;classic&rdquo; form is deprecated and will be removed in a future version.</em></small>)', 'usp')
-	),
 	'current' => array(
 		'value' => 'current',
-		'label' => __('HTML5 form + styles', 'usp')
+		'label' => __('HTML5 form + CSS (<small><em>Recommended</em></small>)', 'usp')
+	),
+	'custom' => array(
+		'value' => 'custom',
+		'label' => __('Custom form + CSS (<small><em>You must provide the template for this option*</em></small>)', 'usp')
 	),
 	'disable' => array(
 		'value' => 'disable',
@@ -634,8 +675,8 @@ function usp_validate_options($input) {
 
 	if (!isset($input['usp_featured_images'])) $input['usp_featured_images'] = null;
 	$input['usp_featured_images'] = ($input['usp_featured_images'] == 1 ? 1 : 0);
-
-	return $input;
+	
+	return apply_filters('usp_input_validate', $input);
 }
 
 // add the options page
@@ -673,13 +714,16 @@ function usp_render_form() {
 		#mm-plugin-options abbr { cursor: help; border-bottom: 1px dotted #dfdfdf; }
 
 		.mm-table-wrap { margin: 15px; }
-		.mm-table-wrap td { padding: 5px 10px; line-height: 18px; vertical-align: middle; }
-		.mm-table-wrap .mm-table {}
-		.mm-table-wrap .widefat th { padding: 10px 15px; vertical-align: middle; }
-		.mm-table-wrap .widefat td { padding: 10px; vertical-align: middle; }
-		.mm-item-caption { margin: 3px 0 0 3px; font-size: 80%; color: #777; }
+		.mm-table-wrap td, 
+		.mm-table-wrap th { padding: 15px; line-height: 18px; vertical-align: middle; }
+		.mm-table-wrap th { width: 25%; }
+		.mm-item-caption { margin: 3px 0 0 3px; font-size: 11px; color: #777; }
+		.mm-item-caption code { font-size: 10px; }
 		.inline { display: inline; }
 		
+		.mm-table-wrap input[type="text"] { width: 80%; font-size: 13px; }
+		.mm-table-wrap textarea { width: 90%; font-size: 13px; }
+		.mm-table-wrap .input-short[type="text"] { width: 77px; }
 		.mm-radio-inputs { margin: 7px 0; }
 		.mm-radio-inputs span { padding-left: 5px; }
 		.mm-code { background-color: #fafae0; color: #333; font-size: 14px; }
@@ -744,7 +788,7 @@ function usp_render_form() {
 						<h3><?php _e('Options', 'usp'); ?></h3>
 						<div class="toggle<?php if (!isset($_GET["settings-updated"])) { echo ' default-hidden'; } ?>">
 							<p><?php _e('Here you may configure options for USP. See the <code>readme.txt</code> for more information.', 'usp'); ?></p>
-							<h4><?php _e('Show/hide the following form fields', 'usp'); ?></h4>
+							<h4><?php _e('Show/Hide Form Fields', 'usp'); ?></h4>
 							<ul class="mm-plain-list">
 								<li>
 									<select name="usp_options[usp_name]">
@@ -795,7 +839,7 @@ function usp_render_form() {
 									</select> <span><?php _e('Challenge question (Captcha)', 'usp'); ?></span>
 								</li>
 							</ul>
-							<h4><?php _e('Choose some general form options', 'usp'); ?></h4>
+							<h4><?php _e('General Form Options', 'usp'); ?></h4>
 							<div class="mm-table-wrap">
 								<table class="widefat mm-table">
 									<tr>
@@ -817,16 +861,16 @@ function usp_render_form() {
 													</div>
 											<?php } ?>
 											<div class="mm-item-caption">
-												<?php _e('HTML5 is recommended. If upgrading and the new form looks weird, choose the Classic version.', 'usp'); ?> 
-												<?php _e('To disable the plugin&rsquo;s stylesheet, choose Disable. Note: complete list of CSS hooks for the submission form at', 'usp'); ?> 
-												<a href="http://m0n.co/e" title="<?php _e('CSS Hooks for User Submitted Posts', 'usp'); ?>" target="_blank">http://m0n.co/e</a>
+												<?php echo __('* If &ldquo;Custom&rdquo; is selected, you must upload your own template files,', 'usp') .
+														' <code>/custom/submission-form.php</code> '. __('and', 'usp') .' <code>/custom/usp.css</code>. See the readme.txt for more information. '; ?> 
+												<?php _e('Note: list of CSS selectors available at ', 'usp'); ?> <a href="http://m0n.co/e" title="<?php _e('CSS selectors for User Submitted Posts', 'usp'); ?>" target="_blank">http://m0n.co/e</a>
 											</div>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="usp_options[usp_include_js]"><?php _e('Include JavaScript?', 'usp'); ?></label></th>
 										<td><input type="checkbox" value="1" name="usp_options[usp_include_js]" <?php if (isset($usp_options['usp_include_js'])) { checked('1', $usp_options['usp_include_js']); } ?> />
-										<span class="mm-item-caption"><?php _e('Check this box if you want to include the external JavaScript file (recommended).', 'usp'); ?></span></td>
+										<span class="mm-item-caption"><?php _e('Check this box if you want to include the external JavaScript files (recommended).', 'usp'); ?></span></td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="usp_options[usp_display_url]"><?php _e('Targeted Loading', 'usp'); ?></label></th>
@@ -842,7 +886,7 @@ function usp_render_form() {
 											<div class="mm-radio-inputs">
 												<label class="description">
 													<input <?php checked(true, in_array($category->term_id, $usp_options['categories'])); ?> type="checkbox" name="usp_options[categories][]" value="<?php echo $category->term_id; ?>" /> 
-													<span><?php echo htmlentities($category->name, ENT_QUOTES, 'UTF-8'); ?></span>
+													<span><?php echo sanitize_text_field($category->name); ?></span>
 												</label>
 											</div>
 											
@@ -921,7 +965,7 @@ function usp_render_form() {
 									</tr>
 								</table>
 							</div>
-							<h4><?php _e('Use registered user info', 'usp'); ?></h4>
+							<h4><?php _e('Registered User Info', 'usp'); ?></h4>
 							<div class="mm-table-wrap">
 								<table class="widefat mm-table">
 									<tr>
@@ -941,12 +985,12 @@ function usp_render_form() {
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="usp_options[usp_use_cat_id]"><?php _e('Category ID for hidden field', 'usp'); ?></label></th>
-										<td><input type="text" size="45" maxlength="200" name="usp_options[usp_use_cat_id]" value="<?php echo esc_attr($usp_options['usp_use_cat_id']); ?>" />
+										<td><input class="input-short" type="text" size="45" maxlength="200" name="usp_options[usp_use_cat_id]" value="<?php echo esc_attr($usp_options['usp_use_cat_id']); ?>" />
 										<div class="mm-item-caption"><?php _e('Specify a cateogry (ID) to use as the default category when using the &ldquo;hidden field&rdquo; option.', 'usp'); ?></div></td>
 									</tr>
 								</table>
 							</div>
-							<h4><?php _e('Challenge question (captcha)', 'usp'); ?></h4>
+							<h4><?php _e('Challenge Question (Captcha)', 'usp'); ?></h4>
 							<div class="mm-table-wrap">
 								<table class="widefat mm-table">
 									<tr>
@@ -966,7 +1010,7 @@ function usp_render_form() {
 									</tr>
 								</table>
 							</div>
-							<h4><?php _e('Options for image uploads', 'usp'); ?></h4>
+							<h4><?php _e('Image Uploads', 'usp'); ?></h4>
 							<div class="mm-table-wrap">
 								<table class="widefat mm-table">
 									<tr>
@@ -995,22 +1039,22 @@ function usp_render_form() {
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="usp_options[min-image-width]"><?php _e('Minimum image width', 'usp'); ?></label></th>
-										<td><input type="text" size="5" maxlength="200" name="usp_options[min-image-width]" value="<?php echo esc_attr($usp_options['min-image-width']); ?>" />
+										<td><input class="input-short" type="text" size="5" maxlength="200" name="usp_options[min-image-width]" value="<?php echo esc_attr($usp_options['min-image-width']); ?>" />
 										<div class="mm-item-caption inline"><?php _e('Specify a <em>minimum width</em> (in pixels) for uploaded images.', 'usp'); ?></div></td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="usp_options[min-image-height]"><?php _e('Minimum image height', 'usp'); ?></label></th>
-										<td><input type="text" size="5" maxlength="200" name="usp_options[min-image-height]" value="<?php echo esc_attr($usp_options['min-image-height']); ?>" />
+										<td><input class="input-short" type="text" size="5" maxlength="200" name="usp_options[min-image-height]" value="<?php echo esc_attr($usp_options['min-image-height']); ?>" />
 										<div class="mm-item-caption inline"><?php _e('Specify a <em>minimum height</em> (in pixels) for uploaded images.', 'usp'); ?></div></td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="usp_options[max-image-width]"><?php _e('Maximum image width', 'usp'); ?></label></th>
-										<td><input type="text" size="5" maxlength="200" name="usp_options[max-image-width]" value="<?php echo esc_attr($usp_options['max-image-width']); ?>" />
+										<td><input class="input-short" type="text" size="5" maxlength="200" name="usp_options[max-image-width]" value="<?php echo esc_attr($usp_options['max-image-width']); ?>" />
 										<div class="mm-item-caption inline"><?php _e('Specify a <em>maximum width</em> (in pixels) for uploaded images.', 'usp'); ?></div></td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description" for="usp_options[max-image-height]"><?php _e('Maximum image height', 'usp'); ?></label></th>
-										<td><input type="text" size="5" maxlength="200" name="usp_options[max-image-height]" value="<?php echo esc_attr($usp_options['max-image-height']); ?>" />
+										<td><input class="input-short" type="text" size="5" maxlength="200" name="usp_options[max-image-height]" value="<?php echo esc_attr($usp_options['max-image-height']); ?>" />
 										<div class="mm-item-caption inline"><?php _e('Specify a <em>maximum height</em> (in pixels) for uploaded images.', 'usp'); ?></div></td>
 									</tr>
 								</table>

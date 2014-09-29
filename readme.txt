@@ -8,9 +8,9 @@ Author URI: http://monzilla.biz/
 Author: Jeff Starr
 Donate link: http://m0n.co/donate
 Contributors: specialk
-Requires at least: 3.5
-Tested up to: 3.8
-Version: 20140308
+Requires at least: 3.7
+Tested up to: 4.0
+Version: 20140927
 Stable tag: trunk
 License: GPL v2 or later
 
@@ -27,14 +27,16 @@ USP Pro now available at [Plugin Planet](http://plugin-planet.com/usp-pro/)!
 **Features**
 
 * Let visitors submit posts from anywhere on your site
-* NEW option to set submitted images as featured images
-* NEW option to use WP's built-in rich text editor for post content
+* Option to set submitted images as featured images
+* Option to use WP's built-in rich text editor for post content
 * Use template tag or shortcode to display the submission form anywhere
 * Includes input validation and customizable captcha and hidden field to stop spam
 * Post submissions may include title, tags, category, author, url, post and image(s)
 * Redirect user to anywhere or return to current page after successful post submission
 * Includes a set of template tags for displaying and customizing user-submitted posts
-* New HTML5 submission form with streamlined CSS styles
+* HTML5 submission form with streamlined CSS styles
+* NEW! Use your own custom form template and stylesheet
+* NEW! 14 action/filter hooks for advanced customization
 
 **More Features**
 
@@ -90,8 +92,33 @@ NOTE that this plugin attaches uploaded images as custom fields to submitted pos
 
 **Customizing the submission form**
 
-* To style the submission form, use the included CSS file located at: `/resources/usp.css`
-* To add custom JavaScript, use the included JS file located at: `/resources/usp.js`
+There are three main ways of customizing the form:
+
+* Via the plugin settings, you can show/hide any field, customize options, and more
+* By adding a custom form template to the `/custom/` directory, for example:
+	* Add a custom form template: `/custom/user-submitted-posts.php`
+	* Add a custom CSS stylesheet: `/custom/usp.css`
+* By using USP action/filter hooks (advanced):
+
+`Filters:
+usp_post_status
+usp_post_author
+usp_form_shortcode
+usp_mail_subject
+usp_mail_message
+usp_new_post
+usp_input_validate
+
+Actions
+usp_submit_success
+usp_submit_error
+usp_insert_before
+usp_insert_after
+usp_files_before
+usp_files_after
+usp_current_page`
+
+More info about [WordPress Actions and Filters](http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters)
 
 **Customizing user-submitted posts**
 
@@ -153,6 +180,55 @@ __Important!__ Many things have changed in the new version of the plugin. Please
 Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
 
 == Changelog ==
+
+= 20140927 =
+
+* Tested on latest version of WordPress (4.0)
+* Increases min-version requirement to 3.7
+* Improves layout and styles of plugin settings page
+* Adds Romanian translation - thanks [Hideg Andras](http://www.blue-design.ro/)
+* Adds Persian (Farsi) translation - thanks [Pooya Behravesh](http://icomp.ir/)
+* Adds French translation - thanks [Mirko Humbert](http://www.designer-daily.com/) and [Matthieu Solente](http://copier-coller.com/)
+* Updates default mo/po translation files
+* Updates Parsley.js to version 2.0
+* Updates usp.css with styles for Parsley 2.0
+* Updates captcha-check script for Parsley 2.0
+* Updates markup in default form for Parsley 2.0
+* Replaces call to wp-load.php with wp_print_scripts
+* Replaces sac.php with individual JavaScript libraries
+* Improves logic of usp_enqueueResources() function
+* Improves logic of min-file check JavaScript
+* Removes ?version from enqueued resources
+* Adds option to use "custom" form and stylesheet
+* Removes deprecated "classic" form, submission-form-classic.php and usp-classic.css
+* Removes `novalidate` from default form
+* Removes `data-type="url"` from default form
+* Removes `.usp-required` classes from default form
+* Removes `id="user-submitted-tags"` from default form
+* Removes `<div class="usp-error"></div>` from default form
+* Adds "Please select a category.." to category select field
+* Updates CSS for default form, see list at http://m0n.co/e
+* Replaces some stripslashes() with sanitize_text_field()
+* Replaces some htmlentities() with sanitize_text_field()
+* Fixes bug where too big/small images would not trigger error
+* Adds post id and error as query variable in return URL
+* Adds sanitize_text_field() to usp_currentPageURL()
+* Adds the following filter hooks:
+	* `usp_post_status`
+	* `usp_post_author`
+	* `usp_form_shortcode`
+	* `usp_mail_subject`
+	* `usp_mail_message`
+	* `usp_new_post`
+	* `usp_input_validate`
+* Adds the following action hooks:
+	* `usp_submit_success`
+	* `usp_submit_error`
+	* `usp_insert_before`
+	* `usp_insert_after`
+	* `usp_files_before`
+	* `usp_files_after`
+	* `usp_current_page`
 
 = 20140308 =
 
