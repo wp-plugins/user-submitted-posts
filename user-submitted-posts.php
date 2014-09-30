@@ -9,7 +9,7 @@
 	Donate link: http://m0n.co/donate
 	Requires at least: 3.7
 	Tested up to: 4.0
-	Version: 20140927
+	Version: 20140930
 	Stable tag: trunk
 	License: GPL v2
 */
@@ -22,7 +22,7 @@ function usp_i18n_init() {
 }
 add_action('plugins_loaded', 'usp_i18n_init');
 
-$usp_version = '20140927';
+$usp_version = '20140930';
 $usp_plugin  = __('User Submitted Posts', 'usp');
 $usp_options = get_option('usp_options');
 $usp_path    = plugin_basename(__FILE__); // '/user-submitted-posts/user-submitted-posts.php';

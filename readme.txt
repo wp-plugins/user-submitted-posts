@@ -10,7 +10,7 @@ Donate link: http://m0n.co/donate
 Contributors: specialk
 Requires at least: 3.7
 Tested up to: 4.0
-Version: 20140927
+Version: 20140930
 Stable tag: trunk
 License: GPL v2 or later
 
@@ -180,6 +180,12 @@ __Important!__ Many things have changed in the new version of the plugin. Please
 Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
 
 == Changelog ==
+
+= 20140930 =
+
+* Removes required attribute from default form textarea
+* Removes "exclude" from type on redirect-override in default form
+* Adds class "exclude" and "hidden" to redirect-override in default form
 
 = 20140927 =
 

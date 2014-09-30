@@ -89,7 +89,7 @@ if (isset($authorName)) {
 			</div>
 			<?php } else { ?>
 				<label for="user-submitted-content"><?php _e('Post Content', 'usp'); ?></label>
-				<textarea name="user-submitted-content" rows="5" data-required="true" placeholder="<?php _e('Post Content', 'usp'); ?>" class="usp-textarea" required></textarea>
+				<textarea name="user-submitted-content" rows="5" data-required="true" placeholder="<?php _e('Post Content', 'usp'); ?>" class="usp-textarea"></textarea>
 			<?php } ?>
 		</fieldset>
 		<?php } if ($usp_options['usp_images'] == 'show') { ?>
@@ -126,7 +126,7 @@ if (isset($authorName)) {
 		</fieldset>
 		<div id="usp-submit">
 			<?php if (!empty($usp_options['redirect-url'])) { ?>
-			<input type="hidden exclude" name="redirect-override" value="<?php echo $usp_options['redirect-url']; ?>">
+			<input class="hidden exclude" type="hidden" name="redirect-override" value="<?php echo $usp_options['redirect-url']; ?>">
 			<?php } ?>
 			<?php if ($usp_options['usp_use_author'] == true) { ?>
 			<input class="hidden exclude" type="hidden" name="user-submitted-name" value="<?php echo $current_user->user_login; ?>">
