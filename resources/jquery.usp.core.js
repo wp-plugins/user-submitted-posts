@@ -4,8 +4,8 @@
 */
 jQuery(document).ready(function($) {
 	
-	$('#usp_add-another').removeClass('no-js');
-	$('#usp_add-another').addClass('js');
+	$('#usp_add-another').removeClass('usp-no-js');
+	$('#usp_add-another').addClass('usp-js');
 	
 	// captcha check
 	$('#usp_form').submit(function(e) {
@@ -18,17 +18,19 @@ jQuery(document).ready(function($) {
 		if (usp_case_sensitivity === 'true') var usp_casing = '';
 		else var usp_casing = 'i';
 		var usp_response = new RegExp(usp_challenge_response + '$', usp_casing);
-		var usp_captcha = $('#user-submitted-captcha').val();
-		if (usp_captcha.match(usp_response)) {
-			$('.usp-captcha-error').remove();
-			$('.usp-captcha .usp-input').removeClass('parsley-error');
-			$('.usp-captcha .usp-input').addClass('parsley-success');
-		} else {
-			if (e) e.preventDefault();
-			$('.usp-captcha-error').remove();
-			$('.usp-captcha').append('<ul class="usp-captcha-error parsley-errors-list filled"><li class="parsley-required">Incorrect response.</li></ul>');
-			$('.usp-captcha .usp-input').removeClass('parsley-success');
-			$('.usp-captcha .usp-input').addClass('parsley-error');
+		var usp_captcha = $('.user-submitted-captcha').val();
+		if (typeof usp_captcha != 'undefined') {
+			if (usp_captcha.match(usp_response)) {
+				$('.usp-captcha-error').remove();
+				$('.usp-captcha .usp-input').removeClass('parsley-error');
+				$('.usp-captcha .usp-input').addClass('parsley-success');
+			} else {
+				if (e) e.preventDefault();
+				$('.usp-captcha-error').remove();
+				$('.usp-captcha').append('<ul class="usp-captcha-error parsley-errors-list filled"><li class="parsley-required">Incorrect response.</li></ul>');
+				$('.usp-captcha .usp-input').removeClass('parsley-success');
+				$('.usp-captcha .usp-input').addClass('parsley-error');
+			}
 		}
 	}
 	
@@ -42,6 +44,7 @@ jQuery(document).ready(function($) {
 	}
 	remember('[name=user-submitted-name]');
 	remember('[name=user-submitted-url]');
+	remember('[name=user-submitted-email]');
 	remember('[name=user-submitted-title]');
 	remember('[name=user-submitted-tags]');
 	remember('[name=user-submitted-captcha]');
@@ -53,6 +56,7 @@ jQuery(document).ready(function($) {
 	if (re.test(location.href)) {
 		$.removeCookie('user-submitted-name', { path: '/' });
 		$.removeCookie('user-submitted-url', { path: '/' });
+		$.removeCookie('user-submitted-email', { path: '/' });
 		$.removeCookie('user-submitted-title', { path: '/' });
 		$.removeCookie('user-submitted-tags', { path: '/' });
 		$.removeCookie('user-submitted-captcha', { path: '/' });
@@ -71,14 +75,13 @@ jQuery(document).ready(function($) {
 	});
 	var validateFront = function() {
 		if (true === $('#usp_form').parsley().isValid()) {
-			$('.usp-callout-success').removeClass('hidden');
-			$('.usp-callout-failure').addClass('hidden');
+			$('.usp-callout-success').removeClass('usp-hidden');
+			$('.usp-callout-failure').addClass('usp-hidden');
 		} else {
-			$('.usp-callout-success').addClass('hidden');
-			$('.usp-callout-failure').removeClass('hidden');
+			$('.usp-callout-success').addClass('usp-hidden');
+			$('.usp-callout-failure').removeClass('usp-hidden');
 		}
 	};
-	
 	// add another image
 	var x = parseInt($('#usp-min-images').val());
 	var y = parseInt($('#usp-max-images').val());

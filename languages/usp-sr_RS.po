@@ -1,0 +1,684 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: User Submitted Posts\n"
+"POT-Creation-Date: 2014-09-29 15:31-0800\n"
+"PO-Revision-Date: 2014-11-17 10:33+0100\n"
+"Last-Translator: Borisa Djuraskovic <borisad@webhostinghub.com>\n"
+"Language-Team: Monzilla Media <http://perishablepress.com/contact/>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../user-submitted-posts.php:26 ../user-submitted-posts.php:61
+msgid "User Submitted Posts"
+msgstr "User Submitted Posts"
+
+#: ../user-submitted-posts.php:48
+msgid "requires WordPress 3.7 or higher, and has been deactivated!"
+msgstr "zahteva WordPress 3.7 ili noviju verziju i deaktiviran je!"
+
+#: ../user-submitted-posts.php:49
+msgid "Please return to the "
+msgstr "Vratite se na"
+
+#: ../user-submitted-posts.php:49
+msgid "WordPress Admin area"
+msgstr "WordPress Admin oblast"
+
+#: ../user-submitted-posts.php:49
+msgid "to upgrade WordPress and try again."
+msgstr "da biste nadgradili WordPress i pokušajte ponovo. "
+
+#: ../user-submitted-posts.php:61
+msgid "Submitted"
+msgstr "Podnesen"
+
+#: ../user-submitted-posts.php:128
+msgid "An error occurred. Please go back and try again."
+msgstr "Došlo je do greške. Molimo vas da se vratite i da pokušate ponovo."
+
+#: ../user-submitted-posts.php:294
+msgid "USP"
+msgstr "USP"
+
+#: ../user-submitted-posts.php:474
+msgid "Settings"
+msgstr "Postavke"
+
+#: ../user-submitted-posts.php:512
+msgid ""
+"There was an error. Please ensure that you have added a title, some content, "
+"and that you have uploaded only images."
+msgstr ""
+"Došlo je do greške. Proverite da li ste uneli naslov, neki sadržaj i da li "
+"ste otpremili samo slike."
+
+#: ../user-submitted-posts.php:519 ../user-submitted-posts.php:520
+#: ../user-submitted-posts.php:521 ../user-submitted-posts.php:522
+#: ../user-submitted-posts.php:523 ../user-submitted-posts.php:530
+#: ../user-submitted-posts.php:531
+msgid "show"
+msgstr "prikaži"
+
+#: ../user-submitted-posts.php:524
+msgid "hide"
+msgstr "sakrij"
+
+#: ../user-submitted-posts.php:525
+msgid "Please select your image(s) to upload."
+msgstr "Odaberite svoju sliku (ili slike) za otpremanje."
+
+#: ../user-submitted-posts.php:532
+msgid "Success! Thank you for your submission."
+msgstr "Uspeli ste! Hvala vam za prijavljivanje!"
+
+#: ../user-submitted-posts.php:555
+msgid "HTML5 form + CSS (<small><em>Recommended</em></small>)"
+msgstr "HTML5 obrazac + CSS (<small><em>Preporučen</em></small>)"
+
+#: ../user-submitted-posts.php:559
+msgid ""
+"Custom form + CSS (<small><em>You must provide the template for this "
+"option*</em></small>)"
+msgstr ""
+"Prilagođeni obrazac + CSS (<small><em>Morate obezbediti šablon za ovu "
+"opciju*</em></small>)"
+
+#: ../user-submitted-posts.php:563
+msgid "Disable stylesheet"
+msgstr "Deaktiviraj datoteku sa stilovima"
+
+#: ../user-submitted-posts.php:751
+msgid "Toggle all panels"
+msgstr "Preklopi sve panele"
+
+#: ../user-submitted-posts.php:759
+msgid "Overview"
+msgstr "Pregled"
+
+#: ../user-submitted-posts.php:763
+msgid ""
+"(USP) enables your visitors to submit posts and upload images from anywhere "
+"on your site."
+msgstr ""
+"(USP) omogućava vašim korisnicima da podnose postove i da otpremaju slike iz "
+"bilo kog dela vašeg site-a."
+
+#: ../user-submitted-posts.php:764
+msgid ""
+"To implement, configure the plugin settings and include the USP form in any "
+"post or page via shortcode or anywhere in your theme via template tag."
+msgstr ""
+"Da biste ga implementirali, konfigurišite postavke plugin-a i dodajte USP "
+"obrazac bilo kom postu ili stranici uz pomoć shortcode-a ili bilo gde u "
+"svoju temu putem oznake šablona."
+
+#: ../user-submitted-posts.php:765
+msgid "For more functionality check out"
+msgstr "Za više funkcija pogledajte"
+
+#: ../user-submitted-posts.php:766
+msgid "&mdash; the ultimate solution for unlimited front-end forms."
+msgstr "&mdash; najbolje rešenje za neograničene front-end obrasce."
+
+#: ../user-submitted-posts.php:770
+msgid "Configure settings"
+msgstr "Konfiguriši postavke"
+
+#: ../user-submitted-posts.php:771
+msgid "Get the shortcode &amp; template tag"
+msgstr "Obezbedite shortcode &amp; oznaka šablona"
+
+#: ../user-submitted-posts.php:772
+msgid "More info:"
+msgstr "Više informacija"
+
+#: ../user-submitted-posts.php:772
+msgid "readme.txt"
+msgstr "readme.txt"
+
+#: ../user-submitted-posts.php:773 ../user-submitted-posts.php:865
+msgid "and"
+msgstr "i"
+
+#: ../user-submitted-posts.php:773
+msgid "homepage"
+msgstr "početna strana"
+
+#: ../user-submitted-posts.php:774
+msgid "If you like USP, please"
+msgstr "Ako vam se sviđa USP, molimo vas da"
+
+#: ../user-submitted-posts.php:775
+msgid "Rate and review this plugin at the WP Plugin Directory"
+msgstr "ocenite ovaj plugin i da napišete komentar u WP Plugin Direktorijumu"
+
+#: ../user-submitted-posts.php:776
+msgid "rate it at WordPress.org"
+msgstr "ocenite ga na WordPress.org"
+
+#: ../user-submitted-posts.php:788
+msgid "Options"
+msgstr "Opcije"
+
+#: ../user-submitted-posts.php:790
+msgid ""
+"Here you may configure options for USP. See the <code>readme.txt</code> for "
+"more information."
+msgstr ""
+"Ovde možete konfigurisati opcije za USP. Pogledajte <code>readme.txt</code> "
+"za više informacija"
+
+#: ../user-submitted-posts.php:791
+msgid "Show/Hide Form Fields"
+msgstr "Polja Prikaži/Sakrij obrazac"
+
+#: ../user-submitted-posts.php:795 ../user-submitted-posts.php:801
+#: ../user-submitted-posts.php:807 ../user-submitted-posts.php:813
+#: ../user-submitted-posts.php:819 ../user-submitted-posts.php:825
+#: ../user-submitted-posts.php:831 ../user-submitted-posts.php:837
+msgid "Show"
+msgstr "Prikaži"
+
+#: ../user-submitted-posts.php:796 ../user-submitted-posts.php:802
+#: ../user-submitted-posts.php:808 ../user-submitted-posts.php:814
+#: ../user-submitted-posts.php:820 ../user-submitted-posts.php:826
+#: ../user-submitted-posts.php:832 ../user-submitted-posts.php:838
+msgid "Hide"
+msgstr "Sakrij "
+
+#: ../user-submitted-posts.php:797
+msgid "User Name"
+msgstr "Korisničko ime"
+
+#: ../user-submitted-posts.php:803
+msgid "Post URL"
+msgstr "URL posta"
+
+#: ../user-submitted-posts.php:809 ../views/submission-form.php:47
+#: ../views/submission-form.php:48
+msgid "Post Title"
+msgstr "Naslov posta"
+
+#: ../user-submitted-posts.php:815 ../views/submission-form.php:52
+#: ../views/submission-form.php:53
+msgid "Post Tags"
+msgstr "Oznake posta"
+
+#: ../user-submitted-posts.php:821 ../views/submission-form.php:62
+msgid "Post Category"
+msgstr "Kategorija posta"
+
+#: ../user-submitted-posts.php:827 ../views/submission-form.php:91
+#: ../views/submission-form.php:92
+msgid "Post Content"
+msgstr "Sadržaj posta"
+
+#: ../user-submitted-posts.php:833
+msgid "Post Images"
+msgstr "Slike posta"
+
+#: ../user-submitted-posts.php:839
+msgid "Challenge question (Captcha)"
+msgstr "Pitanje za izazov (Captcha)"
+
+#: ../user-submitted-posts.php:842
+msgid "General Form Options"
+msgstr "Opcije za opšti obrazac"
+
+#: ../user-submitted-posts.php:846
+msgid "Form style"
+msgstr "Stil obrasca"
+
+#: ../user-submitted-posts.php:864
+msgid ""
+"* If &ldquo;Custom&rdquo; is selected, you must upload your own template "
+"files,"
+msgstr ""
+"* If &ldquo;Custom&rdquo; je odabran, morate otpremiti svoje datoteke šablona"
+
+#: ../user-submitted-posts.php:866
+msgid "Note: list of CSS selectors available at "
+msgstr "Napomena: spisak CSS selektora raspoloživ na"
+
+#: ../user-submitted-posts.php:866
+msgid "CSS selectors for User Submitted Posts"
+msgstr "CSS selektori za User Submitted Posts"
+
+#: ../user-submitted-posts.php:871
+msgid "Include JavaScript?"
+msgstr "Uključi JavaScript?"
+
+#: ../user-submitted-posts.php:873
+msgid ""
+"Check this box if you want to include the external JavaScript files "
+"(recommended)."
+msgstr ""
+"Štiklirajte ovo polje ako želite da uključite eksterne JavaScript datoteke "
+"(preporučeno)."
+
+#: ../user-submitted-posts.php:876
+msgid "Targeted Loading"
+msgstr "Ciljno otpremanje"
+
+#: ../user-submitted-posts.php:878
+msgid ""
+"When enabled, external CSS &amp; JavaScript files are loaded on every page. "
+"Here you may specify the URL of the USP form to load resources only on that "
+"page. Note: leave blank to load on all pages."
+msgstr ""
+"Kad je aktiviran eksterni CSS &amp; JavaScript datoteke otpremaju se na "
+"svakoj stranici. Ovde možete navesti URL obrasca da biste otpremali izvore "
+"samo na toj stranici. Napomena: ostavite prazno ako želite da otpremate na "
+"svim stranicama."
+
+#: ../user-submitted-posts.php:881
+msgid "Categories"
+msgstr "Kategorije"
+
+#: ../user-submitted-posts.php:894
+msgid "Select which categories may be assigned to submitted posts."
+msgstr "Odaberite koje kategorije mogu biti dodeljene na podnesenim postovima."
+
+#: ../user-submitted-posts.php:898
+msgid "Assigned Author"
+msgstr "Dodeljeni autor"
+
+#: ../user-submitted-posts.php:908
+msgid ""
+"Specify the user that should be assigned as author for user-submitted posts."
+msgstr ""
+"Navedite korisnika koji treba da bude dodeljen kao autor za postove koje "
+"podnose korisnici."
+
+#: ../user-submitted-posts.php:912
+msgid "Auto Publish?"
+msgstr "Automatsko objavljivanje?"
+
+#: ../user-submitted-posts.php:915
+msgid "Always moderate"
+msgstr "Uvek uredi"
+
+#: ../user-submitted-posts.php:916
+msgid "Always publish immediately"
+msgstr "Uvek objavi odmah"
+
+#: ../user-submitted-posts.php:921
+msgid ""
+"For submitted posts, you can always moderate (recommended), publish "
+"immediately, or publish after any number of approved posts."
+msgstr ""
+"Podnesene postove možete uvek urediti (preporučeno), odmah objaviti ili "
+"objaviti posle određenog broja odobrenih postova. "
+
+#: ../user-submitted-posts.php:925
+msgid "Receive Email Alert"
+msgstr "Primi obaveštenje putem email-a"
+
+#: ../user-submitted-posts.php:927
+msgid ""
+"Check this box if you want to be notified via email for new post submissions."
+msgstr ""
+"Štiklirajte ovaj okvir ako želite da putem email-a budete obavešteni o novom "
+"podnošenju postova."
+
+#: ../user-submitted-posts.php:930
+msgid "Enable Rich Text Editor"
+msgstr "Aktiviraj Rich Text uređivač"
+
+#: ../user-submitted-posts.php:932
+msgid ""
+"Check this box if you want to enable WP rich text editing for submitted "
+"posts."
+msgstr ""
+"Štiklirajte ovaj okvir ako želite da aktivirate WP rich text uređivanje "
+"podnesenih postova."
+
+#: ../user-submitted-posts.php:935
+msgid "Set Uploaded Image as Featured Image"
+msgstr "Podesi otpremljenu sliku kao uobličenu sliku"
+
+#: ../user-submitted-posts.php:937
+msgid ""
+"Check this box if you want to set submitted images as Featured Images (aka "
+"Post Thumbnails) for posts. \n"
+"\t\t\t\t\t\t\t\t\t\t\tNote: your theme&rsquo;s single.php file must include"
+msgstr ""
+"Štiklirajte ovo polje ako u postovima želite da podesite podnesene slike kao "
+"uobličene slike (tj. sličice posta). \n"
+"\t\t\t\t\t\t\t\t\t\t\tNapomena: vaša theme&rsquo;s single.php datoteka mora "
+"da obuhvata"
+
+#: ../user-submitted-posts.php:938
+msgid "to display Featured Images."
+msgstr "da bi prikazala uobličene slike"
+
+#: ../user-submitted-posts.php:941
+msgid "Email Address for Alerts"
+msgstr "Email adresa za upozorenja"
+
+#: ../user-submitted-posts.php:943
+msgid ""
+"If you checked the box to receive email alerts, indicate here the address"
+"(es) to which the emails should be sent."
+msgstr ""
+"Ako štiklirate okvir za primanje email upozorenja, ovde navedite adresu (ili "
+"više adresa) gde treba slati upozorenja."
+
+#: ../user-submitted-posts.php:944
+msgid "Tip: multiple addresses may be included using a comma, like so:"
+msgstr "Savet: ako imate više adresa, razdvojite ih zarezima, na ovaj način:"
+
+#: ../user-submitted-posts.php:947
+msgid "Redirect URL"
+msgstr "Preusmeri URL"
+
+#: ../user-submitted-posts.php:949
+msgid ""
+"Specify a URL to redirect the user after post-submission. Note: leave blank "
+"to redirect back to current page."
+msgstr ""
+"Navedite URL za preusmeravanje korisnika nakon podnošenja posta. Napomena: "
+"ostavite prazno da biste ih preusmerili nazad na tekuću stranicu."
+
+#: ../user-submitted-posts.php:952
+msgid "Success Message"
+msgstr "Poruka o uspehu"
+
+#: ../user-submitted-posts.php:954
+msgid ""
+"This is the success message that is displayed if post-submission is "
+"successful."
+msgstr "Ovo je poruka koja se prikazuje nakon uspešnog podnošenja posta."
+
+#: ../user-submitted-posts.php:957
+msgid "Error Message"
+msgstr "Poruka o grešci"
+
+#: ../user-submitted-posts.php:959
+msgid "This is the error message that is displayed if post-submission fails."
+msgstr "Ova poruka prikazuje se ukoliko podnošenje posta nije uspelo."
+
+#: ../user-submitted-posts.php:962
+msgid "Custom Content"
+msgstr "Prilagođeni sadržaj"
+
+#: ../user-submitted-posts.php:964
+msgid ""
+"Here you may specify custom text/markup to be included before the submission "
+"form. Note: leave blank to disable."
+msgstr ""
+"Ovde možete navesti prilagođeni tekst ili oznaku koju treba uključiti pre "
+"podnošenja obrasca. Napomena: ostavite prazno da biste opciju deaktivirali."
+
+#: ../user-submitted-posts.php:968
+msgid "Registered User Info"
+msgstr "Informacije o registrovanom korisniku"
+
+#: ../user-submitted-posts.php:972
+msgid "Use registered username for author?"
+msgstr "Koristi registrovano korisničko ime za autora?"
+
+#: ../user-submitted-posts.php:974
+msgid ""
+"Check this box if you want to automatically use the registered username as "
+"the submitted-post author. Note: this really should only be used when "
+"requiring log-in for submissions."
+msgstr ""
+"Štiklirajte ovo polje ako želite da automatski koristite registrovano "
+"korisničko ime kao autora podnesenog posta. Napomena: Ova opcija treba da se "
+"koristi samo kad je za podnošenje posta obavezno prijavljivanje."
+
+#: ../user-submitted-posts.php:977
+msgid "Use registered URL for submitted URL?"
+msgstr "Upotrebi registrovani URL za podneseni URL?"
+
+#: ../user-submitted-posts.php:979
+msgid ""
+"Check this box if you want to automatically use the registered user&rsquo;s "
+"specified URL as the submitted-post URL. Note: this really should only be "
+"used when requiring log-in for submissions."
+msgstr ""
+"Štiklirajte ovo polje ako želite da automatski koristite registrovani "
+"user&rsquo; navedeni URL kao URL podnesenog posta. Napomena: Ova opcija "
+"treba da se koristi samo kad je za podnošenje posta obavezno prijavljivanje."
+
+#: ../user-submitted-posts.php:982
+msgid "Use a hidden field for submitted category?"
+msgstr "Koristi skriveno polje za podnesenu kategoriju?"
+
+#: ../user-submitted-posts.php:984
+msgid ""
+"Check this box if you want to use a hidden category field for the submitted "
+"category. Note: this may be used to specify a default category for submitted "
+"posts when the category field is hidden."
+msgstr ""
+"Štiklirajte ovo polje ako želite da koristite skriveno polje kategorije za "
+"podnesenu kategoriju. Napomena: Može se koristiti za određivanje "
+"podrazumevane kategorije podnesenih postova kad je polje kategorije "
+"skriveno. "
+
+#: ../user-submitted-posts.php:987
+msgid "Category ID for hidden field"
+msgstr "ID kategorije za skriveno polje"
+
+#: ../user-submitted-posts.php:989
+msgid ""
+"Specify a cateogry (ID) to use as the default category when using the &ldquo;"
+"hidden field&rdquo; option."
+msgstr ""
+"Navedite kategoriju (ID) koju ćete koristiti kao podrazumevanu kategoriju "
+"kad koristite opciju &ldquo;skriveno polje&rdquo;."
+
+#: ../user-submitted-posts.php:993
+msgid "Challenge Question (Captcha)"
+msgstr "Pitanje izazova (Captcha)"
+
+#: ../user-submitted-posts.php:997
+msgid "Challenge Question"
+msgstr "Pitanje izazova"
+
+#: ../user-submitted-posts.php:999
+msgid ""
+"To prevent spam, enter a question that users must answer before submitting "
+"the form."
+msgstr ""
+"Da biste sprečili spam-ove, unesite pitanje na koje korisnici moraju da "
+"odgovore pre nego što podnesu obrazac."
+
+#: ../user-submitted-posts.php:1002
+msgid "Challenge Response"
+msgstr "Odgovor izazova"
+
+#: ../user-submitted-posts.php:1004
+msgid "Enter the <em>only</em> correct answer to the challenge question."
+msgstr "Unesite <em>isključivo</em> tačan odgovor na pitanje izazova. "
+
+#: ../user-submitted-posts.php:1007
+msgid "Case-sensitivity"
+msgstr "Velika i mala slova"
+
+#: ../user-submitted-posts.php:1009
+msgid "Check this box if you want the challenge response to be case-sensitive."
+msgstr ""
+"Štiklirajte ovo polje ako želite da se u odgovoru prepoznaju velika i mala "
+"slova."
+
+#: ../user-submitted-posts.php:1013
+msgid "Image Uploads"
+msgstr "Otpremanje slika"
+
+#: ../user-submitted-posts.php:1017
+msgid "Upload Message"
+msgstr "Otpremi poruku"
+
+#: ../user-submitted-posts.php:1019
+msgid ""
+"This is the message that appears next to upload field. Useful to state your "
+"upload guidelines/rules/etc."
+msgstr ""
+"Ova poruka pojavljuje se pored polja za otpremanje. Koristiće vam da "
+"navedete uputstva/pravila/itd."
+
+#: ../user-submitted-posts.php:1022
+msgid "&ldquo;Add another image&rdquo; link"
+msgstr "&ldquo;Dodaj drugu sliku&rdquo; "
+
+#: ../user-submitted-posts.php:1024
+msgid ""
+"Here you may specify your own custom markup for the &ldquo;Add another "
+"image&rdquo; link (leave blank to use the default markup)."
+msgstr ""
+"Ovde možete navesti svoju prilagođenu oznaku za &ldquo;Dodaj drugu "
+"sliku&rdquo; link (ostavite prazno da biste koristili podrazumevanu oznaku)."
+
+#: ../user-submitted-posts.php:1027
+msgid "Minimum number of images"
+msgstr "Minimalan broj slika"
+
+#: ../user-submitted-posts.php:1030
+msgid "Specify the <em>minimum</em> number of images."
+msgstr "Odredite  <em>minimalan</em> broj slika. "
+
+#: ../user-submitted-posts.php:1034
+msgid "Maximum number of images"
+msgstr "Maksimalan broj slika"
+
+#: ../user-submitted-posts.php:1037
+msgid "Specify the <em>maximum</em> number of images."
+msgstr "Odredite <em>maksimalan</em> broj slika. "
+
+#: ../user-submitted-posts.php:1041
+msgid "Minimum image width"
+msgstr "Minimalna širina slike"
+
+#: ../user-submitted-posts.php:1043
+msgid "Specify a <em>minimum width</em> (in pixels) for uploaded images."
+msgstr "Odredite <em>minimalnu širinu</em> (u pikselima) za otpremljene slike."
+
+#: ../user-submitted-posts.php:1046
+msgid "Minimum image height"
+msgstr "Minimalna visina slike"
+
+#: ../user-submitted-posts.php:1048
+msgid "Specify a <em>minimum height</em> (in pixels) for uploaded images."
+msgstr "Odredite <em>minimalnu visinu</em> (u pikselima) za otpremljene slike."
+
+#: ../user-submitted-posts.php:1051
+msgid "Maximum image width"
+msgstr "Maksimalna širina slike"
+
+#: ../user-submitted-posts.php:1053
+msgid "Specify a <em>maximum width</em> (in pixels) for uploaded images."
+msgstr ""
+"Odredite <em>maksimalnu širinu</em> (u pikselima) za otpremljene slike."
+
+#: ../user-submitted-posts.php:1056
+msgid "Maximum image height"
+msgstr "Maksimalna visina slike"
+
+#: ../user-submitted-posts.php:1058
+msgid "Specify a <em>maximum height</em> (in pixels) for uploaded images."
+msgstr ""
+"Odredite <em>maksimalnu visinu</em> (u pikselima) za otpremljene slike."
+
+#: ../user-submitted-posts.php:1062 ../user-submitted-posts.php:1090
+msgid "Save Settings"
+msgstr "Sačuvaj podešavanja"
+
+#: ../user-submitted-posts.php:1066
+msgid "Shortcode &amp; Template Tag"
+msgstr "Shortcode &amp; Oznaka šablona"
+
+#: ../user-submitted-posts.php:1069
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: ../user-submitted-posts.php:1070
+msgid "Use this shortcode to display the USP Form on any post or page:"
+msgstr ""
+"Koristite ovaj shortcode da biste prikazali USP obrazac na bilo kom postu "
+"ili na bilo kojoj stranici:"
+
+#: ../user-submitted-posts.php:1073
+msgid "Template tag"
+msgstr "Oznaka šablona"
+
+#: ../user-submitted-posts.php:1074
+msgid ""
+"Use this template tag to display the USP Form anywhere in your theme "
+"template:"
+msgstr ""
+"Koristite ovu oznaku šablona da biste prikazali USP obrazac bilo gde u vašem "
+"šablonu teme:"
+
+#: ../user-submitted-posts.php:1079
+msgid "Restore Default Options"
+msgstr "Vrati na podrazumevane opcije"
+
+#: ../user-submitted-posts.php:1083
+msgid "Restore default options upon plugin deactivation/reactivation."
+msgstr ""
+"Vratite podrazumevane opcije nakon deaktiviranja/ponovnog aktiviranja plugin-"
+"a. "
+
+#: ../user-submitted-posts.php:1087
+msgid ""
+"<strong>Tip:</strong> leave this option unchecked to remember your settings. "
+"Or, to go ahead and restore all default options, check the box, save your "
+"settings, and then deactivate/reactivate the plugin."
+msgstr ""
+"<strong>Savet:</strong> ostavite ovu opciju neštikliranu da biste zapamtili "
+"svoja podešavanja. Ili, vratite sve podrazumevane opcije, štiklirajte polje, "
+"sačuvajte svoja podešavanja, a zatim deaktivirajte/ponovo aktivirajte plugin."
+
+#: ../user-submitted-posts.php:1094
+msgid "Updates &amp; Info"
+msgstr "Ažuriranja &amp; Info"
+
+#: ../user-submitted-posts.php:1134
+msgid ""
+"Are you sure you want to restore all default options? (this action cannot be "
+"undone)"
+msgstr ""
+"Jeste li sigurni da želite da vratite sve podrazumevane opcije? (Ova "
+"aktivnost ne može se poništiti)"
+
+#: ../views/submission-form.php:37 ../views/submission-form.php:38
+msgid "Your Name"
+msgstr "Vaše ime"
+
+#: ../views/submission-form.php:42 ../views/submission-form.php:43
+msgid "Your URL"
+msgstr "Vaš URL"
+
+#: ../views/submission-form.php:58
+msgid "Antispam Question"
+msgstr "Antispam pitanje"
+
+#: ../views/submission-form.php:64
+msgid "Please select a category.."
+msgstr "Molimo odaberite kategoriju..."
+
+#: ../views/submission-form.php:98
+msgid "Upload an Image"
+msgstr "Otpremi sliku"
+
+#: ../views/submission-form.php:106
+msgid "Add another image"
+msgstr "Dodaj drugu sliku"
+
+#: ../views/submission-form.php:124
+msgid "Human verification: leave this field empty."
+msgstr "Human verification: ostavite ovo polje prazno."
+
+#: ../views/submission-form.php:140
+msgid "Submit Post"
+msgstr "Podnesi post"

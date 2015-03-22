@@ -29,5 +29,5 @@ div#usp-submit { margin: 15px 0; }
 .parsley-errors-list.filled { opacity: 1; }
 .parsley-required { margin: 0; padding: 2px 3px; }
 .usp-files-error { margin-top: -5px; }
-.hidden, .no-js { display: none; }
-.js { display: block; }
+.usp-hidden, .usp-no-js { display: none; }
+.usp-js { display: block; }

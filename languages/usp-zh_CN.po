@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: User Submitted Posts\n"
 "POT-Creation-Date: 2014-09-29 15:31-0800\n"
-"PO-Revision-Date: 2014-09-29 15:31-0800\n"
+"PO-Revision-Date: 2015-03-08 17:56+0300\n"
 "Last-Translator: Jeff Starr <http://perishablepress.com/contact/>\n"
 "Language-Team: Monzilla Media <http://perishablepress.com/contact/>\n"
-"Language: English\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.6\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-KeywordsList: __;_e;_n;_x\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -22,27 +22,27 @@ msgstr ""
 
 #: ../user-submitted-posts.php:48
 msgid "requires WordPress 3.7 or higher, and has been deactivated!"
-msgstr ""
+msgstr "需要 WordPress 3.7 或者更高的版本,并且已激活插件!"
 
 #: ../user-submitted-posts.php:49
 msgid "Please return to the "
-msgstr ""
+msgstr "请返回"
 
 #: ../user-submitted-posts.php:49
 msgid "WordPress Admin area"
-msgstr ""
+msgstr "WordPress 管理区域"
 
 #: ../user-submitted-posts.php:49
 msgid "to upgrade WordPress and try again."
-msgstr ""
+msgstr "升级WordPress 并重试."
 
 #: ../user-submitted-posts.php:61
 msgid "Submitted"
-msgstr ""
+msgstr "已提交"
 
 #: ../user-submitted-posts.php:128
 msgid "An error occurred. Please go back and try again."
-msgstr ""
+msgstr "发生一个错误.请返回并重试."
 
 #: ../user-submitted-posts.php:294
 msgid "USP"
@@ -50,86 +50,86 @@ msgstr ""
 
 #: ../user-submitted-posts.php:474
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: ../user-submitted-posts.php:512
 msgid ""
 "There was an error. Please ensure that you have added a title, some content, "
 "and that you have uploaded only images."
-msgstr ""
+msgstr "错误.情确认您已添加标题,以及一些类容."
 
 #: ../user-submitted-posts.php:519 ../user-submitted-posts.php:520
 #: ../user-submitted-posts.php:521 ../user-submitted-posts.php:522
 #: ../user-submitted-posts.php:523 ../user-submitted-posts.php:530
 #: ../user-submitted-posts.php:531
 msgid "show"
-msgstr ""
+msgstr "显示"
 
 #: ../user-submitted-posts.php:524
 msgid "hide"
-msgstr ""
+msgstr "隐藏"
 
 #: ../user-submitted-posts.php:525
 msgid "Please select your image(s) to upload."
-msgstr ""
+msgstr "请选择图片上传"
 
 #: ../user-submitted-posts.php:532
 msgid "Success! Thank you for your submission."
-msgstr ""
+msgstr "成功!谢谢提交!"
 
 #: ../user-submitted-posts.php:555
 msgid "HTML5 form + CSS (<small><em>Recommended</em></small>)"
-msgstr ""
+msgstr "HTML5 表单 + CSS (<small><em>建议</em></small>)"
 
 #: ../user-submitted-posts.php:559
 msgid ""
 "Custom form + CSS (<small><em>You must provide the template for this "
 "option*</em></small>)"
-msgstr ""
+msgstr "自定义表单 + CSS (<small><em>该选项您需要提供模板*</em></small>)"
 
 #: ../user-submitted-posts.php:563
 msgid "Disable stylesheet"
-msgstr ""
+msgstr "禁用style样式"
 
 #: ../user-submitted-posts.php:751
 msgid "Toggle all panels"
-msgstr ""
+msgstr "切换所有面板"
 
 #: ../user-submitted-posts.php:759
 msgid "Overview"
-msgstr ""
+msgstr "概览"
 
 #: ../user-submitted-posts.php:763
 msgid ""
 "(USP) enables your visitors to submit posts and upload images from anywhere "
 "on your site."
-msgstr ""
+msgstr "(USP) 让您的访客在您网站的任何位置前台发布图片和文章."
 
 #: ../user-submitted-posts.php:764
 msgid ""
 "To implement, configure the plugin settings and include the USP form in any "
 "post or page via shortcode or anywhere in your theme via template tag."
-msgstr ""
+msgstr "在您主题的任何位置通过简码或者模板标签来实现前端发布功能."
 
 #: ../user-submitted-posts.php:765
 msgid "For more functionality check out"
-msgstr ""
+msgstr "更多功能详见"
 
 #: ../user-submitted-posts.php:766
 msgid "&mdash; the ultimate solution for unlimited front-end forms."
-msgstr ""
+msgstr "&mdash; 无限用户前端发布表单的终极解决方案"
 
 #: ../user-submitted-posts.php:770
 msgid "Configure settings"
-msgstr ""
+msgstr "修改设置"
 
 #: ../user-submitted-posts.php:771
 msgid "Get the shortcode &amp; template tag"
-msgstr ""
+msgstr "获得简码&amp; 模板标签"
 
 #: ../user-submitted-posts.php:772
 msgid "More info:"
-msgstr ""
+msgstr "更多信息:"
 
 #: ../user-submitted-posts.php:772
 msgid "readme.txt"
@@ -137,122 +137,122 @@ msgstr ""
 
 #: ../user-submitted-posts.php:773 ../user-submitted-posts.php:865
 msgid "and"
-msgstr ""
+msgstr "和"
 
 #: ../user-submitted-posts.php:773
 msgid "homepage"
-msgstr ""
+msgstr "主页"
 
 #: ../user-submitted-posts.php:774
 msgid "If you like USP, please"
-msgstr ""
+msgstr "如果您喜欢USP,请"
 
 #: ../user-submitted-posts.php:775
 msgid "Rate and review this plugin at the WP Plugin Directory"
-msgstr ""
+msgstr "在WP插件目录评价和概览该插件"
 
 #: ../user-submitted-posts.php:776
 msgid "rate it at WordPress.org"
-msgstr ""
+msgstr "在 WordPress.org 评价"
 
 #: ../user-submitted-posts.php:788
 msgid "Options"
-msgstr ""
+msgstr "配置"
 
 #: ../user-submitted-posts.php:790
 msgid ""
 "Here you may configure options for USP. See the <code>readme.txt</code> for "
 "more information."
-msgstr ""
+msgstr "您可以在这里配置USP选项.可在阅读<code>readme.txt</code> 更多信息."
 
 #: ../user-submitted-posts.php:791
 msgid "Show/Hide Form Fields"
-msgstr ""
+msgstr "显示/隐藏表单区域"
 
 #: ../user-submitted-posts.php:795 ../user-submitted-posts.php:801
 #: ../user-submitted-posts.php:807 ../user-submitted-posts.php:813
 #: ../user-submitted-posts.php:819 ../user-submitted-posts.php:825
 #: ../user-submitted-posts.php:831 ../user-submitted-posts.php:837
 msgid "Show"
-msgstr ""
+msgstr "显示"
 
 #: ../user-submitted-posts.php:796 ../user-submitted-posts.php:802
 #: ../user-submitted-posts.php:808 ../user-submitted-posts.php:814
 #: ../user-submitted-posts.php:820 ../user-submitted-posts.php:826
 #: ../user-submitted-posts.php:832 ../user-submitted-posts.php:838
 msgid "Hide"
-msgstr ""
+msgstr "隐藏"
 
 #: ../user-submitted-posts.php:797
 msgid "User Name"
-msgstr ""
+msgstr "用户名"
 
 #: ../user-submitted-posts.php:803
 msgid "Post URL"
-msgstr ""
+msgstr "发表链接"
 
 #: ../user-submitted-posts.php:809 ../views/submission-form.php:47
 #: ../views/submission-form.php:48
 msgid "Post Title"
-msgstr ""
+msgstr "发表标题"
 
 #: ../user-submitted-posts.php:815 ../views/submission-form.php:52
 #: ../views/submission-form.php:53
 msgid "Post Tags"
-msgstr ""
+msgstr "发表标签"
 
 #: ../user-submitted-posts.php:821 ../views/submission-form.php:62
 msgid "Post Category"
-msgstr ""
+msgstr "发表目录"
 
 #: ../user-submitted-posts.php:827 ../views/submission-form.php:91
 #: ../views/submission-form.php:92
 msgid "Post Content"
-msgstr ""
+msgstr "发表类容"
 
 #: ../user-submitted-posts.php:833
 msgid "Post Images"
-msgstr ""
+msgstr "发表图片"
 
 #: ../user-submitted-posts.php:839
 msgid "Challenge question (Captcha)"
-msgstr ""
+msgstr "验证问题(验证码)"
 
 #: ../user-submitted-posts.php:842
 msgid "General Form Options"
-msgstr ""
+msgstr "常规表单设置"
 
 #: ../user-submitted-posts.php:846
 msgid "Form style"
-msgstr ""
+msgstr "表单风格"
 
 #: ../user-submitted-posts.php:864
 msgid ""
 "* If &ldquo;Custom&rdquo; is selected, you must upload your own template "
 "files,"
-msgstr ""
+msgstr "* 如果 &ldquo;自定义&rdquo;已选择, 您必须上传自己的模板,"
 
 #: ../user-submitted-posts.php:866
 msgid "Note: list of CSS selectors available at "
-msgstr ""
+msgstr "注意: CSS选择符列表"
 
 #: ../user-submitted-posts.php:866
 msgid "CSS selectors for User Submitted Posts"
-msgstr ""
+msgstr "User Submitted Posts的 CSS 选择符"
 
 #: ../user-submitted-posts.php:871
 msgid "Include JavaScript?"
-msgstr ""
+msgstr "使用JavaScript?"
 
 #: ../user-submitted-posts.php:873
 msgid ""
 "Check this box if you want to include the external JavaScript files "
 "(recommended)."
-msgstr ""
+msgstr "勾选如果您想使用外部JavaScript 文件(推荐)."
 
 #: ../user-submitted-posts.php:876
 msgid "Targeted Loading"
-msgstr ""
+msgstr "目标载入中"
 
 #: ../user-submitted-posts.php:878
 msgid ""
@@ -260,64 +260,66 @@ msgid ""
 "Here you may specify the URL of the USP form to load resources only on that "
 "page. Note: leave blank to load on all pages."
 msgstr ""
+"当启用时外部CSS &amp; JavaScript 文件会在每一个页面加载.您可以为USP表单指定一"
+"个页面,资源都会从该页面加载.注意: 留空白代表每一个页面都加载."
 
 #: ../user-submitted-posts.php:881
 msgid "Categories"
-msgstr ""
+msgstr "分类"
 
 #: ../user-submitted-posts.php:894
 msgid "Select which categories may be assigned to submitted posts."
-msgstr ""
+msgstr "选择可以发表的分类"
 
 #: ../user-submitted-posts.php:898
 msgid "Assigned Author"
-msgstr ""
+msgstr "指派作者"
 
 #: ../user-submitted-posts.php:908
 msgid ""
 "Specify the user that should be assigned as author for user-submitted posts."
-msgstr ""
+msgstr "指定一个用户作为发布文章的作者"
 
 #: ../user-submitted-posts.php:912
 msgid "Auto Publish?"
-msgstr ""
+msgstr "自动发布?"
 
 #: ../user-submitted-posts.php:915
 msgid "Always moderate"
-msgstr ""
+msgstr "总是需要审核"
 
 #: ../user-submitted-posts.php:916
 msgid "Always publish immediately"
-msgstr ""
+msgstr "总是立即发布"
 
 #: ../user-submitted-posts.php:921
 msgid ""
 "For submitted posts, you can always moderate (recommended), publish "
 "immediately, or publish after any number of approved posts."
-msgstr ""
+msgstr "已提交的文章,您可以随时审核 (建议),立刻发表, 或者在审核几篇文章后发布."
 
 #: ../user-submitted-posts.php:925
 msgid "Receive Email Alert"
-msgstr ""
+msgstr "接收邮件通知"
 
 #: ../user-submitted-posts.php:927
 msgid ""
 "Check this box if you want to be notified via email for new post submissions."
-msgstr ""
+msgstr "勾选可通过邮箱接收新发布通知."
 
 #: ../user-submitted-posts.php:930
 msgid "Enable Rich Text Editor"
-msgstr ""
+msgstr "启用富文本编辑框"
 
 #: ../user-submitted-posts.php:932
 msgid ""
 "Check this box if you want to enable WP rich text editing for submitted "
 "posts."
-msgstr ""
+msgstr "勾选启用富文本编辑框."
 
 #: ../user-submitted-posts.php:935
 msgid "Set Uploaded Image as Featured Image"
-msgstr ""
+msgstr "选择已上传图片作为特色图"
 
 #: ../user-submitted-posts.php:937
 msgid ""
@@ -325,70 +327,72 @@ msgid ""
 "Post Thumbnails) for posts. \n"
 "\t\t\t\t\t\t\t\t\t\t\tNote: your theme&rsquo;s single.php file must include"
 msgstr ""
+"如果您想使用特色图请勾选该框(发布时的缩略图). \n"
+"\t\t\t\t\t\t\t\t\t\t\t注意: 您的主题&rsquo;的 single.php 文件必须存在"
 
 #: ../user-submitted-posts.php:938
 msgid "to display Featured Images."
-msgstr ""
+msgstr "显示特色图"
 
 #: ../user-submitted-posts.php:941
 msgid "Email Address for Alerts"
-msgstr ""
+msgstr "邮箱地址"
 
 #: ../user-submitted-posts.php:943
 msgid ""
-"If you checked the box to receive email alerts, indicate here the address"
-"(es) to which the emails should be sent."
-msgstr ""
+"If you checked the box to receive email alerts, indicate here the "
+"address(es) to which the emails should be sent."
+msgstr "如果你勾选该选项来接收邮件提醒,在这指定邮箱地址."
 
 #: ../user-submitted-posts.php:944
 msgid "Tip: multiple addresses may be included using a comma, like so:"
-msgstr ""
+msgstr "帮助:多个地址可以用逗号隔开,例如:"
 
 #: ../user-submitted-posts.php:947
 msgid "Redirect URL"
-msgstr ""
+msgstr "跳转链接"
 
 #: ../user-submitted-posts.php:949
 msgid ""
 "Specify a URL to redirect the user after post-submission. Note: leave blank "
 "to redirect back to current page."
-msgstr ""
+msgstr "指定发布成功后的跳转链接.注意:留空白跳转为当前页."
 
 #: ../user-submitted-posts.php:952
 msgid "Success Message"
-msgstr ""
+msgstr "成功信息"
 
 #: ../user-submitted-posts.php:954
 msgid ""
 "This is the success message that is displayed if post-submission is "
 "successful."
-msgstr ""
+msgstr "这是发布成功时显示的信息"
 
 #: ../user-submitted-posts.php:957
 msgid "Error Message"
-msgstr ""
+msgstr "错误信息"
 
 #: ../user-submitted-posts.php:959
 msgid "This is the error message that is displayed if post-submission fails."
-msgstr ""
+msgstr "这是发布失败时显示的错误信息"
 
 #: ../user-submitted-posts.php:962
 msgid "Custom Content"
-msgstr ""
+msgstr "自定义类容"
 
 #: ../user-submitted-posts.php:964
 msgid ""
 "Here you may specify custom text/markup to be included before the submission "
 "form. Note: leave blank to disable."
-msgstr ""
+msgstr "    您可以自定义发表前被包括的文字/标记.注意:留空白来禁用. "
 
 #: ../user-submitted-posts.php:968
 msgid "Registered User Info"
-msgstr ""
+msgstr "已注册用户信息"
 
 #: ../user-submitted-posts.php:972
 msgid "Use registered username for author?"
-msgstr ""
+msgstr "使用用已注册户名作为作者?"
 
 #: ../user-submitted-posts.php:974
 msgid ""
@@ -396,10 +400,12 @@ msgid ""
 "the submitted-post author. Note: this really should only be used when "
 "requiring log-in for submissions."
 msgstr ""
+"勾选如果您想自动使用已注册用户的名字作为发布文章的作者名.注意:这个功能只有在"
+"需要登录发表时才有必要使用."
 
 #: ../user-submitted-posts.php:977
 msgid "Use registered URL for submitted URL?"
-msgstr ""
+msgstr "使用已注册的URL作为已发表的URL"
 
 #: ../user-submitted-posts.php:979
 msgid ""
@@ -407,163 +413,166 @@ msgid ""
 "specified URL as the submitted-post URL. Note: this really should only be "
 "used when requiring log-in for submissions."
 msgstr ""
+"勾选如果您想自动使用注册用户&rsquo;的指定URL作为发布文章的URL.注意:这个功能只"
+"有在需要登录发表时才有必要使用."
 
 #: ../user-submitted-posts.php:982
 msgid "Use a hidden field for submitted category?"
-msgstr ""
+msgstr "使用隐藏分类?"
 
 #: ../user-submitted-posts.php:984
 msgid ""
 "Check this box if you want to use a hidden category field for the submitted "
 "category. Note: this may be used to specify a default category for submitted "
 "posts when the category field is hidden."
-msgstr ""
+msgstr "如果您想使用隐藏分类请勾选该.注意:"
 
 #: ../user-submitted-posts.php:987
 msgid "Category ID for hidden field"
-msgstr ""
+msgstr "隐藏区域分类ID"
 
 #: ../user-submitted-posts.php:989
 msgid ""
 "Specify a cateogry (ID) to use as the default category when using the &ldquo;"
 "hidden field&rdquo; option."
-msgstr ""
+msgstr "指定当使用&ldquo时的目录 (ID) ;隐藏区域&rdquo; 选项."
 
 #: ../user-submitted-posts.php:993
 msgid "Challenge Question (Captcha)"
-msgstr ""
+msgstr "验证问题 (验证码)"
 
 #: ../user-submitted-posts.php:997
 msgid "Challenge Question"
-msgstr ""
+msgstr "验证问题"
 
 #: ../user-submitted-posts.php:999
 msgid ""
 "To prevent spam, enter a question that users must answer before submitting "
 "the form."
-msgstr ""
+msgstr "填写一个用户必须回答的问题来阻止垃圾信息."
 
 #: ../user-submitted-posts.php:1002
 msgid "Challenge Response"
-msgstr ""
+msgstr "验证信息"
 
 #: ../user-submitted-posts.php:1004
 msgid "Enter the <em>only</em> correct answer to the challenge question."
-msgstr ""
+msgstr "填写 <em>唯一</em> 正确的答案."
 
 #: ../user-submitted-posts.php:1007
 msgid "Case-sensitivity"
-msgstr ""
+msgstr "大小写敏感性"
 
 #: ../user-submitted-posts.php:1009
 msgid "Check this box if you want the challenge response to be case-sensitive."
-msgstr ""
+msgstr "勾选让验证信息区分大小写"
 
 #: ../user-submitted-posts.php:1013
 msgid "Image Uploads"
-msgstr ""
+msgstr "图片上传"
 
 #: ../user-submitted-posts.php:1017
 msgid "Upload Message"
-msgstr ""
+msgstr "上传区域信息"
 
 #: ../user-submitted-posts.php:1019
 msgid ""
 "This is the message that appears next to upload field. Useful to state your "
 "upload guidelines/rules/etc."
-msgstr ""
+msgstr "这条信息可以显示在上传区域.适用于上传规则/帮助/介绍等."
 
 #: ../user-submitted-posts.php:1022
 msgid "&ldquo;Add another image&rdquo; link"
-msgstr ""
+msgstr "&ldquo;添加新的图片&rdquo; 链接"
 
 #: ../user-submitted-posts.php:1024
 msgid ""
 "Here you may specify your own custom markup for the &ldquo;Add another "
 "image&rdquo; link (leave blank to use the default markup)."
 msgstr ""
+"可以在这里使用自定义标记 &ldquo;添加新的图片&rdquo; 链接 (留空白为默认标记)."
 
 #: ../user-submitted-posts.php:1027
 msgid "Minimum number of images"
-msgstr ""
+msgstr "最小图片数"
 
 #: ../user-submitted-posts.php:1030
 msgid "Specify the <em>minimum</em> number of images."
-msgstr ""
+msgstr "指定 <em>最小</em>图片数."
 
 #: ../user-submitted-posts.php:1034
 msgid "Maximum number of images"
-msgstr ""
+msgstr "最大图片数"
 
 #: ../user-submitted-posts.php:1037
 msgid "Specify the <em>maximum</em> number of images."
-msgstr ""
+msgstr "指定<em>最大</em>图片数."
 
 #: ../user-submitted-posts.php:1041
 msgid "Minimum image width"
-msgstr ""
+msgstr "最小宽度"
 
 #: ../user-submitted-posts.php:1043
 msgid "Specify a <em>minimum width</em> (in pixels) for uploaded images."
-msgstr ""
+msgstr "给上图图片指定一个 <em>最小宽度</em> (像素)."
 
 #: ../user-submitted-posts.php:1046
 msgid "Minimum image height"
-msgstr ""
+msgstr "最小高度"
 
 #: ../user-submitted-posts.php:1048
 msgid "Specify a <em>minimum height</em> (in pixels) for uploaded images."
-msgstr ""
+msgstr "给上图图片指定一个 <em>最小高度</em> (像素)."
 
 #: ../user-submitted-posts.php:1051
 msgid "Maximum image width"
-msgstr ""
+msgstr "最大宽度"
 
 #: ../user-submitted-posts.php:1053
 msgid "Specify a <em>maximum width</em> (in pixels) for uploaded images."
-msgstr ""
+msgstr "给上图图片指定一个 <em>最大宽度</em> (像素)."
 
 #: ../user-submitted-posts.php:1056
 msgid "Maximum image height"
-msgstr ""
+msgstr "最大照片高度"
 
 #: ../user-submitted-posts.php:1058
 msgid "Specify a <em>maximum height</em> (in pixels) for uploaded images."
-msgstr ""
+msgstr "给上图图片指定一个 <em>最大高度</em> (像素)."
 
 #: ../user-submitted-posts.php:1062 ../user-submitted-posts.php:1090
 msgid "Save Settings"
-msgstr ""
+msgstr "保存设置"
 
 #: ../user-submitted-posts.php:1066
 msgid "Shortcode &amp; Template Tag"
-msgstr ""
+msgstr "简码 &amp; 模板标签"
 
 #: ../user-submitted-posts.php:1069
 msgid "Shortcode"
-msgstr ""
+msgstr "简码"
 
 #: ../user-submitted-posts.php:1070
 msgid "Use this shortcode to display the USP Form on any post or page:"
-msgstr ""
+msgstr "使用该简码来在任何文章或页面显示USP表单:"
 
 #: ../user-submitted-posts.php:1073
 msgid "Template tag"
-msgstr ""
+msgstr "模板标签"
 
 #: ../user-submitted-posts.php:1074
 msgid ""
 "Use this template tag to display the USP Form anywhere in your theme "
 "template:"
-msgstr ""
+msgstr "使用该模板标签让USP表单显示在您主题的任意位置:"
 
 #: ../user-submitted-posts.php:1079
 msgid "Restore Default Options"
-msgstr ""
+msgstr "恢复默认设置"
 
 #: ../user-submitted-posts.php:1083
 msgid "Restore default options upon plugin deactivation/reactivation."
-msgstr ""
+msgstr "在插件禁用/重新启用的时候恢复默认设置."
 
 #: ../user-submitted-posts.php:1087
 msgid ""
@@ -571,45 +580,47 @@ msgid ""
 "Or, to go ahead and restore all default options, check the box, save your "
 "settings, and then deactivate/reactivate the plugin."
 msgstr ""
+"strong>Tip:</strong> 空出该选项来保存您的设置.或者, 继续去重置, 在方框打勾,保"
+"存您的设置, 然后禁用/重新激活插件."
 
 #: ../user-submitted-posts.php:1094
 msgid "Updates &amp; Info"
-msgstr ""
+msgstr "更新 &amp; 信息"
 
 #: ../user-submitted-posts.php:1134
 msgid ""
 "Are you sure you want to restore all default options? (this action cannot be "
 "undone)"
-msgstr ""
+msgstr "确认您要重置所有设置为默认?(无法恢复)"
 
 #: ../views/submission-form.php:37 ../views/submission-form.php:38
 msgid "Your Name"
-msgstr ""
+msgstr "您的名字"
 
 #: ../views/submission-form.php:42 ../views/submission-form.php:43
 msgid "Your URL"
-msgstr ""
+msgstr "您的链接"
 
 #: ../views/submission-form.php:58
 msgid "Antispam Question"
-msgstr ""
+msgstr "验证问题"
 
 #: ../views/submission-form.php:64
 msgid "Please select a category.."
-msgstr ""
+msgstr "请选择分类"
 
 #: ../views/submission-form.php:98
 msgid "Upload an Image"
-msgstr ""
+msgstr "上传一张图片"
 
 #: ../views/submission-form.php:106
 msgid "Add another image"
-msgstr ""
+msgstr "添加图片"
 
 #: ../views/submission-form.php:124
 msgid "Human verification: leave this field empty."
-msgstr ""
+msgstr "验证问题: 这里什么都不要填."
 
 #: ../views/submission-form.php:140
 msgid "Submit Post"
-msgstr ""
+msgstr "提交"

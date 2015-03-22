@@ -4,14 +4,16 @@ Plugin Name: User Submitted Posts
 Plugin URI: http://perishablepress.com/user-submitted-posts/
 Description: Enables your visitors to submit posts and images from anywhere on your site.
 Tags: submit, public, share, upload, images, posts, users, user-submit, community, front-end, submissions
-Author URI: http://monzilla.biz/
 Author: Jeff Starr
+Author URI: http://monzilla.biz/
 Donate link: http://m0n.co/donate
 Contributors: specialk
-Requires at least: 3.7
-Tested up to: 4.0
-Version: 20140930
+Requires at least: 3.8
+Tested up to: 4.1
 Stable tag: trunk
+Version: 20150319
+Text Domain: usp
+Domain Path: /languages/
 License: GPL v2 or later
 
 User Submitted Posts enables your visitors to submit posts and images from anywhere on your site.
@@ -180,6 +182,46 @@ __Important!__ Many things have changed in the new version of the plugin. Please
 Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
 
 == Changelog ==
+
+= 20150319 =
+
+* Tested with latest version of WP (4.1)
+* Increases minimum version to WP 3.8
+* Removes deprecated screen_icon()
+* Adds $usp_wp_vers for version check
+* Streamline/fine-tune plugin code
+* Adds Text Domain and Domain Path to file header
+* Adds alert panel to plugin settings page
+* Adds Serbo-Croatian translation - thanks [Borisa Djuraskovic](http://www.webhostinghub.com/)
+* Adds Chinese translation - thanks Xing
+* Improves error handling
+* Improves post author process
+* Improves post-submission process
+* Improves code in submission-form.php
+* Adds nonce security to submission process
+* Adds proper headers to email alert
+* Adds Email field to the form (hidden by default)
+* Adds USP Info meta box to Post Edit screen (Props: Nathan Clough)
+* Adds specific error messages for fields/files (e.g., min, max, required)
+* Adds option to disable required attributes
+* Adds usp_post_status filter hook
+* Adds usp_file_key filter hook
+* Adds usp_post_data filter hook
+* Adds usp_editor_settings filter hook
+* Adds usp_error_message filter hook
+* Adds usp_post_moderate filter hook
+* Adds usp_post_publish filter hook
+* Adds usp_post_approve filter hook
+* Adds drag_drop_upload to visual/rich-text editor
+* Adds option to require unique post titles
+* Changes approved-post count to check for name/IP instead of URL/IP
+* Changes class .hidden to .usp-hidden in default submission form
+* Changes class .no-js to .usp-no-js in default submission form
+* Changes class .js to .usp-js in default submission form
+* Replaces sanitize_text_field() with esc_url() for URL field
+* Replaces default .mo/.po templates with .pot template
+* Fixes bug where encoded characters are removed from URL
+* Fixes various bugs and PHP notices
 
 = 20140930 =
 
@@ -469,7 +511,27 @@ Answer: Some things to check:
 That should help troubleshoot or get some clues going.
 
 Question: "I have it set so that articles get submitted under the users name. Sometimes when a user submits an article the article gets submitted under the users name, and other times set as the default user as set in the settings. When the article gets set to the default user I cannot change it in wordpress, I need to copy and paste the whole article to a new article and then set it to the proper user."
+
 Answer: The registered username of the submitter can be used for post author only when they are logged in to WP (otherwise it's difficult to "guess" their identity). So if a registered user does not log in and guest posting is enabled, their post will be submitted with the submitted name as the post author. Thus, to resolve the dilemma posed in the question, one solution is to require users to be logged in to submit posts.
+
+Question: "How do I create a custom submission form?"
+
+Answer: Follow these steps:
+
+1. Copy the file, submission-form.php from the /views/ directory
+2. Paste the file, submission-form.php into the /custom/ directory
+3. Inside of the new "custom" file, locate both instances of "Your URL" (there are two), and change them to whatever is required
+4. Lastly, visit the plugin settings and change "Form style" to "Custom form + CSS" (Don't forget to save your changes )
+
+Or, to go further with unlimited custom forms [check out USP Pro](http://plugin-planet.com/usp-pro/) :)
+
+Question: I am having a hard time uploading photos from certain mobile devices, such as iPhone et al.
+
+Answer: There are many variables involved with uploading images, so it is difficult to just "guess" at a solution. I do, however, know that some devices have a higher resolution for images, so a possible fix is to adjust the plugin's min/max width/height settings.
+
+Question: How can I translate this plugin?
+
+Answer: There are many ways to translate, depending on your setup, skill level, etc. The easiest way that I know of is to install and use [Loco Translate](https://wordpress.org/plugins/loco-translate/), which makes translating about as easy as it can be.
 
 **Got questions?**
 
@@ -477,6 +539,11 @@ To ask a question, visit the [USP Homepage](http://perishablepress.com/user-subm
 
 == Donations ==
 
-I created this plugin with love for the WP community. To show support, consider purchasing one of my books: [The Tao of WordPress](http://wp-tao.com/), [Digging into WordPress](http://digwp.com/), or [.htaccess made easy](http://htaccessbook.com/).
+I created this plugin with love for the WP community. To show support, you can [make a donation](http://m0n.co/donate) or purchase one of my books: 
+
+* [The Tao of WordPress](http://wp-tao.com/)
+* [Digging into WordPress](http://digwp.com/)
+* [.htaccess made easy](http://htaccessbook.com/)
+* [WordPress Themes In Depth](http://wp-tao.com/wordpress-themes-book/)
 
 Links, tweets and likes also appreciated. Thanks! :)
