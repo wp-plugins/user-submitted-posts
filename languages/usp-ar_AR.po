@@ -1,0 +1,826 @@
+# Loco Gettext template
+msgid ""
+msgstr ""
+"Project-Id-Version: User Submitted Posts\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Sat Mar 21 2015 17:34:49 GMT-0700 (PDT)\n"
+"POT-Revision-Date: Sat Mar 21 2015 17:34:53 GMT-0700 (PDT)\n"
+"PO-Revision-Date: 2015-03-23 06:11-0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_MA\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n"
+"%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;__:1;"
+"_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;_x:1,2c;"
+"_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;esc_attr__:1;"
+"esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;esc_html_x:1,2c;"
+"comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../user-submitted-posts.php:24 ../user-submitted-posts.php:66
+msgid "User Submitted Posts"
+msgstr ""
+
+#: ../user-submitted-posts.php:53
+msgid "requires WordPress "
+msgstr ""
+
+#: ../user-submitted-posts.php:53
+msgid " or higher, and has been deactivated!"
+msgstr ""
+
+#: ../user-submitted-posts.php:54
+msgid "Please return to the "
+msgstr ""
+
+#: ../user-submitted-posts.php:54
+msgid "WordPress Admin area"
+msgstr ""
+
+#: ../user-submitted-posts.php:54
+msgid "to upgrade WordPress and try again."
+msgstr ""
+
+#: ../user-submitted-posts.php:66
+msgid "Submitted"
+msgid_plural "Submitted"
+msgstr[0] "تم الإرسال"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: ../user-submitted-posts.php:179
+msgid "User Submitted Post Info"
+msgstr ""
+
+#: ../user-submitted-posts.php:196
+msgid "Submitter Name: "
+msgstr ""
+
+#: ../user-submitted-posts.php:197
+msgid "Submitter Email: "
+msgstr ""
+
+#: ../user-submitted-posts.php:198
+msgid "Submitter URL: "
+msgstr ""
+
+#: ../user-submitted-posts.php:199
+msgid "Submitter IP: "
+msgstr ""
+
+#: ../user-submitted-posts.php:326
+msgid "USP"
+msgstr ""
+
+#: ../user-submitted-posts.php:662
+msgid " files required"
+msgstr ""
+
+#: ../user-submitted-posts.php:663
+msgid " file required"
+msgstr ""
+
+#: ../user-submitted-posts.php:665
+msgid " files"
+msgstr ""
+
+#: ../user-submitted-posts.php:666
+msgid " file"
+msgstr ""
+
+#: ../user-submitted-posts.php:668 ../user-submitted-posts.php:669 ../user-
+#: submitted-posts.php:670 ../user-submitted-posts.php:671
+msgid " pixels"
+msgstr ""
+
+#: ../user-submitted-posts.php:674
+msgid "An error occurred. Please go back and try again."
+msgstr ""
+
+#: ../user-submitted-posts.php:681
+msgid "User login required"
+msgstr "تسجيل الدخول مطلوب"
+
+#: ../user-submitted-posts.php:682
+msgid "User name required"
+msgstr "اسم المستخدم مطلوب"
+
+#: ../user-submitted-posts.php:683
+msgid "Post title required"
+msgstr "عنوان المقال مطلوب"
+
+#: ../user-submitted-posts.php:684
+msgid "Post url required"
+msgstr "عنوان الرابط مطلوب"
+
+#: ../user-submitted-posts.php:685
+msgid "Post tags required"
+msgstr "الكلمات الدلالية مطلوبة"
+
+#: ../user-submitted-posts.php:686
+msgid "Post category required"
+msgstr "تصنيف المقال مطلوب"
+
+#: ../user-submitted-posts.php:687
+msgid "Post content required"
+msgstr "محتوى المقال مطلوب"
+
+#: ../user-submitted-posts.php:688
+msgid "Correct captcha required"
+msgstr "التحقق البشري مطلوب"
+
+#: ../user-submitted-posts.php:689
+msgid "User email required"
+msgstr "البريد الإلكتروني مطلوب"
+
+#: ../user-submitted-posts.php:690
+msgid "Non-empty value for hidden field"
+msgstr ""
+
+#: ../user-submitted-posts.php:691
+msgid "Minimum number of images not met"
+msgstr ""
+
+#: ../user-submitted-posts.php:692
+msgid "Maximum number of images exceeded "
+msgstr ""
+
+#: ../user-submitted-posts.php:693
+msgid "Minimum image width not met"
+msgstr ""
+
+#: ../user-submitted-posts.php:694
+msgid "Image width exceeds maximum"
+msgstr ""
+
+#: ../user-submitted-posts.php:695
+msgid "Minimum image height not met"
+msgstr ""
+
+#: ../user-submitted-posts.php:696
+msgid "Image height exceeds maximum"
+msgstr ""
+
+#: ../user-submitted-posts.php:697
+msgid "File type not allowed (please upload images only)"
+msgstr ""
+
+#: ../user-submitted-posts.php:698
+msgid "The selected files could not be uploaded to the server"
+msgstr ""
+
+#: ../user-submitted-posts.php:699
+msgid "The file(s) could not be uploaded"
+msgstr ""
+
+#: ../user-submitted-posts.php:702
+msgid "Post not created. Please contact the site administrator for help."
+msgstr ""
+
+#: ../user-submitted-posts.php:703
+msgid "Duplicate post title. Please try again."
+msgstr ""
+
+#: ../user-submitted-posts.php:709
+msgid "Error: "
+msgstr ""
+
+#: ../user-submitted-posts.php:722
+msgid "Settings"
+msgstr ""
+
+#: ../user-submitted-posts.php:761
+msgid ""
+"There was an error. Please ensure that you have added a title, some content, and "
+"that you have uploaded only images."
+msgstr ""
+
+#: ../user-submitted-posts.php:768 ../user-submitted-posts.php:769 ../user-
+#: submitted-posts.php:771 ../user-submitted-posts.php:772 ../user-submitted-
+#: posts.php:773 ../user-submitted-posts.php:780 ../user-submitted-posts.php:781
+msgid "show"
+msgstr ""
+
+#: ../user-submitted-posts.php:770 ../user-submitted-posts.php:774
+msgid "hide"
+msgstr ""
+
+#: ../user-submitted-posts.php:775
+msgid "Please select your image(s) to upload."
+msgstr "المرجو اختيار الصور للرفع."
+
+#: ../user-submitted-posts.php:782
+msgid "Success! Thank you for your submission."
+msgstr "تم الإرسال بنجاح! شكرا لك."
+
+#: ../user-submitted-posts.php:807
+msgid "HTML5 form + CSS (<small><em>Recommended</em></small>)"
+msgstr ""
+
+#: ../user-submitted-posts.php:811
+msgid ""
+"Custom form + CSS (<small><em>You must provide the template for this option*</em></"
+"small>)"
+msgstr ""
+
+#: ../user-submitted-posts.php:815
+msgid "Disable stylesheet"
+msgstr ""
+
+#: ../user-submitted-posts.php:1018
+msgid "Toggle all panels"
+msgstr ""
+
+#: ../user-submitted-posts.php:1027
+msgid "User Submitted Posts needs your support!"
+msgstr ""
+
+#: ../user-submitted-posts.php:1031
+msgid "Your support is needed to keep this free plugin going."
+msgstr ""
+
+#: ../user-submitted-posts.php:1034
+msgid ""
+"If you use User Submitted Posts and would like development to continue, please"
+msgstr ""
+
+#: ../user-submitted-posts.php:1035
+msgid "make a donation&nbsp;&raquo;"
+msgstr ""
+
+#: ../user-submitted-posts.php:1038
+msgid "If you are unable to donate, please"
+msgstr ""
+
+#: ../user-submitted-posts.php:1039
+msgid "Click here to rate and review this plugin"
+msgstr ""
+
+#: ../user-submitted-posts.php:1040
+msgid "give a 5-star rating at the Plugin Directory"
+msgstr ""
+
+#: ../user-submitted-posts.php:1044
+msgid ""
+"Your generous support enables continued development of this plugin. Thank you!"
+msgstr ""
+
+#: ../user-submitted-posts.php:1049
+msgid "Check this box if you have shown support"
+msgstr ""
+
+#: ../user-submitted-posts.php:1057
+msgid "Overview"
+msgstr ""
+
+#: ../user-submitted-posts.php:1061
+msgid ""
+"(USP) enables your visitors to submit posts and upload images from anywhere on "
+"your site."
+msgstr ""
+
+#: ../user-submitted-posts.php:1062
+msgid ""
+"To implement, configure the plugin settings and include the USP form in any post "
+"or page via shortcode or anywhere in your theme via template tag."
+msgstr ""
+
+#: ../user-submitted-posts.php:1063
+msgid "For more functionality check out"
+msgstr ""
+
+#: ../user-submitted-posts.php:1064
+msgid "&mdash; the ultimate solution for unlimited front-end forms."
+msgstr ""
+
+#: ../user-submitted-posts.php:1068
+msgid "Configure settings"
+msgstr ""
+
+#: ../user-submitted-posts.php:1069
+msgid "Get the shortcode &amp; template tag"
+msgstr ""
+
+#: ../user-submitted-posts.php:1071
+msgid "More info:"
+msgstr ""
+
+#: ../user-submitted-posts.php:1072 ../user-submitted-posts.php:1171
+msgid "and"
+msgstr ""
+
+#: ../user-submitted-posts.php:1072
+msgid "homepage"
+msgstr ""
+
+#: ../user-submitted-posts.php:1074
+msgid "If you like USP, please"
+msgstr ""
+
+#: ../user-submitted-posts.php:1075
+msgid "Rate and review this plugin at the WP Plugin Directory"
+msgstr ""
+
+#: ../user-submitted-posts.php:1076
+msgid "rate it at WordPress.org"
+msgstr ""
+
+#: ../user-submitted-posts.php:1088
+msgid "Options"
+msgstr "إعدادات"
+
+#: ../user-submitted-posts.php:1090
+msgid ""
+"Here you may configure options for USP. See the <code>readme.txt</code> for more "
+"information."
+msgstr ""
+
+#: ../user-submitted-posts.php:1091
+msgid "Show/Hide Form Fields"
+msgstr ""
+
+#: ../user-submitted-posts.php:1095 ../user-submitted-posts.php:1101 ../user-
+#: submitted-posts.php:1107 ../user-submitted-posts.php:1113 ../user-submitted-
+#: posts.php:1119 ../user-submitted-posts.php:1125 ../user-submitted-posts.php: 1131
+#: ../user-submitted-posts.php:1137 ../user-submitted-posts.php:1143
+msgid "Show"
+msgstr "إظهار"
+
+#: ../user-submitted-posts.php:1096 ../user-submitted-posts.php:1102 ../user-
+#: submitted-posts.php:1108 ../user-submitted-posts.php:1114 ../user-submitted-
+#: posts.php:1120 ../user-submitted-posts.php:1126 ../user-submitted-posts.php: 1132
+#: ../user-submitted-posts.php:1138 ../user-submitted-posts.php:1144
+msgid "Hide"
+msgstr "إخفاء"
+
+#: ../user-submitted-posts.php:1097
+msgid "User Name"
+msgstr "اسم المستخدم"
+
+#: ../user-submitted-posts.php:1103
+msgid "User Email"
+msgstr "البريد الإلكتروني للمستخدم"
+
+#: ../user-submitted-posts.php:1109
+msgid "Post URL"
+msgstr "رابط المقال"
+
+#: ../user-submitted-posts.php:1115 ../views/submission-form.php:50 ..
+#: /views/submission-form.php:51 ../custom/submission-form.php:47
+#: /custom/submission-form.php:48
+msgid "Post Title"
+msgstr "عنوان المقال"
+
+#: ../user-submitted-posts.php:1121 ../views/submission-form.php:56 ..
+#: /views/submission-form.php:57 ../custom/submission-form.php:52
+#: /custom/submission-form.php:53
+msgid "Post Tags"
+msgstr "الكلمات الدلالية (الوسوم)"
+
+#: ../user-submitted-posts.php:1127 ../views/submission-form.php:68 ..
+#: /custom/submission-form.php:62
+msgid "Post Category"
+msgstr "تصنيف المقال"
+
+#: ../user-submitted-posts.php:1133 ../views/submission-form.php:103 ..
+#: /views/submission-form.php:104 ../custom/submission-form.php:91
+#: /custom/submission-form.php:92
+msgid "Post Content"
+msgstr "المحتوى"
+
+#: ../user-submitted-posts.php:1139
+msgid "Post Images"
+msgstr "صور المقال"
+
+#: ../user-submitted-posts.php:1145
+msgid "Challenge question (Captcha)"
+msgstr "التحقق البشري"
+
+#: ../user-submitted-posts.php:1148
+msgid "General Form Options"
+msgstr ""
+
+#: ../user-submitted-posts.php:1152
+msgid "Form style"
+msgstr ""
+
+#: ../user-submitted-posts.php:1170
+msgid ""
+"* If &ldquo;Custom&rdquo; is selected, you must upload your own template files,"
+msgstr ""
+
+#: ../user-submitted-posts.php:1172
+msgid "Note: list of CSS selectors available at "
+msgstr ""
+
+#: ../user-submitted-posts.php:1172
+msgid "CSS selectors for User Submitted Posts"
+msgstr ""
+
+#: ../user-submitted-posts.php:1177
+msgid "Include JavaScript?"
+msgstr ""
+
+#: ../user-submitted-posts.php:1179
+msgid ""
+"Check this box if you want to include the external JavaScript files (recommended)."
+msgstr ""
+
+#: ../user-submitted-posts.php:1182
+msgid "Targeted Loading"
+msgstr ""
+
+#: ../user-submitted-posts.php:1184
+msgid ""
+"When enabled, external CSS &amp; JavaScript files are loaded on every page. Here "
+"you may specify the URL of the USP form to load resources only on that page. Note: "
+"leave blank to load on all pages."
+msgstr ""
+
+#: ../user-submitted-posts.php:1187
+msgid "Categories"
+msgstr ""
+
+#: ../user-submitted-posts.php:1200
+msgid "Select which categories may be assigned to submitted posts."
+msgstr ""
+
+#: ../user-submitted-posts.php:1204
+msgid "Assigned Author"
+msgstr ""
+
+#: ../user-submitted-posts.php:1214
+msgid "Specify the user that should be assigned as author for user-submitted posts."
+msgstr ""
+
+#: ../user-submitted-posts.php:1218
+msgid "Auto Publish?"
+msgstr ""
+
+#: ../user-submitted-posts.php:1221
+msgid "Always moderate"
+msgstr ""
+
+#: ../user-submitted-posts.php:1222
+msgid "Always publish immediately"
+msgstr ""
+
+#: ../user-submitted-posts.php:1227
+msgid ""
+"For submitted posts, you can always moderate (recommended), publish immediately, "
+"or publish after any number of approved posts."
+msgstr ""
+
+#: ../user-submitted-posts.php:1231
+msgid "Receive Email Alert"
+msgstr ""
+
+#: ../user-submitted-posts.php:1233
+msgid "Check this box if you want to be notified via email for new post submissions."
+msgstr ""
+
+#: ../user-submitted-posts.php:1236
+msgid "Enable Rich Text Editor"
+msgstr ""
+
+#: ../user-submitted-posts.php:1238
+msgid ""
+"Check this box if you want to enable WP rich text editing for submitted posts."
+msgstr ""
+
+#: ../user-submitted-posts.php:1241
+msgid "Set Uploaded Image as Featured Image"
+msgstr ""
+
+#: ../user-submitted-posts.php:1243
+msgid ""
+"Check this box if you want to set submitted images as Featured Images (aka Post "
+"Thumbnails) for posts. \n"
+"\t\t\t\t\t\t\t\t\t\t\tNote: your theme&rsquo;s single.php file must include"
+msgstr ""
+
+#: ../user-submitted-posts.php:1244
+msgid "to display Featured Images."
+msgstr ""
+
+#: ../user-submitted-posts.php:1247
+msgid "Email Address for Alerts"
+msgstr ""
+
+#: ../user-submitted-posts.php:1249
+msgid ""
+"If you checked the box to receive email alerts, indicate here the address(es) to "
+"which the emails should be sent."
+msgstr ""
+
+#: ../user-submitted-posts.php:1250
+msgid "Tip: multiple addresses may be included using a comma, like so:"
+msgstr ""
+
+#: ../user-submitted-posts.php:1253
+msgid "Redirect URL"
+msgstr ""
+
+#: ../user-submitted-posts.php:1255
+msgid ""
+"Specify a URL to redirect the user after post-submission. Note: leave blank to "
+"redirect back to current page."
+msgstr ""
+
+#: ../user-submitted-posts.php:1258
+msgid "Success Message"
+msgstr ""
+
+#: ../user-submitted-posts.php:1260
+msgid ""
+"This is the success message that is displayed if post-submission is successful."
+msgstr ""
+
+#: ../user-submitted-posts.php:1263
+msgid "Error Message"
+msgstr ""
+
+#: ../user-submitted-posts.php:1265
+msgid "This is the error message that is displayed if post-submission fails."
+msgstr ""
+
+#: ../user-submitted-posts.php:1268
+msgid "Custom Content"
+msgstr ""
+
+#: ../user-submitted-posts.php:1270
+msgid ""
+"Here you may specify custom text/markup to be included before the submission form. "
+"Note: leave blank to disable."
+msgstr ""
+
+#: ../user-submitted-posts.php:1273
+msgid "Unique Titles"
+msgstr ""
+
+#: ../user-submitted-posts.php:1275
+msgid ""
+"Require submitted post titles to be unique (useful for preventing multiple/"
+"duplicate submitted posts)."
+msgstr ""
+
+#: ../user-submitted-posts.php:1278
+msgid "Disable Required"
+msgstr ""
+
+#: ../user-submitted-posts.php:1280
+msgid ""
+"Disable all required attributes on default form fields (useful for troubleshooting "
+"error messages)."
+msgstr ""
+
+#: ../user-submitted-posts.php:1284
+msgid "Registered User Info"
+msgstr ""
+
+#: ../user-submitted-posts.php:1288
+msgid "Use registered username for author?"
+msgstr ""
+
+#: ../user-submitted-posts.php:1290
+msgid ""
+"Check this box if you want to automatically use the registered username as the "
+"submitted-post author. Note: this really should only be used when requiring log-in "
+"for submissions."
+msgstr ""
+
+#: ../user-submitted-posts.php:1293
+msgid "Use registered URL for submitted URL?"
+msgstr ""
+
+#: ../user-submitted-posts.php:1295
+msgid ""
+"Check this box if you want to automatically use the registered user&rsquo;s "
+"specified URL as the submitted-post URL. Note: this really should only be used "
+"when requiring log-in for submissions."
+msgstr ""
+
+#: ../user-submitted-posts.php:1298
+msgid "Use a hidden field for submitted category?"
+msgstr ""
+
+#: ../user-submitted-posts.php:1300
+msgid ""
+"Check this box if you want to use a hidden category field for the submitted "
+"category. Note: this may be used to specify a default category for submitted posts "
+"when the category field is hidden."
+msgstr ""
+
+#: ../user-submitted-posts.php:1303
+msgid "Category ID for hidden field"
+msgstr ""
+
+#: ../user-submitted-posts.php:1305
+msgid ""
+"Specify a cateogry (ID) to use as the default category when using the &ldquo;"
+"hidden field&rdquo; option."
+msgstr ""
+
+#: ../user-submitted-posts.php:1309
+msgid "Challenge Question (Captcha)"
+msgstr ""
+
+#: ../user-submitted-posts.php:1313
+msgid "Challenge Question"
+msgstr ""
+
+#: ../user-submitted-posts.php:1315
+msgid ""
+"To prevent spam, enter a question that users must answer before submitting the "
+"form."
+msgstr ""
+
+#: ../user-submitted-posts.php:1318
+msgid "Challenge Response"
+msgstr ""
+
+#: ../user-submitted-posts.php:1320
+msgid "Enter the <em>only</em> correct answer to the challenge question."
+msgstr ""
+
+#: ../user-submitted-posts.php:1323
+msgid "Case-sensitivity"
+msgstr ""
+
+#: ../user-submitted-posts.php:1325
+msgid "Check this box if you want the challenge response to be case-sensitive."
+msgstr ""
+
+#: ../user-submitted-posts.php:1329
+msgid "Image Uploads"
+msgstr ""
+
+#: ../user-submitted-posts.php:1333
+msgid "Upload Message"
+msgstr ""
+
+#: ../user-submitted-posts.php:1335
+msgid ""
+"This is the message that appears next to upload field. Useful to state your upload "
+"guidelines/rules/etc."
+msgstr ""
+
+#: ../user-submitted-posts.php:1338
+msgid "&ldquo;Add another image&rdquo; link"
+msgstr "&ldquo;أضف صورة أخرى&rdquo; link"
+
+#: ../user-submitted-posts.php:1340
+msgid ""
+"Here you may specify your own custom markup for the &ldquo;Add another "
+"image&rdquo; link (leave blank to use the default markup)."
+msgstr ""
+
+#: ../user-submitted-posts.php:1343
+msgid "Minimum number of images"
+msgstr ""
+
+#: ../user-submitted-posts.php:1346
+msgid "Specify the <em>minimum</em> number of images."
+msgstr ""
+
+#: ../user-submitted-posts.php:1350
+msgid "Maximum number of images"
+msgstr ""
+
+#: ../user-submitted-posts.php:1353
+msgid "Specify the <em>maximum</em> number of images."
+msgstr ""
+
+#: ../user-submitted-posts.php:1357
+msgid "Minimum image width"
+msgstr ""
+
+#: ../user-submitted-posts.php:1359
+msgid "Specify a <em>minimum width</em> (in pixels) for uploaded images."
+msgstr ""
+
+#: ../user-submitted-posts.php:1362
+msgid "Minimum image height"
+msgstr ""
+
+#: ../user-submitted-posts.php:1364
+msgid "Specify a <em>minimum height</em> (in pixels) for uploaded images."
+msgstr ""
+
+#: ../user-submitted-posts.php:1367
+msgid "Maximum image width"
+msgstr ""
+
+#: ../user-submitted-posts.php:1369
+msgid "Specify a <em>maximum width</em> (in pixels) for uploaded images."
+msgstr ""
+
+#: ../user-submitted-posts.php:1372
+msgid "Maximum image height"
+msgstr ""
+
+#: ../user-submitted-posts.php:1374
+msgid "Specify a <em>maximum height</em> (in pixels) for uploaded images."
+msgstr ""
+
+#: ../user-submitted-posts.php:1378 ../user-submitted-posts.php:1406
+msgid "Save Settings"
+msgstr ""
+
+#: ../user-submitted-posts.php:1382
+msgid "Shortcode &amp; Template Tag"
+msgstr ""
+
+#: ../user-submitted-posts.php:1385
+msgid "Shortcode"
+msgstr ""
+
+#: ../user-submitted-posts.php:1386
+msgid "Use this shortcode to display the USP Form on any post or page:"
+msgstr ""
+
+#: ../user-submitted-posts.php:1389
+msgid "Template tag"
+msgstr ""
+
+#: ../user-submitted-posts.php:1390
+msgid ""
+"Use this template tag to display the USP Form anywhere in your theme template:"
+msgstr ""
+
+#: ../user-submitted-posts.php:1395
+msgid "Restore Default Options"
+msgstr ""
+
+#: ../user-submitted-posts.php:1399
+msgid "Restore default options upon plugin deactivation/reactivation."
+msgstr ""
+
+#: ../user-submitted-posts.php:1403
+msgid ""
+"<strong>Tip:</strong> leave this option unchecked to remember your settings. Or, "
+"to go ahead and restore all default options, check the box, save your settings, "
+"and then deactivate/reactivate the plugin."
+msgstr ""
+
+#: ../user-submitted-posts.php:1410
+msgid "Updates &amp; Info"
+msgstr ""
+
+#: ../user-submitted-posts.php:1450
+msgid "Save Preference"
+msgstr "حفظ الإعدادات"
+
+#: ../user-submitted-posts.php:1456
+msgid ""
+"Are you sure you want to restore all default options? (this action cannot be "
+"undone)"
+msgstr "هل أنت متأكد من أنك تريد استرجاع الإعدادات الافتراضية؟ (لا يمكن عكس العملية)"
+
+#: ../views/submission-form.php:32 ../views/submission-form.php:33 ..
+#: /custom/submission-form.php:37 ../custom/submission-form.php:38
+msgid "Your Name"
+msgstr "اسمك"
+
+#: ../views/submission-form.php:38 ../views/submission-form.php:39 ..
+#: /custom/submission-form.php:42 ../custom/submission-form.php:43
+msgid "Your URL"
+msgstr "الرابط"
+
+#: ../views/submission-form.php:44 ../views/submission-form.php:45
+msgid "Your Email"
+msgstr "بريدك الإلكتروني"
+
+#: ../views/submission-form.php:63 ../custom/submission-form.php:58
+msgid "Antispam Question"
+msgstr "التحقق البشري"
+
+#: ../views/submission-form.php:70 ../custom/submission-form.php:64
+msgid "Please select a category.."
+msgstr "اختر التصنيف.."
+
+#: ../views/submission-form.php:112 ../custom/submission-form.php:98
+msgid "Upload an Image"
+msgstr "رفع صورة"
+
+#: ../views/submission-form.php:120 ../custom/submission-form.php:106
+msgid "Add another image"
+msgstr "إضافة صورة أخرى"
+
+#: ../views/submission-form.php:141 ../custom/submission-form.php:124
+msgid "Human verification: leave this field empty."
+msgstr "التحقق البشري: اترك هذه الخانة فارغة."
+
+#: ../views/submission-form.php:162 ../custom/submission-form.php:140
+msgid "Submit Post"
+msgstr "أرسل المقال"

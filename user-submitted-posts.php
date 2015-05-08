@@ -1,17 +1,17 @@
 <?php 
 /*
 	Plugin Name: User Submitted Posts
-	Plugin URI: http://perishablepress.com/user-submitted-posts/
+	Plugin URI: https://perishablepress.com/user-submitted-posts/
 	Description: Enables your visitors to submit posts and images from anywhere on your site.
 	Tags: submit, public, share, upload, images, posts, users, user-submit, community, front-end, submissions
 	Author: Jeff Starr
 	Author URI: http://monzilla.biz/
 	Donate link: http://m0n.co/donate
 	Contributors: specialk
-	Requires at least: 3.8
-	Tested up to: 4.1
+	Requires at least: 3.9
+	Tested up to: 4.2
 	Stable tag: trunk
-	Version: 20150319
+	Version: 20150507
 	Text Domain: usp
 	Domain Path: /languages/
 	License: GPL v2 or later
@@ -19,14 +19,14 @@
 
 if (!defined('ABSPATH')) die();
 
-$usp_wp_vers = '3.8';
-$usp_version = '20150319';
+$usp_wp_vers = '3.9';
+$usp_version = '20150507';
 $usp_plugin  = __('User Submitted Posts', 'usp');
 $usp_options = get_option('usp_options');
 $usp_path    = plugin_basename(__FILE__); // '/user-submitted-posts/user-submitted-posts.php';
 $usp_logo    = plugins_url() . '/user-submitted-posts/images/usp-logo.png';
 $usp_pro     = plugins_url() . '/user-submitted-posts/images/usp-pro.png';
-$usp_homeurl = 'http://perishablepress.com/user-submitted-posts/';
+$usp_homeurl = 'https://perishablepress.com/user-submitted-posts/';
 
 $usp_post_meta_IsSubmission   = 'is_submission';
 $usp_post_meta_SubmitterIp    = 'user_submit_ip';
@@ -139,7 +139,7 @@ function usp_checkForPublicSubmission() {
 			}
 			do_action('usp_submit_error', $redirect);
 		}
-		wp_redirect($redirect);
+		wp_redirect(esc_url_raw($redirect));
 		exit();
 	}
 }
@@ -211,7 +211,10 @@ function usp_js_vars() {
 	$display_url  = $usp_options['usp_display_url'];
 	$usp_casing   = $usp_options['usp_casing'];
 	
-	$current_url = sanitize_text_field(trailingslashit('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+	$protocol = 'http://';
+	if (is_ssl()) $protocol = 'https://';
+	
+	$current_url = sanitize_text_field(trailingslashit($protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 	$current_url = remove_query_arg(array('submission-error', 'error', 'success', 'post_id'), $current_url);
 	
 	$print_casing = 'false';
@@ -246,10 +249,13 @@ if (!function_exists('usp_enqueueResources')) {
 		$form_type   = $usp_options['usp_form_version'];
 		$display_url = $usp_options['usp_display_url'];
 		
-		$current_url = sanitize_text_field(trailingslashit('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+		$protocol = 'http://';
+		if (is_ssl()) $protocol = 'https://';
+		
+		$current_url = sanitize_text_field(trailingslashit($protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
 		$current_url = remove_query_arg(array('submission-error', 'error', 'success', 'post_id'), $current_url);
 		
-		$base_url = WP_PLUGIN_URL .'/'. basename(dirname(__FILE__));
+		$base_url = plugins_url() .'/'. basename(dirname(__FILE__));
 		$dir_path = plugin_dir_path(__FILE__);
 		
 		$custom_css  = '/custom/usp.css';
@@ -286,7 +292,7 @@ add_action('admin_print_styles', 'load_custom_admin_css');
 function load_custom_admin_css() {
 	global $usp_version, $pagenow;
 	if (is_admin() && $pagenow == 'edit.php') {
-		wp_enqueue_style('usp_style_admin', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) . '/resources/usp-admin.css', false, $usp_version, 'all');
+		wp_enqueue_style('usp_style_admin', plugins_url() . '/' . basename(dirname(__FILE__)) . '/resources/usp-admin.css', false, $usp_version, 'all');
 	}
 }
 
@@ -367,6 +373,16 @@ function usp_get_author($author) {
 	$author_data = array('author' => $author, 'author_id' => $author_id, 'error' => $error);
 	return $author_data;
 }
+
+// exif_imagetype support
+if (!function_exists('exif_imagetype')) {
+	function exif_imagetype($filename) {
+		if ((list($width, $height, $type, $attr) = getimagesize($filename)) !== false) { 
+			return $type;
+		} 
+		return false; 
+	} 
+} 
 
 function usp_check_images($files) {
 	global $usp_options;
@@ -472,7 +488,7 @@ function usp_createPublicSubmission($title, $files, $ip, $author, $url, $email, 
 	// check errors
 	$newPost = array('id' => false, 'error' => false);
 	
-	$author_data = usp_get_author($author);
+	$author_data        = usp_get_author($author);
 	$author             = $author_data['author'];
 	$author_id          = $author_data['author_id'];
 	$newPost['error'][] = $author_data['error'];
@@ -481,16 +497,16 @@ function usp_createPublicSubmission($title, $files, $ip, $author, $url, $email, 
 	$file_count       = $file_data['file_count'];
 	$newPost['error'] = array_unique(array_merge($file_data['error'], $newPost['error']));
 	
-	if (($usp_options['usp_title']    == 'show') && empty($title))    $newPost['error'][] = 'required-title';
-	if (($usp_options['usp_url']      == 'show') && empty($url))      $newPost['error'][] = 'required-url';
-	if (($usp_options['usp_tags']     == 'show') && empty($tags))     $newPost['error'][] = 'required-tags';
-	if (($usp_options['usp_category'] == 'show') && empty($category)) $newPost['error'][] = 'required-category';
-	if (($usp_options['usp_content']  == 'show') && empty($content))  $newPost['error'][] = 'required-content';
+	if (isset($usp_options['usp_title'])    && ($usp_options['usp_title']    == 'show') && empty($title))    $newPost['error'][] = 'required-title';
+	if (isset($usp_options['usp_url'])      && ($usp_options['usp_url']      == 'show') && empty($url))      $newPost['error'][] = 'required-url';
+	if (isset($usp_options['usp_tags'])     && ($usp_options['usp_tags']     == 'show') && empty($tags))     $newPost['error'][] = 'required-tags';
+	if (isset($usp_options['usp_category']) && ($usp_options['usp_category'] == 'show') && empty($category)) $newPost['error'][] = 'required-category';
+	if (isset($usp_options['usp_content'])  && ($usp_options['usp_content']  == 'show') && empty($content))  $newPost['error'][] = 'required-content';
 	
-	if (($usp_options['usp_captcha'] == 'show') && !usp_spamQuestion($captcha)) $newPost['error'][] = 'required-captcha';
-	if (($usp_options['usp_email']   == 'show') && !usp_validateEmail($email))  $newPost['error'][] = 'required-email';
+	if (isset($usp_options['usp_captcha']) && ($usp_options['usp_captcha'] == 'show') && !usp_spamQuestion($captcha)) $newPost['error'][] = 'required-captcha';
+	if (isset($usp_options['usp_email'])   && ($usp_options['usp_email']   == 'show') && !usp_validateEmail($email))  $newPost['error'][] = 'required-email';
 	
-	if ($usp_options['titles_unique'] && !usp_check_duplicates($title)) $newPost['error'][] = 'duplicate-title';
+	if (isset($usp_options['titles_unique']) && $usp_options['titles_unique'] && !usp_check_duplicates($title)) $newPost['error'][] = 'duplicate-title';
 	if (!empty($verify)) $newPost['error'][] = 'spam-verify';
 	
 	foreach ($newPost['error'] as $e) {
@@ -734,7 +750,7 @@ function add_usp_links($links, $file) {
 	if ($file == plugin_basename(__FILE__)) {
 		$rate_url = 'http://wordpress.org/support/view/plugin-reviews/' . basename(dirname(__FILE__)) . '?rate=5#postform';
 		$links[] = '<a target="_blank" href="' . $rate_url . '" title="Click here to rate and review this plugin on WordPress.org">Rate this plugin</a>';
-		$links[] = '<strong><a target="_blank" href="http://plugin-planet.com/usp-pro/" title="Get USP Pro">Go Pro &raquo;</a></strong>';
+		$links[] = '<strong><a target="_blank" href="https://plugin-planet.com/usp-pro/" title="Get USP Pro">Go Pro &raquo;</a></strong>';
 	}
 	return $links;
 }
@@ -1057,7 +1073,7 @@ function usp_render_form() {
 								<p class="mm-overview-intro">
 									<strong><?php echo $usp_plugin; ?></strong> <?php _e('(USP) enables your visitors to submit posts and upload images from anywhere on your site.', 'usp'); ?> 
 									<?php _e('To implement, configure the plugin settings and include the USP form in any post or page via shortcode or anywhere in your theme via template tag.', 'usp'); ?> 
-									<?php _e('For more functionality check out', 'usp'); ?> <strong><a href="http://plugin-planet.com/usp-pro/" target="_blank">USP Pro</a></strong> 
+									<?php _e('For more functionality check out', 'usp'); ?> <strong><a href="https://plugin-planet.com/usp-pro/" target="_blank">USP Pro</a></strong> 
 									<?php _e('&mdash; the ultimate solution for unlimited front-end forms.', 'usp'); ?>
 								</p>
 								<div class="mm-left-div">
@@ -1076,7 +1092,7 @@ function usp_render_form() {
 									</ul>
 								</div>
 								<div class="mm-right-div">
-									<a class="mm-pro-blurb" target="_blank" href="http://plugin-planet.com/usp-pro/" title="Unlimited front-end forms">Get USP Pro</a>
+									<a class="mm-pro-blurb" target="_blank" href="https://plugin-planet.com/usp-pro/" title="Unlimited front-end forms">Get USP Pro</a>
 								</div>
 							</div>
 						</div>
@@ -1407,7 +1423,7 @@ function usp_render_form() {
 						<h3><?php _e('Updates &amp; Info', 'usp'); ?></h3>
 						<div class="toggle">
 							<div id="mm-iframe-wrap">
-								<iframe src="http://perishablepress.com/current/index-usp.html"></iframe>
+								<iframe src="https://perishablepress.com/current/index-usp.html"></iframe>
 							</div>
 						</div>
 					</div>

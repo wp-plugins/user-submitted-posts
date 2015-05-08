@@ -1,17 +1,17 @@
 === User Submitted Posts ===
 
 Plugin Name: User Submitted Posts
-Plugin URI: http://perishablepress.com/user-submitted-posts/
+Plugin URI: https://perishablepress.com/user-submitted-posts/
 Description: Enables your visitors to submit posts and images from anywhere on your site.
 Tags: submit, public, share, upload, images, posts, users, user-submit, community, front-end, submissions
 Author: Jeff Starr
 Author URI: http://monzilla.biz/
 Donate link: http://m0n.co/donate
 Contributors: specialk
-Requires at least: 3.8
-Tested up to: 4.1
+Requires at least: 3.9
+Tested up to: 4.2
 Stable tag: trunk
-Version: 20150319
+Version: 20150507
 Text Domain: usp
 Domain Path: /languages/
 License: GPL v2 or later
@@ -24,7 +24,7 @@ Adds a basic form via template tag or shortcode that enables your visitors to su
 
 **Pro Version**
 
-USP Pro now available at [Plugin Planet](http://plugin-planet.com/usp-pro/)!
+USP Pro now available at [Plugin Planet](https://plugin-planet.com/usp-pro/)!
 
 **Features**
 
@@ -81,6 +81,8 @@ USP Pro now available at [Plugin Planet](http://plugin-planet.com/usp-pro/)!
 2. Go to the "User Submitted Posts" Settings Page and customize your options
 3. Display the submission form on your page(s) using template tag or shortcode
 
+[More info on installing WP plugins](http://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
+
 **Important**
 
 NOTE that this plugin attaches uploaded images as custom fields to submitted posts. Attached images are not displayed automatically in posts, but rather may be displayed using template tags, either WP's built-in tags or the USP template tags (explained below). This provides maximum flexibility in terms of customizing the display of uploaded images. 
@@ -134,8 +136,8 @@ User-submitted posts are just like any other post, with the exception that they 
 
 So when user-submitted posts are displayed on your website, say on the home page or single-view, these custom fields are available to you in your theme files. This enables you to customize the user-submitted posts by displaying the submitted name, URL, images, and so forth. Here are two articles for those new to using WordPress custom-fields:
 
-* [WordPress Custom Fields, Part I: The Basics](http://perishablepress.com/wordpress-custom-fields-tutorial/)
-* [WordPress Custom Fields, Part II: Tips and Tricks](http://perishablepress.com/wordpress-custom-fields-tips-tricks/)
+* [WordPress Custom Fields, Part I: The Basics](https://perishablepress.com/wordpress-custom-fields-tutorial/)
+* [WordPress Custom Fields, Part II: Tips and Tricks](https://perishablepress.com/wordpress-custom-fields-tips-tricks/)
 
 **Template Tags**
 
@@ -171,7 +173,7 @@ For more information, check out the template-tag file at: `/library/template-tag
 
 **Additional Notes**
 
-Here's a quick tutorial for [automatically setting submitted images as featured images](http://wp-mix.com/set-attachment-featured-image/) (aka post thumbnails).
+Here's a quick tutorial for [automatically setting submitted images as featured images](https://wp-mix.com/set-attachment-featured-image/) (aka post thumbnails).
 
 == Upgrade Notice ==
 
@@ -179,9 +181,20 @@ __Important!__ Many things have changed in the new version of the plugin. Please
 
 == Screenshots ==
 
-Screenshots available at the [USP Homepage](http://perishablepress.com/user-submitted-posts/)
+Screenshots available at the [USP Homepage](https://perishablepress.com/user-submitted-posts/)
 
 == Changelog ==
+
+= 20150507 =
+
+* Tested with WP 4.2 + 4.3 (alpha)
+* Changes a few "http" links to "https"
+* Fixes XSS vulnerability with add_query_arg()
+* Adds isset() to stop some minor PHP warnings
+* Fixes mixed content warning for https sites
+* Adds support for exif_imagetype when needed
+* Adds Arabic translation, thanks to Amine CH
+* Adds Spanish translation, thanks to Clara Roldán
 
 = 20150319 =
 
@@ -426,17 +439,17 @@ There are several things that can interfere with uploading files:
 * Check the permission settings on the upload folder(s) by ensuring that you can successfully upload image files thru the Media Uploader. 
 * Double-check that all the image-upload settings make sense, and that the images being uploaded meet the specified requirements.
 
-Note: when changing permissions on files and folders, it is important to use the least-restrictive settings possible. If you have to use more permissive settings, it is important to secure the directory against malicious activity. For more information check out: [Secure Media Uploads](http://digwp.com/2012/09/secure-media-uploads/)
+Note: when changing permissions on files and folders, it is important to use the least-restrictive settings possible. If you have to use more permissive settings, it is important to secure the directory against malicious activity. For more information check out: [Secure Media Uploads](https://digwp.com/2012/09/secure-media-uploads/)
 
-Update: new posts at [WP-Mix](http://wp-mix.com/) that should be useful for this: [Display all images attached to post](http://wp-mix.com/display-images-attached-post/) and [Display images with links](http://wp-mix.com/display-images-with-user-submitted-posts/)
+Update: new posts at [WP-Mix](https://wp-mix.com/) that should be useful for this: [Display all images attached to post](https://wp-mix.com/display-images-attached-post/) and [Display images with links](https://wp-mix.com/display-images-with-user-submitted-posts/)
 
 **How to set submitted image as the featured image?**
 
-Visit the "Options" panel in the plugin settings and select "Set Uploaded Image as Featured Image". Note that this setting merely assigns the submitted image as the Featured Image for the post; it's up to your theme's single.php file to include `the_post_thumbnail()` to display the Featured Images. Update: I've posted a quick tutorial at [WP-Mix](http://wp-mix.com/set-attachment-featured-image/).
+Visit the "Options" panel in the plugin settings and select "Set Uploaded Image as Featured Image". Note that this setting merely assigns the submitted image as the Featured Image for the post; it's up to your theme's single.php file to include `the_post_thumbnail()` to display the Featured Images. Update: I've posted a quick tutorial at [WP-Mix](https://wp-mix.com/set-attachment-featured-image/).
 
 **How to require login?**
 
-Here's a quick tutorial for [requiring user login for any plugin](http://wp-mix.com/require-user-login-any-plugin/).
+Here's a quick tutorial for [requiring user login for any plugin](https://wp-mix.com/require-user-login-any-plugin/).
 
 Here is another way of doing it (customize as needed):
 
@@ -449,7 +462,7 @@ Here is another way of doing it (customize as needed):
 	exit;
 }`
 
-Also check out [Members-only content via shortcode](http://wp-mix.com/members-only-content-shortcode/) at WP-Mix.
+Also check out [Members-only content via shortcode](https://wp-mix.com/members-only-content-shortcode/) at WP-Mix.
 
 **How do I change the appearance of the submission form?**
 
@@ -485,7 +498,7 @@ Answer: No database table is created but the option for the user's name is "usp_
 
 Question: "In your FAQs you mention about a paid version that allows a video field? i cant find any further information on it? Is there a way i can add this to the form?"
 
-Answer: It's available at [Plugin Planet](http://plugin-planet.com/usp-pro/). And/or as a workaround in the free version, you can use WP's built-in oEmbed functionality to allow visitors to include video URLs and WP will then embed automatically in the posts. 
+Answer: It's available at [Plugin Planet](https://plugin-planet.com/usp-pro/). And/or as a workaround in the free version, you can use WP's built-in oEmbed functionality to allow visitors to include video URLs and WP will then embed automatically in the posts. 
 
 Question: "I'm new to wordpress and just installed your plugin User Submitted posts. What template do I add the code to have it work everywhere."
 
@@ -523,7 +536,7 @@ Answer: Follow these steps:
 3. Inside of the new "custom" file, locate both instances of "Your URL" (there are two), and change them to whatever is required
 4. Lastly, visit the plugin settings and change "Form style" to "Custom form + CSS" (Don't forget to save your changes )
 
-Or, to go further with unlimited custom forms [check out USP Pro](http://plugin-planet.com/usp-pro/) :)
+Or, to go further with unlimited custom forms [check out USP Pro](https://plugin-planet.com/usp-pro/) :)
 
 Question: I am having a hard time uploading photos from certain mobile devices, such as iPhone et al.
 
@@ -535,15 +548,15 @@ Answer: There are many ways to translate, depending on your setup, skill level, 
 
 **Got questions?**
 
-To ask a question, visit the [USP Homepage](http://perishablepress.com/user-submitted-posts/) or [contact me](http://perishablepress.com/contact/).
+To ask a question, visit the [USP Homepage](https://perishablepress.com/user-submitted-posts/) or [contact me](https://perishablepress.com/contact/).
 
 == Donations ==
 
 I created this plugin with love for the WP community. To show support, you can [make a donation](http://m0n.co/donate) or purchase one of my books: 
 
-* [The Tao of WordPress](http://wp-tao.com/)
-* [Digging into WordPress](http://digwp.com/)
-* [.htaccess made easy](http://htaccessbook.com/)
-* [WordPress Themes In Depth](http://wp-tao.com/wordpress-themes-book/)
+* [The Tao of WordPress](https://wp-tao.com/)
+* [Digging into WordPress](https://digwp.com/)
+* [.htaccess made easy](https://htaccessbook.com/)
+* [WordPress Themes In Depth](https://wp-tao.com/wordpress-themes-book/)
 
 Links, tweets and likes also appreciated. Thanks! :)
