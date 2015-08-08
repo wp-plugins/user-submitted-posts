@@ -8,10 +8,10 @@
 	Author URI: http://monzilla.biz/
 	Donate link: http://m0n.co/donate
 	Contributors: specialk
-	Requires at least: 3.9
-	Tested up to: 4.2
+	Requires at least: 4.0
+	Tested up to: 4.3
 	Stable tag: trunk
-	Version: 20150507
+	Version: 20150808
 	Text Domain: usp
 	Domain Path: /languages/
 	License: GPL v2 or later
@@ -19,8 +19,8 @@
 
 if (!defined('ABSPATH')) die();
 
-$usp_wp_vers = '3.9';
-$usp_version = '20150507';
+$usp_wp_vers = '4.0';
+$usp_version = '20150808';
 $usp_plugin  = __('User Submitted Posts', 'usp');
 $usp_options = get_option('usp_options');
 $usp_path    = plugin_basename(__FILE__); // '/user-submitted-posts/user-submitted-posts.php';
